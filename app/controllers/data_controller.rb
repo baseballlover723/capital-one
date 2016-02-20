@@ -3,8 +3,12 @@ class DataController < ApplicationController
     @id = params[:id]
     @customer = Customer.find(@id)
     @accounts = @customer.accounts
+    @bills = []
     @accounts.each do |account|
-      account
+      @bills += account.bills
+    end
+    @bills.each do |bill|
+      puts bill.to_json
     end
     @bills = Bill.all
     @customers = Customer.all
