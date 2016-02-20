@@ -18,5 +18,8 @@ p1 = Purchase.create(id: 332, purchase_type: "merchant", merchant: m3, account: 
                      amount: 76.31, status: "pending", "medium": "balance", description: "Luke bought some reeds from zanes music shop")
 p1 = Purchase.create(id: 14, purchase_type: "merchant", merchant: m1, account: a1, purchase_date: DateTime.iso8601("20160115"),
                      amount: 2530.31, status: "declinded", "medium": "balance", description: "Luke got black out drunk and spent all of his retierment fund on expensive clothes from Andrew silk shop")
+
+
+
 puts "done seeding"
 
