@@ -3,8 +3,11 @@
 setup commands
 
 cd capital_one
+
 bundle install
+
 bundle exec figaro install
+
 rake db:setup
 
 This README would normally document whatever steps are necessary to get the
