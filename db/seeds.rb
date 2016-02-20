@@ -51,8 +51,21 @@ t3 = Transfer.create(id: 502, transfer_type: "weeb", transaction_date: DateTime.
                      amount: 150.00, description: "Weeaboo leassons from Jeremy, Konnichiha! Hajimemashite, watashi wa desu Kawaii baka. 5/7, would weeaboo again",
                      payer: a1, payee: a3)
 
+
 atm1 = Atm.create(u_id: 1, name: "ATM", lat: "123.24", lng: "123.24")
 atm2 = Atm.create(u_id: 1, name: "ATM", lat: "56.56", lng: "56.56")
 atm3 = Atm.create(u_id: 1, name: "ATM", lat: "300.0", lng: "300.0")
 atm4 = Atm.create(u_id: 1, name: "ATM", lat: "156.43", lng: "150.0")
 puts "done seeding"
+
+def name
+  Faker::Name.name
+end
+
+def first_name
+  Faker::Name.first_name
+end
+
+def last_name
+  Faker::Name.last_name
+end
