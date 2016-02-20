@@ -17,6 +17,7 @@ class DataController < ApplicationController
     @purchases = Purchase.all
     @transfers = Transfer.all
     @withdraws = Withdraw.all
+    @atms = Atm.all
 
     gon.id = @id;
     gon.accounts = @accounts
@@ -27,5 +28,12 @@ class DataController < ApplicationController
     gon.purchases = @purchases
     gon.transfers = @transfers
     gon.withdraws = @withdraws
+    gon.atms = @atms
+
+    gon.graphBills = Bill.where(account: @accounts)
+    gon.graphDeposit = Deposit.where(account: @accounts)
+    gon.graphPurchases = Purchase.where(account: @accounts)
+    gon.graphTransfers = Transfer.where(account: @accounts)
+    gon.graphWithdraws = Withdraw.where(account: @accounts);
   end
 end

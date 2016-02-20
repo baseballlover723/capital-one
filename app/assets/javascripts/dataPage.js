@@ -10,6 +10,11 @@ $(document).ready(function(){
     initializeMap();
   });
 
+  console.log(gon.graphBills);
+  console.log(gon.graphDeposit);
+  console.log(gon.graphPurchases);
+  console.log(gon.graphTransfers);
+  console.log(gon.graphWithdraws);
   function initializeGraphs(){
     if(document.getElementById("chartBody")){
       var canv = document.getElementById("lineGraph");
@@ -108,6 +113,21 @@ $(document).ready(function(){
         var merch = gon.merchants[merchant];
         myLatLng = {lat: parseFloat(merch.lat), lng: parseFloat(merch.lng)};
         marker = new google.maps.Marker({position: myLatLng,map: map,title: merch.category});
+        (function(marker, i) {
+                        // add click event
+                        google.maps.event.addListener(marker, 'click', function() {
+                            infowindow = new google.maps.InfoWindow({
+                                content: 'Hello, World!!'
+                            });
+                            infowindow.open(map, marker);
+                        });
+                    })(marker, merchant);
+      }
+
+      for(var merchant in gon.atms){
+        var atm = gon.atms[merchant];
+        myLatLng = {lat: parseFloat(atm.lat), lng: parseFloat(atm.lng)};
+        marker = new google.maps.Marker({position: myLatLng,map: map,title: "ATM"});
         (function(marker, i) {
                         // add click event
                         google.maps.event.addListener(marker, 'click', function() {

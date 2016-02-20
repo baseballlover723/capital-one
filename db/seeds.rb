@@ -52,10 +52,9 @@ t3 = Transfer.create(id: 502, transfer_type: "weeb", transaction_date: DateTime.
                      payer: a1, payee: a3)
 
 
-atm1 = Atm.create(u_id: 1, name: "ATM", lat: "123.24", lng: "123.24")
-atm2 = Atm.create(u_id: 1, name: "ATM", lat: "56.56", lng: "56.56")
-atm3 = Atm.create(u_id: 1, name: "ATM", lat: "300.0", lng: "300.0")
-atm4 = Atm.create(u_id: 1, name: "ATM", lat: "156.43", lng: "150.0")
+atm1 = Atm.create(u_id: 5, name: "ATM", lat: "39.48", lng: "-87.32")
+atm2 = Atm.create(u_id: 5, name: "ATM", lat: "39.10", lng: "-84.51")
+atm3 = Atm.create(u_id: 5, name: "ATM", lat: "41.89", lng: "-87.64")
 puts "done seeding"
 
 def name
