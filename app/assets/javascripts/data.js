@@ -20,7 +20,7 @@ $(document).ready(function(){
 	var ctx1 = document.getElementById("chart1").getContext("2d");
 	var ctx2 = document.getElementById("chart2").getContext("2d");
 
-
+	// Do the data stuff
 	
 	var data = {
     labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
