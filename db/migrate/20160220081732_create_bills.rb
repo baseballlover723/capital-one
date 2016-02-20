@@ -9,6 +9,7 @@ class CreateBills < ActiveRecord::Migration
       t.integer :recurring_date
       t.date :upcoming_payment_date
       t.decimal :payment_amount, precision: 16, scale: 2
+      t.references :account
 
       t.timestamps null: false
     end
