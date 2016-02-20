@@ -8,6 +8,15 @@ class DataController < ApplicationController
     @purchases = Purchase.all
     @transfers = Transfer.all
     @withdraws = Withdraw.all
+
+    gon.accounts = @accounts
+    gon.bills = @bills
+    gon.customers = @customers
+    gon.deposits = @deposits
+    gon.merchants = @merchants
+    gon.purchases = @purchases
+    gon.transfers = @transfers
+    gon.withdraws = @withdraws
   end
 
   def giveUserData

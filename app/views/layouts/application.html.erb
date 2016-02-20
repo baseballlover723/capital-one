@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title><%= content_for?(:title) ? yield(:title) : "Capital One" %></title>
-
+    <%= favicon_link_tag 'favicon.ico' %>
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
@@ -15,7 +15,7 @@
     <div class="top-bar">
       <div class="top-bar-left">
           <ul class="dropdown menu" data-dropdown-menu>
-            <li class="menu-text">Capital One HackIllinois 2016</li>
+            <li class="menu-text"><div data-no-turbolink><%= link_to "Capital One HackIllinois 2016", landing_path %></div></li>
           </ul>
         </div>
       <div class="top-bar-right">
@@ -34,7 +34,7 @@
     </div>
   <body>
 
-    <%= yield %>
+  <%= yield %>
 
   </body>
 </html>

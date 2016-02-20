@@ -35,6 +35,10 @@
   color: white;
 }
 
+.top-bar-left ul li a {
+  padding: 0;
+}
+
 .mainBody{
   background-image: url("/city.png");
   display: block;
