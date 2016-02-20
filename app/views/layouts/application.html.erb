@@ -1,15 +1,40 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>CapitalOne</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-<%= Gon::Base.render_data %>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<%= yield %>
+    <title><%= content_for?(:title) ? yield(:title) : "Capital One" %></title>
 
-</body>
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+    <link href='https://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
+    <%= Gon::Base.render_data %>
+  </head>
+    <div class="top-bar">
+      <div class="top-bar-left">
+          <ul class="dropdown menu" data-dropdown-menu>
+            <li class="menu-text">Capital One HackIllinois 2016</li>
+          </ul>
+        </div>
+      <div class="top-bar-right">
+        <ul class="dropdown menu" data-dropdown-menu>
+          <li>
+            <a href="#">Authors</a>
+            <ul class="menu vertical">
+              <li><a href="https://www.linkedin.com/in/softwarelover">Andrew Ma</a></li>
+              <li><a href="#">Philip Ross</a></li>
+              <li><a href="#">Nathan Blank</a></li>
+              <li><a href="#">Luke Miller</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  <body>
+
+    <%= yield %>
+
+  </body>
 </html>
