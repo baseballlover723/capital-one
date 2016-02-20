@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160220062008) do
+ActiveRecord::Schema.define(version: 20160220081732) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "type",           limit: 255
@@ -23,6 +23,32 @@ ActiveRecord::Schema.define(version: 20160220062008) do
     t.datetime "created_at",                                          null: false
     t.datetime "updated_at",                                          null: false
   end
+
+  create_table "bills", force: :cascade do |t|
+    t.string   "status",                limit: 255
+    t.string   "payee",                 limit: 255
+    t.string   "nickname",              limit: 255
+    t.date     "creation_date"
+    t.date     "payment_date"
+    t.integer  "recurring_date",        limit: 4
+    t.date     "upcoming_payment_date"
+    t.decimal  "payment_amount",                    precision: 16, scale: 2
+    t.datetime "created_at",                                                 null: false
+    t.datetime "updated_at",                                                 null: false
+  end
+
+  create_table "deposits", force: :cascade do |t|
+    t.string   "type",             limit: 255
+    t.datetime "transaction_date"
+    t.string   "status",           limit: 255
+    t.string   "medium",           limit: 255
+    t.decimal  "amount",                       precision: 16, scale: 2
+    t.integer  "account_id",       limit: 4
+    t.datetime "created_at",                                            null: false
+    t.datetime "updated_at",                                            null: false
+  end
+
+  add_index "deposits", ["account_id"], name: "index_deposits_on_account_id", using: :btree
 
   create_table "merchants", force: :cascade do |t|
     t.string   "name",          limit: 255
@@ -47,4 +73,32 @@ ActiveRecord::Schema.define(version: 20160220062008) do
 
   add_index "purchases", ["account_id"], name: "index_purchases_on_account_id", using: :btree
   add_index "purchases", ["merchant_id"], name: "index_purchases_on_merchant_id", using: :btree
+
+  create_table "transfers", force: :cascade do |t|
+    t.string   "type",             limit: 255
+    t.datetime "transaction_date"
+    t.string   "status",           limit: 255
+    t.string   "medium",           limit: 255
+    t.integer  "payer_id",         limit: 4
+    t.integer  "payee_id",         limit: 4
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
+  add_index "transfers", ["payee_id"], name: "index_transfers_on_payee_id", using: :btree
+  add_index "transfers", ["payer_id"], name: "index_transfers_on_payer_id", using: :btree
+
+  create_table "withdraws", force: :cascade do |t|
+    t.string   "type",             limit: 255
+    t.datetime "transaction_date"
+    t.string   "status",           limit: 255
+    t.string   "medium",           limit: 255
+    t.decimal  "amount",                       precision: 16, scale: 2
+    t.integer  "account_id",       limit: 4
+    t.datetime "created_at",                                            null: false
+    t.datetime "updated_at",                                            null: false
+  end
+
+  add_index "withdraws", ["account_id"], name: "index_withdraws_on_account_id", using: :btree
+
 end
