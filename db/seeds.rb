@@ -30,5 +30,6 @@ b3 = Bill.create(status: "not due", payee: "Luke", nickname: "Luke's netflix and
                  payment_amount: 69.99, account: a1)
 
 
+
 puts "done seeding"
 

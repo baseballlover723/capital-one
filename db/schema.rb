@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20160220090803) do
     t.integer  "recurring_date",        limit: 4
     t.date     "upcoming_payment_date"
     t.decimal  "payment_amount",                    precision: 16, scale: 2
+    t.integer  "account_id",            limit: 4
     t.datetime "created_at",                                                 null: false
     t.datetime "updated_at",                                                 null: false
   end
