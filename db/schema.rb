@@ -47,5 +47,4 @@ ActiveRecord::Schema.define(version: 20160220062008) do
 
   add_index "purchases", ["account_id"], name: "index_purchases_on_account_id", using: :btree
   add_index "purchases", ["merchant_id"], name: "index_purchases_on_merchant_id", using: :btree
-
 end
