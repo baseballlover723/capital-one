@@ -59,6 +59,9 @@ GEM
     execjs (2.6.0)
     figaro (1.1.1)
       thor (~> 0.14)
+    foundation-rails (6.1.2.0)
+      railties (>= 3.1.0)
+      sass (>= 3.3.0, < 3.5)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     gon (6.0.1)
@@ -158,8 +161,6 @@ GEM
       binding_of_caller (>= 0.7.2)
       railties (>= 4.0)
       sprockets-rails (>= 2.0, < 4.0)
-    zurb-foundation (4.3.2)
-      sass (>= 3.2.0)
 
 PLATFORMS
   x86-mingw32
@@ -169,6 +170,7 @@ DEPENDENCIES
   byebug
   coffee-rails (~> 4.1.0)
   figaro
+  foundation-rails
   gon
   httparty
   jbuilder (~> 2.0)
@@ -183,7 +185,6 @@ DEPENDENCIES
   tzinfo-data
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
-  zurb-foundation
 
 BUNDLED WITH
    1.11.2
