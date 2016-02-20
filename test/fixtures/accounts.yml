@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 
+  nickname: MyString
+  rewards: 9.99
+  balance: 9.99
+  account_number: MyString
+  customer_id: MyString
+
+two:
+  type: 
+  nickname: MyString
+  rewards: 9.99
+  balance: 9.99
+  account_number: MyString
+  customer_id: MyString
