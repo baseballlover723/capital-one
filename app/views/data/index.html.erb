@@ -1,4 +1,39 @@
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=visualization"></script>
+<style type="text/css">
+
+  path {
+    stroke: #fff;
+    fill-rule: evenodd;
+  }
+
+  svg {
+    display: inline-block;
+  }
+
+  #righty {
+    width: 50%;
+    float: right;
+    text-align: left;
+  }
+
+  #lefty {
+    width: 50%;
+    float: left;
+    text-align: center;
+    position: relative;
+
+  }
+
+  #explanation {
+    height: 100%;
+    position: relative;
+    top: 50%;
+    margin-top: 20%;
+    font-size: 5em
+  }
+
+</style>
+
 
 <div class="dataBody">
   <div class="leftMenu">
@@ -14,16 +49,27 @@
         <div class="chartTitle">here</div>
         <canvas id="lineGraph"><canvas>
       </div>
+
       <div id="solarChartWrapper">
-        <div class="chartTitle">here2</div>
-        <canvas id="solarGraph"><canvas>
-      </div>
+        <div class="chartTitle">Creative Title</div>
+        <div id="lefty">
+          <div id="solarGraph" class="graphs"></div>
+        </div>
+        <div id="righty">
+          <div id="explanation" style="visibility: hidden;">
+            <span id="nameofthing"></span><br/>
+            <span id="percentage"></span> of total flow 
+          </div>
+        </div>
+      </div>  
+
     </div>
     <div id="mapBody">
       <div id="mapTitle">Financial Map for Andrew Ma</div>
       <div id="mapWrapper">
         <div id="map"></div>
       </div>
+
     </div>
   </div>
 </div>
