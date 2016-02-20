@@ -11,18 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160220081732) do
+ActiveRecord::Schema.define(version: 20160220090803) do
 
   create_table "accounts", force: :cascade do |t|
-    t.string   "type",           limit: 255
-    t.string   "nickname",       limit: 255
-    t.decimal  "rewards",                    precision: 16, scale: 2
-    t.decimal  "balance",                    precision: 16, scale: 2
-    t.string   "account_number", limit: 255
-    t.string   "customer_id",    limit: 255
-    t.datetime "created_at",                                          null: false
-    t.datetime "updated_at",                                          null: false
+    t.string   "account_type", limit: 255
+    t.string   "nickname",     limit: 255
+    t.decimal  "rewards",                  precision: 16, scale: 2
+    t.decimal  "balance",                  precision: 16, scale: 2
+    t.integer  "customer_id",  limit: 4
+    t.datetime "created_at",                                        null: false
+    t.datetime "updated_at",                                        null: false
   end
+
+  add_index "accounts", ["customer_id"], name: "index_accounts_on_customer_id", using: :btree
 
   create_table "bills", force: :cascade do |t|
     t.string   "status",                limit: 255
@@ -35,6 +36,18 @@ ActiveRecord::Schema.define(version: 20160220081732) do
     t.decimal  "payment_amount",                    precision: 16, scale: 2
     t.datetime "created_at",                                                 null: false
     t.datetime "updated_at",                                                 null: false
+  end
+
+  create_table "customers", force: :cascade do |t|
+    t.string   "first_name",    limit: 255
+    t.string   "last_name",     limit: 255
+    t.string   "street_number", limit: 255
+    t.string   "street_name",   limit: 255
+    t.string   "city",          limit: 255
+    t.string   "state",         limit: 255
+    t.string   "zip",           limit: 255
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   create_table "deposits", force: :cascade do |t|
@@ -56,6 +69,10 @@ ActiveRecord::Schema.define(version: 20160220081732) do
     t.string   "street_number", limit: 255
     t.string   "street_name",   limit: 255
     t.string   "city",          limit: 255
+    t.string   "state",         limit: 255
+    t.string   "zip",           limit: 255
+    t.float    "lat",           limit: 24
+    t.float    "lng",           limit: 24
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
   end

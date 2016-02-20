@@ -1,14 +1,14 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+m1 = Merchant.create(id: 1, name: "Andrew Ma", category: "Retail", street_number: "5500", street_name: "Wabash Avenue", city: "Terre Haute", zip: "47803", lat: "45.32", lng: "52.12")
+m2 = Merchant.create(id: 94, name: "Philip Ross", category: "Sports", street_number: "284", street_name: "Palo Alto Lane", city: "San Jose", zip: "95120", lat: "12.23", lng: "-3.43")
+m3 = Merchant.create(id: 5132, name: "Zane Geiger", category: "Music", street_number: "900", street_name: "Germany Boulevard", city: "Berlin", zip: "N/A", lat: "21.31", lng: "40.99")
 
-Merchant.create(first_name: "Andrew", last_name: "Ma", street_number: "5500", street_name: "Wabash Avenue")
-Merchant.create(first_name: "Philip", last_name: "Ross", street_number: "284", street_name: "Palo Alto Lane")
-Merchant.create(first_name: "Zane", last_name: "Geiger", street_number: "900", street_name: "Germany Boulevard")
+c1 = Customer.create(id: 5, first_name: "Luke", last_name: "Miller", street_number: "6969", street_name: "ohio street", city: "Dayton", state: "Ohio", zip: "53244")
+c2 = Customer.create(id: 693, first_name: "Nathan", last_name: "Blank", street_number: "42", street_name: "donkey", city: "Chicago", state: "Illinios", zip: "65843")
+c3 = Customer.create(id: 6092, first_name: "Jeremy", last_name: "Wright", street_number: "52", street_name: "??? ?? ???", city: "??", state: "???", zip: "N/A")
 
-Account.create(_id: "123", type: "Credit Card", nickname: "Andrew's Credit Card", rewards: 100, balance: 1000000.00, account_number: "134523", customer_id: "1")
-Account.create(_id: "473", type: "Savings", nickname: "Andrew's Savings", rewards: 0, balance: 50.00, account_number: "252533", customer_id: "1")
+a1 = Account.create(id: 123, account_type: "Credit Card", nickname: "Luke's Credit Card", rewards: 100.08, balance: 1_000_000.00, customer: c1)
+a2 = Account.create(id: 999, account_type: "Savings", nickname: "Luke's Savings", rewards: 0.00, balance: 50.00, customer: c1)
+a3 = Account.create(id: 7, account_type: "Checking", nickname: "Jeremy's checking", rewards: 5.14, balance: 56_357.40,customer: c3)
+
+puts "done seeding"
+
