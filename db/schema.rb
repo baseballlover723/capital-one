@@ -52,11 +52,12 @@ ActiveRecord::Schema.define(version: 20160220090803) do
   end
 
   create_table "deposits", force: :cascade do |t|
-    t.string   "type",             limit: 255
+    t.string   "deposit_type",     limit: 255
     t.datetime "transaction_date"
     t.string   "status",           limit: 255
     t.string   "medium",           limit: 255
     t.decimal  "amount",                       precision: 16, scale: 2
+    t.string   "description",      limit: 255
     t.integer  "account_id",       limit: 4
     t.datetime "created_at",                                            null: false
     t.datetime "updated_at",                                            null: false
