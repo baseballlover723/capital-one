@@ -10,6 +10,235 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *= require foundation
+ *= reqiore font-awesome
  *= require_tree .
  *= require_self
+ *= require foundation_and_overrides
  */
+
+ html, body {
+   height: 100%;
+   margin: 0;
+   font-family: 'PT Sans', sans-serif;
+ }
+
+ ::selection {
+    background: purple;
+    color: white;
+}
+
+.top-bar, .top-bar div, .top-bar div ul, .top-bar div ul li{
+  background-color: #2980b9;
+}
+
+.top-bar div ul, .top-bar div ul li a{
+  color: white;
+}
+
+.top-bar-left ul li a {
+  padding: 0;
+}
+
+.mainBody{
+  background-image: url("/city.png");
+  display: block;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: calc(100% - 56px);
+}
+
+ #queryWrapper {
+   margin-left: 37%;
+   top: 15%;
+   position: relative;
+}
+
+input{
+  box-sizing: content-box;
+  box-shadow: none;
+}
+
+ #query {
+   font-size: 18px;
+   padding:10px 10px 10px 5px;
+   display: block;
+   width: 300px;
+   font-family: 'PT Sans', sans-serif;
+ }
+
+ .allInput {
+   background: transparent;
+   color: #efefef;
+   border: none;
+   border-bottom:1px solid white;
+ }
+
+ #query:focus {
+   outline: none;
+ }
+
+ #searchLabel {
+   color: white;
+   font-size:18px;
+   font-weight:normal;
+   position:absolute;
+   pointer-events:none;
+   left:5px;
+   top:10px;
+   transition:0.2s ease all;
+   font-family: 'PT Sans', sans-serif;
+ }
+
+ #query:focus ~ label, #query:valid ~ label {
+   top:-2px;
+   font-size:10px;
+ }
+
+ #bar {
+   position: relative;
+   display: block;
+   width: 315px;
+ }
+
+ .allBar {
+   background: white;
+ }
+
+ .allBar:before, .allBar:after {
+   background: white;
+ }
+
+ #bar:before, #bar:after {
+   content:'';
+   height:2px;
+   width:0;
+   bottom:1px;
+   position:absolute;
+   transition:0.2s ease all;
+ }
+
+ #bar:before {
+   left:50%;
+ }
+
+ #bar:after {
+   right:50%;
+ }
+
+ #query:focus ~ #bar:before, #query:focus ~ #bar:after {
+   width:50%;
+ }
+
+ .dataBody {
+   display :block;
+   height: 100%;
+   clear: both;
+ }
+
+ .leftMenu {
+   float: left;
+   width: 100px;
+   background-color: #c0392b;
+   height: 100%;
+   z-index: -1;
+ }
+
+ #sourceSelectorWrapper {
+   list-style-type: none;
+   width: 100%;
+   padding: 0;
+   margin: 0;
+   background: transparent;
+   border: transparent;
+}
+
+ .sourceList {
+   width: 100%;
+   border: transparent;
+   background: transparent;
+}
+
+#mapSelector {
+  background-color: transparent;
+}
+
+i {
+  border: transparent;
+  background: transparent;
+}
+
+ .sourceSelector {
+   background-color: transparent;
+   border-color: transparent;
+   width: 100%;
+   font-size: 70px;
+   margin-top: 50px;
+   transition: 0.5s ease;
+ }
+
+ .sourceSelector:hover {
+   cursor:pointer;
+   font-size: 90px;
+   transition: 0.3s ease;
+ }
+
+ .rightDisplay {
+   width: calc(100% - 100px);
+   height: 100%;
+   display: block;
+   float: right;
+ }
+
+ #chartBody {
+   width: 100%;
+   height: 100%;
+ }
+
+ #chartTitle, #mapTitle {
+   text-align: center;
+   font-size: 2.5em;
+   font-weight: bold;
+   width: 80%;
+   margin-right: auto;
+   margin-left: auto;
+ }
+
+ #lineGraphWrapper, #solarChartWrapper {
+   width: 100%;
+ }
+
+.chartTitle {
+  text-align: center;
+  font-size: 1.5em;
+  margin-left: auto;
+  margin-right: auto;
+  top: 5%;
+}
+
+.graphs {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70% !important;
+  height: auto !important
+}
+
+ #mapBody {
+   display: none;
+   height: 100%;
+   width: 100%;
+ }
+
+#mapWrapper {
+  width: 100%;
+  height: calc(100% - 60px);
+}
+
+#map {
+  position: relative;
+  width: 90%;
+  height: 90%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}

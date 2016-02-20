@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 
+  transaction_date: 2016-02-20 02:50:04
+  status: MyString
+  medium: MyString
+
+two:
+  type: 
+  transaction_date: 2016-02-20 02:50:04
+  status: MyString
+  medium: MyString

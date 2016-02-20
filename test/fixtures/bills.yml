@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  status: MyString
+  payee: MyString
+  nickname: MyString
+  creation_date: 2016-02-20
+  payment_date: 2016-02-20
+  recurring_date: 1
+  upcoming_payment_date: 2016-02-20
+  payment_amount: 9.99
+
+two:
+  status: MyString
+  payee: MyString
+  nickname: MyString
+  creation_date: 2016-02-20
+  payment_date: 2016-02-20
+  recurring_date: 1
+  upcoming_payment_date: 2016-02-20
+  payment_amount: 9.99
