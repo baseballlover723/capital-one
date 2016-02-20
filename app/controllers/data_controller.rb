@@ -1,6 +1,15 @@
 class DataController < ApplicationController
   def index
-    @accounts = Account.all
+    @id = params[:id]
+    @customer = Customer.find(@id)
+    @accounts = @customer.accounts
+    @bills = []
+    @accounts.each do |account|
+      @bills += account.bills
+    end
+    @bills.each do |bill|
+      puts bill.to_json
+    end
     @bills = Bill.all
     @customers = Customer.all
     @deposits = Deposit.all
@@ -8,7 +17,9 @@ class DataController < ApplicationController
     @purchases = Purchase.all
     @transfers = Transfer.all
     @withdraws = Withdraw.all
+    @atms = Atm.all
 
+    gon.id = @id;
     gon.accounts = @accounts
     gon.bills = @bills
     gon.customers = @customers
@@ -17,8 +28,12 @@ class DataController < ApplicationController
     gon.purchases = @purchases
     gon.transfers = @transfers
     gon.withdraws = @withdraws
-  end
+    gon.atms = @atms
 
-  def giveUserData
+    gon.graphBills = Bill.where(account: @accounts)
+    gon.graphDeposit = Deposit.where(account: @accounts)
+    gon.graphPurchases = Purchase.where(account: @accounts)
+    gon.graphTransfers = Transfer.where(account: @accounts)
+    gon.graphWithdraws = Withdraw.where(account: @accounts);
   end
 end

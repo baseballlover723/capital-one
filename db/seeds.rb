@@ -50,5 +50,21 @@ t2 = Transfer.create(id: 87, transfer_type: "p2p", transaction_date: DateTime.is
 t3 = Transfer.create(id: 502, transfer_type: "weeb", transaction_date: DateTime.iso8601("2016-02-19"), status: "pending", medium: "balance",
                      amount: 150.00, description: "Weeaboo leassons from Jeremy, Konnichiha! Hajimemashite, watashi wa desu Kawaii baka. 5/7, would weeaboo again",
                      payer: a1, payee: a3)
+
+
+atm1 = Atm.create(u_id: 5, name: "ATM", lat: "39.48", lng: "-87.32")
+atm2 = Atm.create(u_id: 5, name: "ATM", lat: "39.10", lng: "-84.51")
+atm3 = Atm.create(u_id: 5, name: "ATM", lat: "41.89", lng: "-87.64")
 puts "done seeding"
 
+def name
+  Faker::Name.name
+end
+
+def first_name
+  Faker::Name.first_name
+end
+
+def last_name
+  Faker::Name.last_name
+end

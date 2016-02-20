@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160220090803) do
+ActiveRecord::Schema.define(version: 20160220182022) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "account_type", limit: 255
@@ -24,6 +24,15 @@ ActiveRecord::Schema.define(version: 20160220090803) do
   end
 
   add_index "accounts", ["customer_id"], name: "index_accounts_on_customer_id", using: :btree
+
+  create_table "atms", force: :cascade do |t|
+    t.string   "u_id",       limit: 255
+    t.string   "name",       limit: 255
+    t.string   "lat",        limit: 255
+    t.string   "lng",        limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "bills", force: :cascade do |t|
     t.string   "status",                limit: 255
