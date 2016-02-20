@@ -4,7 +4,7 @@ class DataController < ApplicationController
     @customer = Customer.find(@id)
     @accounts = @customer.accounts
     @accounts.each do |account|
-      account.bil
+      account
     end
     @bills = Bill.all
     @customers = Customer.all
