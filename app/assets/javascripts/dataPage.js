@@ -28,9 +28,12 @@ $(document).ready(function(){
       var canv = document.getElementById("lineGraph");
       canv.className = "graphs";
       var ctx1 = canv.getContext("2d");
+
+
   var bucketsCurrent = [0,0,0,0,0,0,0,0,0,0,0,0];
   var bucketsOld = [0,0,0,0,0,0,0,0,0,0,0,0];
   preparePurchaseGraph(bucketsCurrent, bucketsOld);
+
   console.log(bucketsCurrent)
 
       var data = {
@@ -110,7 +113,62 @@ $(document).ready(function(){
       };
       var lineChart1 = new Chart(ctx1).Line(data, options);
       canv.className = "graphs";
+
+      generatePurchaseTable();
+
     }
+  }
+
+  function generatePurchaseTable(){
+    var body = document.getElementsByTagName('body')[0];
+    var tbl = document.createElement('table');
+    tbl.style.width = '100%';
+    tbl.setAttribute('border', '1');
+    var tbdy = document.createElement('tbody');
+    // Titles
+    var tr = document.createElement('tr');
+
+    var td = document.createElement('td');
+    td.appendChild(document.createTextNode('Purchase Description'))
+    td.setAttribute('rowSpan', '1');
+    tr.appendChild(td);
+
+    var td = document.createElement('td');
+    td.appendChild(document.createTextNode('Amount'))
+    td.setAttribute('rowSpan', '1');
+    tr.appendChild(td);
+
+    var td = document.createElement('td');
+    td.appendChild(document.createTextNode('Date Purchased'))
+    td.setAttribute('rowSpan', '1');
+    tr.appendChild(td);
+
+    tbdy.appendChild(tr);
+
+
+    for(var i =0; i< gon.graphPurchases.length; i++){
+      // Create Table Row
+        var tr = document.createElement('tr');
+
+        var td = document.createElement('td');
+        td.appendChild(document.createTextNode(gon.graphPurchases[i].description))
+        td.setAttribute('rowSpan', '1');
+        tr.appendChild(td)
+
+        var td = document.createElement('td');
+        td.appendChild(document.createTextNode(gon.graphPurchases[i].amount))
+        td.setAttribute('rowSpan', '1');
+        tr.appendChild(td)
+
+        var td = document.createElement('td');
+        td.appendChild(document.createTextNode(gon.graphPurchases[i].purchase_date.split("T")[0]))
+        td.setAttribute('rowSpan', '1');
+        tr.appendChild(td)
+       
+        tbdy.appendChild(tr);
+    }
+    tbl.appendChild(tbdy);
+    body.appendChild(tbl)
   }
 
   function preparePurchaseGraph(bucketsCurrent, bucketsOld){
