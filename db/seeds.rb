@@ -36,5 +36,19 @@ d2 = Deposit.create(id: 24, deposit_type: "p2p", transaction_date: DateTime.iso8
 d3 = Deposit.create(id: 1543, deposit_type: "p2p", transaction_date: DateTime.iso8601("2016-02-25"), status: "planded",
                     medium: "balence", amount: 10.00, description: "found a ten on the ground", account: a1)
 
+w1 = Withdraw.create(id: 1, withdraw_type: "p2p", transaction_date: DateTime.iso8601("2016-01-01"), status: "done",
+                     medium: "balence", amount: 120.00, description: "Mystery Gifting all of my friends", account: a3)
+w2 = Withdraw.create(id: 87, withdraw_type: "p2p", transaction_date: DateTime.iso8601("2015-12-25"), status: "done",
+                     medium: "balence", amount: 58_777_888.66, description: "I bought Sealand", account: a1)
+w3 = Withdraw.create(id: 4523, withdraw_type: "p2p", transaction_date: DateTime.iso8601("2016-02-19"), status: "pending",
+                     medium: "balence", amount: 2130.69, description: "Needed money to go buy some rare pepes and dank memes", account: a2)
+
+t1 = Transfer.create(id: 31, transfer_type: "p2p", transaction_date: DateTime.iso8601("2015-11-19"), status: "done",
+                     medium: "balanece", amount: 420.00, description: "Needed to blaze it real hard", payer: a2, payee: a1)
+t2 = Transfer.create(id: 87, transfer_type: "p2p", transaction_date: DateTime.iso8601("2016-01-06"), status: "pending",
+                     medium: "balance", amount: 72_933_435.65, description: "shh, no one needs to know where this came from", payer: a2, payee: a3)
+t3 = Transfer.create(id: 502, transfer_type: "weeb", transaction_date: DateTime.iso8601("2016-02-19"), status: "pending", medium: "balance",
+                     amount: 150.00, description: "Weeaboo leassons from Jeremy, Konnichiha! Hajimemashite, watashi wa desu Kawaii baka. 5/7, would weeaboo again",
+                     payer: a1, payee: a3)
 puts "done seeding"
 
