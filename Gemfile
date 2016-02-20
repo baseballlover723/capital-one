@@ -38,6 +38,8 @@ gem 'gon'
 gem 'ruby-json'
 gem 'figaro'
 gem 'httparty'
+gem "font-awesome-rails"
+gem 'gmaps4rails'
 
 
 group :development, :test do
