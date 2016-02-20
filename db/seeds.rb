@@ -4,32 +4,37 @@ m3 = Merchant.create(id: 5132, name: "Zane Geiger", category: "Music", street_nu
 
 c1 = Customer.create(id: 5, first_name: "Luke", last_name: "Miller", street_number: "6969", street_name: "ohio street", city: "Dayton", state: "Ohio", zip: "53244")
 c2 = Customer.create(id: 693, first_name: "Nathan", last_name: "Blank", street_number: "42", street_name: "donkey", city: "Chicago", state: "Illinios", zip: "65843")
-c3 = Customer.create(id: 6092, first_name: "Jeremy", last_name: "Wright", street_number: "52", street_name: "??? ?? ???", city: "??", state: "???", zip: "N/A")
+c3 = Customer.create(id: 6092, first_name: "Jeremy", last_name: "Wright", street_number: "52", street_name: "weaboo drive", city: "tokyo", state: "Japan", zip: "N/A")
 
 a1 = Account.create(id: 123, account_type: "Credit Card", nickname: "Luke's Credit Card", rewards: 100.08, balance: 1_000_000.00, customer: c1)
 a2 = Account.create(id: 999, account_type: "Savings", nickname: "Luke's Savings", rewards: 0.00, balance: 50.00, customer: c1)
 a3 = Account.create(id: 7, account_type: "Checking", nickname: "Jeremy's checking", rewards: 5.14, balance: 56_357.40, customer: c3)
 
-p1 = Purchase.create(id: 1234, purchase_type: "merchant", merchant: m1, account: a3, purchase_date: DateTime.iso8601("20160215"),
+p1 = Purchase.create(id: 1234, purchase_type: "merchant", merchant: m1, account: a3, purchase_date: DateTime.iso8601("2016-02-15"),
                      amount: 524.31, status: "pending", "medium": "balance", description: "Jeremey bought some expensive clothes stuff from Andrew")
-p1 = Purchase.create(id: 4231, purchase_type: "merchant", merchant: m2, account: a3, purchase_date: DateTime.iso8601("20151215"),
+p1 = Purchase.create(id: 4231, purchase_type: "merchant", merchant: m2, account: a3, purchase_date: DateTime.iso8601("2015-12-15"),
                      amount: 700_000.00, status: "pending", "medium": "balance", description: "Jeremey bought a league team from Philip")
-p1 = Purchase.create(id: 332, purchase_type: "merchant", merchant: m3, account: a1, purchase_date: DateTime.iso8601("20150712"),
+p1 = Purchase.create(id: 332, purchase_type: "merchant", merchant: m3, account: a1, purchase_date: DateTime.iso8601("2015-07-12"),
                      amount: 76.31, status: "pending", "medium": "balance", description: "Luke bought some reeds from zanes music shop")
-p1 = Purchase.create(id: 14, purchase_type: "merchant", merchant: m1, account: a1, purchase_date: DateTime.iso8601("20160115"),
+p1 = Purchase.create(id: 14, purchase_type: "merchant", merchant: m1, account: a1, purchase_date: DateTime.iso8601("2016-01-15"),
                      amount: 2530.31, status: "declinded", "medium": "balance", description: "Luke got black out drunk and spent all of his retierment fund on expensive clothes from Andrew silk shop")
 
-b1 = Bill.create(status: "pending", payee: "Jeremy", nickname: "?????????", creation_date: DateTime.iso8601("19950717"),
-                 payment_date: DateTime.iso8601("19950727"), recurring_date: 485, upcoming_payment_date: DateTime.iso8601("20160222"),
+b1 = Bill.create(id: 15, status: "pending", payee: "Jeremy", nickname: "weaboo tax", creation_date: DateTime.iso8601("1995-07-17"),
+                 payment_date: DateTime.iso8601("1995-07-27"), recurring_date: 485, upcoming_payment_date: DateTime.iso8601("2016-02-22"),
                  payment_amount: 58_603.32, account: a3)
-b2 = Bill.create(status: "overdue", payee: "Luke", nickname: "Luke's unfair government tax", creation_date: DateTime.iso8601("20150525"),
-                 payment_date: DateTime.iso8601("20160101"), recurring_date: 15, upcoming_payment_date: DateTime.iso8601("20160217"),
+b2 = Bill.create(id: 944, status: "overdue", payee: "Luke", nickname: "Luke's unfair government tax", creation_date: DateTime.iso8601("20150525"),
+                 payment_date: DateTime.iso8601("2016-01-01"), recurring_date: 15, upcoming_payment_date: DateTime.iso8601("20160217"),
                  payment_amount: 4_458_754.99, account: a2)
-b3 = Bill.create(status: "not due", payee: "Luke", nickname: "Luke's netflix and chill bill", creation_date: DateTime.iso8601("20131019"),
-                 payment_date: DateTime.iso8601("20160319"), recurring_date: 12, upcoming_payment_date: DateTime.iso8601("20160319"),
+b3 = Bill.create(id: 921, status: "not due", payee: "Luke", nickname: "Luke's netflix and chill bill", creation_date: DateTime.iso8601("20131019"),
+                 payment_date: DateTime.iso8601("2016-03-19"), recurring_date: 12, upcoming_payment_date: DateTime.iso8601("20160319"),
                  payment_amount: 69.99, account: a1)
 
-
+d1 = Deposit.create(id: 512, deposit_type: "paycheck", transaction_date: DateTime.iso8601("2016-02-20"), status: "pending",
+                    medium: "balence", amount: 84.66, description: "Micky d's paycheck", account: a2)
+d2 = Deposit.create(id: 24, deposit_type: "p2p", transaction_date: DateTime.iso8601("2016-01-12"), status: "done",
+                    medium: "balence", amount: 500_084.66, description: "Mom died and get me her millions", account: a1)
+d3 = Deposit.create(id: 1543, deposit_type: "p2p", transaction_date: DateTime.iso8601("2016-02-25"), status: "planded",
+                    medium: "balence", amount: 10.00, description: "found a ten on the ground", account: a1)
 
 puts "done seeding"
 
