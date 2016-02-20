@@ -52,3 +52,14 @@ t3 = Transfer.create(id: 502, transfer_type: "weeb", transaction_date: DateTime.
                      payer: a1, payee: a3)
 puts "done seeding"
 
+def name
+  Faker::Name.name
+end
+
+def first_name
+  Faker::Name.first_name
+end
+
+def last_name
+  Faker::Name.last_name
+end

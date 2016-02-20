@@ -40,6 +40,7 @@ gem 'figaro'
 gem 'httparty'
 gem "font-awesome-rails"
 gem 'gmaps4rails'
+gem 'faker'
 
 
 group :development, :test do
