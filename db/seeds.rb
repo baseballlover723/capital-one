@@ -19,6 +19,15 @@ p1 = Purchase.create(id: 332, purchase_type: "merchant", merchant: m3, account: 
 p1 = Purchase.create(id: 14, purchase_type: "merchant", merchant: m1, account: a1, purchase_date: DateTime.iso8601("20160115"),
                      amount: 2530.31, status: "declinded", "medium": "balance", description: "Luke got black out drunk and spent all of his retierment fund on expensive clothes from Andrew silk shop")
 
+b1 = Bill.create(status: "pending", payee: "Jeremy", nickname: "?????????", creation_date: DateTime.iso8601("19950717"),
+                 payment_date: DateTime.iso8601("19950727"), recurring_date: 485, upcoming_payment_date: DateTime.iso8601("20160222"),
+                 payment_amount: 58_603.32, account: a3)
+b2 = Bill.create(status: "overdue", payee: "Luke", nickname: "Luke's unfair government tax", creation_date: DateTime.iso8601("20150525"),
+                 payment_date: DateTime.iso8601("20160101"), recurring_date: 15, upcoming_payment_date: DateTime.iso8601("20160217"),
+                 payment_amount: 4_458_754.99, account: a2)
+b3 = Bill.create(status: "not due", payee: "Luke", nickname: "Luke's netflix and chill bill", creation_date: DateTime.iso8601("20131019"),
+                 payment_date: DateTime.iso8601("20160319"), recurring_date: 12, upcoming_payment_date: DateTime.iso8601("20160319"),
+                 payment_amount: 69.99, account: a1)
 
 
 puts "done seeding"
