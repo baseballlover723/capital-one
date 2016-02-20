@@ -1,3 +1,37 @@
 // Place all the styles related to the landing controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+body {
+  height: 100%;
+}
+
+p {
+  font-family: "Open Sans", Sans-Serif;
+}
+
+.title_screen {
+  background-image: url(https://images.unsplash.com/photo-1452475168325-672188dc4dc3?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=90ac1d6a1647efae8f2e547893d8cdec);
+  height: 100%;
+  height: 1080px;
+  width: 100%;
+  text-align: center;
+
+  #get-started {
+    position: relative;
+    top: 800px;
+  }
+
+
+}
+
+.left-bar {
+  float: left;
+  width: 50%;
+  background-color: #3498db;
+  min-height: 1080px;
+}
+.right-bar {
+  width: 50%;
+  height: 1080px;
+}
