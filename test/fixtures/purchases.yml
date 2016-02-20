@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 
+  purchase_date: 2016-02-20 01:20:08
+  amount: 9.99
+  status: MyString
+
+two:
+  type: 
+  purchase_date: 2016-02-20 01:20:08
+  amount: 9.99
+  status: MyString
