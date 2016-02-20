@@ -1,2 +1,29 @@
-<h1>Data#index</h1>
-<p>Find me in app/views/data/index.html.erb</p>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=visualization"></script>
+
+<div class="dataBody">
+  <div class="leftMenu">
+    <ul id="sourceSelectorWrapper">
+      <li class="sourceList"><button id="graphSelector" class="sourceSelector"><abbr title="Transaction Locations"><i class="fa fa-line-chart"></i></abbr></button></li>
+      <li class="sourceList"><button id="mapSelector" class="sourceSelector"><abbr title="Transaction Locations"><i class="fa fa-map"></i></abbr></button></li>
+    </ul>
+  </div>
+  <div class="rightDisplay">
+    <div id="chartBody">
+      <div id="chartTitle">Financial Data for Andrew Ma</div>
+      <div id="lineGraphWrapper">
+        <div class="chartTitle">here</div>
+        <canvas id="lineGraph"><canvas>
+      </div>
+      <div id="solarChartWrapper">
+        <div class="chartTitle">here2</div>
+        <canvas id="solarGraph"><canvas>
+      </div>
+    </div>
+    <div id="mapBody">
+      <div id="mapTitle">Financial Map for Andrew Ma</div>
+      <div id="mapWrapper">
+        <div id="map"></div>
+      </div>
+    </div>
+  </div>
+</div>
