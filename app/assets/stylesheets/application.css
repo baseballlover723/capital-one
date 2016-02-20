@@ -216,7 +216,8 @@ i {
   margin-left: auto;
   margin-right: auto;
   width: 70% !important;
-  height: auto !important
+  height: auto !important;
+  text-align: center;
 }
 
  #mapBody {
