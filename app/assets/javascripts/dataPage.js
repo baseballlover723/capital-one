@@ -9,42 +9,55 @@ $(document).ready(function(){
     document.getElementById("mapBody").style.display = "block";
     initializeMap();
   });
-
+  console.log("This user's accounts:")
+  console.log(gon.accounts)
+  console.log("gon.graphBills");
   console.log(gon.graphBills);
+    console.log("gon.graphDeposit");
   console.log(gon.graphDeposit);
+    console.log("gon.graphPurchases");
   console.log(gon.graphPurchases);
-  console.log(gon.graphTransfers);
+
+  console.log("payer/payee transfers");
+  console.log(gon.graphPayerTransfers);
+  console.log(gon.graphPayeeTransfers);
+
   console.log(gon.graphWithdraws);
   function initializeGraphs(){
     if(document.getElementById("chartBody")){
       var canv = document.getElementById("lineGraph");
       canv.className = "graphs";
       var ctx1 = canv.getContext("2d");
+  var bucketsCurrent = [0,0,0,0,0,0,0,0,0,0,0,0];
+  var bucketsOld = [0,0,0,0,0,0,0,0,0,0,0,0];
+  preparePurchaseGraph(bucketsCurrent, bucketsOld);
+  console.log(bucketsCurrent)
+
       var data = {
-          labels: ["January", "February", "March", "April", "May", "June", "July"],
-          datasets: [
-              {
-                  label: "My First dataset",
-                  fillColor: "rgba(220,220,220,0.2)",
-                  strokeColor: "rgba(220,220,220,1)",
-                  pointColor: "rgba(220,220,220,1)",
-                  pointStrokeColor: "#fff",
-                  pointHighlightFill: "#fff",
-                  pointHighlightStroke: "rgba(220,220,220,1)",
-                  data: [65, 59, 80, 81, 56, 55, 40]
-              },
-              {
-                  label: "My Second dataset",
-                  fillColor: "rgba(151,187,205,0.2)",
-                  strokeColor: "rgba(151,187,205,1)",
-                  pointColor: "rgba(151,187,205,1)",
-                  pointStrokeColor: "#fff",
-                  pointHighlightFill: "#fff",
-                  pointHighlightStroke: "rgba(151,187,205,1)",
-                  data: [28, 48, 40, 19, 86, 27, 90]
-              }
-          ]
-      };
+    labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+    datasets: [
+        {
+            label: "My First dataset",
+            fillColor: "rgba(220,220,220,0.2)",
+            strokeColor: "rgba(220,220,220,1)",
+            pointColor: "rgba(220,220,220,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(220,220,220,1)",
+            data: bucketsOld
+        },
+        {
+            label: "My Second dataset",
+            fillColor: "rgba(151,187,205,0.2)",
+            strokeColor: "rgba(151,187,205,1)",
+            pointColor: "rgba(151,187,205,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(151,187,205,1)",
+            data: bucketsCurrent
+        }
+    ]
+};
       var options = {
 
         ///Boolean - Whether grid lines are shown across the chart
@@ -55,6 +68,8 @@ $(document).ready(function(){
 
         //Number - Width of the grid lines
         scaleGridLineWidth : 1,
+
+        scaleOverride: false,
 
         //Boolean - Whether to show horizontal lines (except X axis)
         scaleShowHorizontalLines: true,
@@ -95,6 +110,22 @@ $(document).ready(function(){
       };
       var lineChart1 = new Chart(ctx1).Line(data, options);
       canv.className = "graphs";
+    }
+  }
+
+  function preparePurchaseGraph(bucketsCurrent, bucketsOld){
+    labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    
+
+    for(var i =0; i< gon.graphPurchases.length; i++){
+      var datebucket = parseInt(gon.graphPurchases[i].purchase_date.split("-")[1] );
+      var year = parseInt(gon.graphPurchases[i].purchase_date.split("-")[0] );
+      if(year < 2015 ){
+        bucketsOld[datebucket] += parseInt(gon.graphPurchases[i].amount);
+      } else{ 
+        bucketsCurrent[datebucket] += parseInt(gon.graphPurchases[i].amount);
+      }
+
     }
   }
 
@@ -142,4 +173,7 @@ $(document).ready(function(){
       }
     }
   }
+console.log(gon.transfers)
+
 });
+
