@@ -8,7 +8,15 @@ c3 = Customer.create(id: 6092, first_name: "Jeremy", last_name: "Wright", street
 
 a1 = Account.create(id: 123, account_type: "Credit Card", nickname: "Luke's Credit Card", rewards: 100.08, balance: 1_000_000.00, customer: c1)
 a2 = Account.create(id: 999, account_type: "Savings", nickname: "Luke's Savings", rewards: 0.00, balance: 50.00, customer: c1)
-a3 = Account.create(id: 7, account_type: "Checking", nickname: "Jeremy's checking", rewards: 5.14, balance: 56_357.40,customer: c3)
+a3 = Account.create(id: 7, account_type: "Checking", nickname: "Jeremy's checking", rewards: 5.14, balance: 56_357.40, customer: c3)
 
+p1 = Purchase.create(id: 1234, purchase_type: "merchant", merchant: m1, account: a3, purchase_date: DateTime.iso8601("20160215"),
+                     amount: 524.31, status: "pending", "medium": "balance", description: "Jeremey bought some expensive clothes stuff from Andrew")
+p1 = Purchase.create(id: 4231, purchase_type: "merchant", merchant: m2, account: a3, purchase_date: DateTime.iso8601("20151215"),
+                     amount: 700_000.00, status: "pending", "medium": "balance", description: "Jeremey bought a league team from Philip")
+p1 = Purchase.create(id: 332, purchase_type: "merchant", merchant: m3, account: a1, purchase_date: DateTime.iso8601("20150712"),
+                     amount: 76.31, status: "pending", "medium": "balance", description: "Luke bought some reeds from zanes music shop")
+p1 = Purchase.create(id: 14, purchase_type: "merchant", merchant: m1, account: a1, purchase_date: DateTime.iso8601("20160115"),
+                     amount: 2530.31, status: "declinded", "medium": "balance", description: "Luke got black out drunk and spent all of his retierment fund on expensive clothes from Andrew silk shop")
 puts "done seeding"
 
