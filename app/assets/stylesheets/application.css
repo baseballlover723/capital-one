@@ -14,3 +14,104 @@
  *= require_self
  *= require foundation_and_overrides
  */
+
+ html, body {
+   height: 100%;
+   margin: 0;
+   font-family: 'PT Sans', sans-serif;
+ }
+
+ ::selection {
+    background: purple;
+    color: white;
+}
+
+.mainBody{
+  background-image: url("/city.png");
+  display: block;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: calc(100% - 56px);
+}
+
+ #queryWrapper {
+   margin-left: 37%;
+   top: 15%;
+   position: relative;
+}
+
+input{
+  box-sizing: content-box;
+  box-shadow: none;
+}
+
+ #query {
+   font-size: 18px;
+   padding:10px 10px 10px 5px;
+   display: block;
+   width: 300px;
+   font-family: 'PT Sans', sans-serif;
+ }
+
+ .allInput {
+   background: transparent;
+   color: #efefef;
+   border: none;
+   border-bottom:1px solid white;
+ }
+
+ #query:focus {
+   outline: none;
+ }
+
+ #searchLabel {
+   color: white;
+   font-size:18px;
+   font-weight:normal;
+   position:absolute;
+   pointer-events:none;
+   left:5px;
+   top:10px;
+   transition:0.2s ease all;
+   font-family: 'PT Sans', sans-serif;
+ }
+
+ #query:focus ~ label, #query:valid ~ label {
+   top:-2px;
+   font-size:10px;
+ }
+
+ #bar {
+   position: relative;
+   display: block;
+   width: 315px;
+ }
+
+ .allBar {
+   background: white;
+ }
+
+ .allBar:before, .allBar:after {
+   background: white;
+ }
+
+ #bar:before, #bar:after {
+   content:'';
+   height:2px;
+   width:0;
+   bottom:1px;
+   position:absolute;
+   transition:0.2s ease all;
+ }
+
+ #bar:before {
+   left:50%;
+ }
+
+ #bar:after {
+   right:50%;
+ }
+
+ #query:focus ~ #bar:before, #query:focus ~ #bar:after {
+   width:50%;
+ }

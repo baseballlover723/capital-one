@@ -4,46 +4,37 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
+    <title><%= content_for?(:title) ? yield(:title) : "Capital One" %></title>
 
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
+    <link href='https://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
+    <%= Gon::Base.render_data %>
   </head>
-
-  <body>
     <div class="top-bar">
-        <div class="top-bar-left">
+      <div class="top-bar-left">
           <ul class="dropdown menu" data-dropdown-menu>
-            <li class="menu-text">Site Title</li>
-            <li>
-              <a href="#">One</a>
-              <ul class="menu vertical">
-                <li><a href="#">One</a></li>
-                <li><a href="#">Two</a></li>
-                <li><a href="#">Three</a></li>
-              </ul>
-            </li>
-            <li><a href="#">Two</a></li>
-            <li><a href="#">Three</a></li>
+            <li class="menu-text">Capital One HackIllinois 2016</li>
           </ul>
         </div>
-        <div class="top-bar-right">
-          <ul class="menu">
-            <li><input type="search" placeholder="Search"></li>
-            <li><button type="button" class="button">Search</button></li>
-          </ul>
-        </div>
+      <div class="top-bar-right">
+        <ul class="dropdown menu" data-dropdown-menu>
+          <li>
+            <a href="#">Authors</a>
+            <ul class="menu vertical">
+              <li><a href="#">Andrew Ma</a></li>
+              <li><a href="#">Philip Ross</a></li>
+              <li><a href="#">Nathan Blank</a></li>
+              <li><a href="#">Luke Miller</a></li>
+            </ul>
+          </li>
+        </ul>
       </div>
-    <%= yield %>
-      <!-- Left Nav Section -->
-      <ul class="left">
-        <li><a href="#">Left Nav Button</a></li>
-      </ul>
-    </section>
-  </nav>
+    </div>
+  <body>
 
-<%= yield %>
+    <%= yield %>
 
   </body>
 </html>
