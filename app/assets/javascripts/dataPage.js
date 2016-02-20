@@ -2,10 +2,10 @@ $(document).ready(function(){
   initializeGraphs();
   $("#graphSelector").click(function(){
     document.getElementById("mapBody").style.display = "none";
-    document.getElementById("chartBody").style.display = "block";
+    document.getElementById("rightDisplay").style.display = "block";
   });
   $("#mapSelector").click(function(){
-    document.getElementById("chartBody").style.display = "none";
+    document.getElementById("rightDisplay").style.display = "none";
     document.getElementById("mapBody").style.display = "block";
     initializeMap();
   });
@@ -100,6 +100,8 @@ $(document).ready(function(){
 
   function initializeMap(){
     if(document.getElementById("map")){
+
+      console.log("map");
       var myLatLng = {lat: gon.merchants[0].lat, lng: gon.merchants[0].lng};
 
       var map = new google.maps.Map(document.getElementById('map'), {

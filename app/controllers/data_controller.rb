@@ -33,7 +33,7 @@ class DataController < ApplicationController
     gon.graphBills = Bill.where(account: @accounts)
     gon.graphDeposit = Deposit.where(account: @accounts)
     gon.graphPurchases = Purchase.where(account: @accounts)
-    gon.graphTransfers = Transfer.where(account: @accounts)
+    gon.graphTransfers = Transfer.select("*").joins(:payer).where(payer: @accounts)
     gon.graphWithdraws = Withdraw.where(account: @accounts);
   end
 end
