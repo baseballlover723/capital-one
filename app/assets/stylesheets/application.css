@@ -323,6 +323,10 @@ svg {
   margin-top: -2.5%;
   float: right;
   margin-right: 15%;
+    overflow: none;
+    text-overflow: ellipsis;
+    height:100px;
+
 }
 
 #lefty {
@@ -338,7 +342,7 @@ svg {
   width: 100%;
   position: relative;
   top: 50%;
-  margin-top: 20%;
+  /*margin-top: 20%;*/
   font-size: 1.3em
 }
 
@@ -352,7 +356,7 @@ svg {
 #hotList {
   float: left;
   width: 20%;
-  height: 100%%;
+  height: 100%;
   overflow: auto;
 }
 
