@@ -132,40 +132,57 @@ class DataController < ApplicationController
         others << load_categories(c)
       end
     end
-    puts customer_categories.to_json
-    puts "others"
+    # puts customer_categories.to_json
+    # puts "others"
     # others.each do |key, value|
     #   puts "#{key.first_name} #{key.last_name}: #{value.to_json}"
     # end
-    others.each do |value|
-      puts value.as_json
-    end
     # puts others.as_json
-    is_similar customer_categories, others, 10
+    is_similar customer_categories, others, 0.1
   end
 
   def is_similar(customer_categories, others, threshhold)
-    # customer
-    @similar_customers = others
+    @similar_customers = []
+    categories = customer_categories[:categories]
+    c1={category: "", value: 0}
+    c2={category: "", value: 0}
+    categories.each do |category, value|
+      if value > c1[:value]
+        c2 = c1
+        c1 = {category: category, value: value}
+      elsif value > c2[:value]
+        c2 = {category: category, value: value}
+      end
+    end
+    # puts c1.as_json
+    # puts c2.as_json
+    # puts ""
+    others.each do |other|
+      # puts other.as_json
+      dif1 = ((other[:categories][c1[:category]] || 0) - c1[:value]).abs
+      dif2 = ((other[:categories][c2[:category]] || 0) - c2[:value]).abs
+      # puts "original value: #{c1[:value].round(4)}, other_value: #{(other[:categories][c1[:category]] || 0).round(4)}, dif: #{dif1.round(4)}, #{c1[:category]}"
+      # puts "original value: #{c2[:value].round(4)}, other_value: #{(other[:categories][c2[:category]] || 0).round(4)}, dif: #{dif2.round(4)}, #{c2[:category]}"
+      dif = (1- c1[:value]) * dif1  + (1-c2[:value]) * dif2 # the magic formula for similarity
+      # puts "dif: #{dif.round(4)}"
+      @similar_customers << other and puts "added" if dif < threshhold
+    end
     gon.similar_customers = @similar_customers
   end
 
   def load_categories(customer)
     categories = {}
-    puts customer
     total = 0
     customer.accounts.each do |account|
       account.purchases.each do |purchase|
         category = purchase.merchant.category
         add_category categories, category, purchase.amount
         total += purchase.amount
-        puts purchase.to_json
       end
     end
     categories.each do |category, value|
       categories[category] = value / total.to_f
     end
-    puts categories.to_json
     {size: total, categories: categories, customer: customer}
   end
 
@@ -173,5 +190,4 @@ class DataController < ApplicationController
     categories[category] = 0 unless categories[category]
     categories[category] += amount
   end
-
 end
