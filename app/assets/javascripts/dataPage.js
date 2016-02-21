@@ -1,5 +1,6 @@
 $(document).ready(function(){
   var createdHotList = false;
+  var createdRegionList = false;
   initializeGraphs();
   $("#graphSelector").click(function(){
     document.getElementById("mapBody").style.display = "none";
@@ -362,12 +363,142 @@ $(document).ready(function(){
 
   function regionCalculator() {
     if(document.getElementById("regionBody")){
-      populateRegionTable();
+      generateRegionMap();
     }
   }
 
-  function populateRegionTable() {
-    console.log("populate region table");
+
+
+
+  function generateRegionMap() {
+    // console.log("populate region table");
+    // Run K-Means to generate clusters from # of cities, then get each's average 
+    // cost of a transaction to estimate most/least expensive
+    var merchantIdToName = {};
+    var merchantsCounts = {};
+    var merchantIdToIndex = {};
+
+    for(var i =0; i< gon.merchants.length; i++){
+      merchantIdToIndex[gon.merchants[i].id] = i;
+    }
+
+
+    numCities = 4;
+    regionData = []
+    for(var i=0; i < gon.purchases.length; i++){
+      regionData.push([gon.merchants[merchantIdToIndex[gon.purchases[i]["merchant_id"]]].lat, gon.merchants[merchantIdToIndex[gon.purchases[i]["merchant_id"]]].lng, i ]);
+    }
+
+    clusterOptions = {
+      "numberOfClusters" :3,
+      "numberOfDimensions": 2
+    }
+    var clusters = getClusters(regionData, clusterOptions);
+
+    console.log(clusters);
+    
+
+    for(var c in clusters){
+      clusters[c]["avgCost"] = 0;
+      var sum = 0;
+      for(var d in clusters[c].data ){
+        sum += parseInt(gon.purchases[clusters[c].data[d][2]].amount )
+        // console.log(gon.purchases[clusters[c].data[d][2]].amount)
+      }
+      sum = sum / clusters[c].data.length;
+      // console.log(sum)
+      clusters[c]["avgCost"] = sum;
+    }
+
+
+    console.log(clusters);
+
+
+    // Map stuff
+    // if(!createdHotList){
+    //     createHotList(merchantCounts);
+    //     createdHotList = true;
+    //   }
+
+      var myLatLng = {lat: clusters[0].mean[0], lng:  clusters[0].mean[1]};
+
+      var map = new google.maps.Map(document.getElementById('regionMap'), {
+        center: myLatLng,
+        scrollwheel: true,
+        zoom: 5
+      });
+
+      var purchases = gon.purchases
+      var merchants = gon.merchants
+
+      for(var c in clusters){
+        // var merch = gon.merchants[merchant];
+        myLatLng = {lat: clusters[c].mean[0], lng: clusters[c].mean[1]};
+        marker = new google.maps.Marker({position: myLatLng,map: map,title: "wheee titlehere"});
+        (function(marker, i, clusters, purchases, merchants) {
+                        // add click event
+                        google.maps.event.addListener(marker, 'click', function() {
+                            infowindow = new google.maps.InfoWindow({
+                                content:  merchants[merchantIdToIndex[purchases[clusters[i].data[0][2]]["merchant_id"]]].city + ": " + clusters[i].avgCost.toFixed(2)
+                            });
+                            infowindow.open(map, marker);
+                        });
+                    })(marker, c, clusters, purchases, merchants);
+      }
+
+
+      if(!createdRegionList){
+        createdRegionList = true;
+        // Generate Table
+        var wrapper = document.getElementById('regionList');
+        var tbl = document.createElement('table');
+        tbl.style.width = '100%';
+        tbl.setAttribute('border', '1');
+        var tbdy = document.createElement('tbody');
+        // Titles
+        var tr = document.createElement('tr');
+
+        var td = document.createElement('td');
+        td.appendChild(document.createTextNode('City'))
+        td.setAttribute('rowSpan', '1');
+        tr.appendChild(td);
+
+        var td = document.createElement('td');
+        td.appendChild(document.createTextNode('Average Purchase'))
+        td.setAttribute('rowSpan', '1');
+        tr.appendChild(td);
+
+
+        tbdy.appendChild(tr);
+
+        var count = 0;
+        console.log(clusters)
+
+        var sortable = [];
+        // for (var i in clusters)
+        //     sortable.push([merchantIdToName[i], merchantsCounts[i], merchantIdToIndex[i]])
+
+        clusters.sort(function(a, b) {return b.avgCost - a.avgCost});
+        console.log(clusters)
+        for(var i =0; i<  clusters.length; i++){
+          // Create Table Row
+            var tr = document.createElement('tr');
+
+            var td = document.createElement('td');
+            td.appendChild(document.createTextNode(merchants[merchantIdToIndex[purchases[clusters[i].data[0][2]]["merchant_id"]]].city));
+            td.setAttribute('rowSpan', '1');
+            tr.appendChild(td)
+
+            var td = document.createElement('td');
+            td.appendChild(document.createTextNode(clusters[i].avgCost.toFixed(2)))
+            td.setAttribute('rowSpan', '1');
+            tr.appendChild(td)
+
+            tbdy.appendChild(tr);
+        }
+        tbl.appendChild(tbdy);
+        wrapper.appendChild(tbl)
+    }
   }
 
 
@@ -376,6 +507,286 @@ $(document).ready(function(){
 
 
 
+
+
+
+
+
+
+
+/* K Means Implementation by dimas at
+ * https://github.com/shudima/dimas-kmeans
+ */
+
+function getClusters(data, options) {
+
+  var numberOfClusters, distanceFunction, vectorFunction, minMaxValues, maxIterations, numberOfDimensions;
+
+  if (!options || !options.numberOfClusters) { numberOfClusters = getNumberOfClusters(data.length); }
+  else { numberOfClusters = options.numberOfClusters; }
+
+  if (!options || !options.distanceFunction) { distanceFunction = getDistance; }
+  else { distanceFunction = options.distanceFunction; }
+  
+  if (!options || !options.vectorFunction) { vectorFunction = defaultVectorFunction; }
+    else { vectorFunction = options.vectorFunction; }
+    
+    if (!options || !options.maxIterations) { maxIterations = 1000; }
+    else { maxIterations = options.maxIterations; }
+
+  if (!options || !options.numberOfDimensions) { numberOfDimensions = getNumnerOfDimensions(data, vectorFunction); }
+  else { numberOfDimensions = options.numberOfDimensions; }
+
+  minMaxValues = getMinAndMaxValues(data, numberOfDimensions, vectorFunction);
+
+
+  return getClustersWithParams(data, numberOfDimensions, numberOfClusters, distanceFunction, vectorFunction, minMaxValues, maxIterations).clusters;
+}
+
+
+function getClustersWithParams(data, numberOfDimensions ,numberOfClusters, distanceFunction, vectorFunction, minMaxValues, maxIterations) {
+  
+  var means = createRandomMeans(numberOfDimensions, numberOfClusters, minMaxValues);
+
+  var clusters = createClusters(means);
+
+  var prevMeansDistance = 999999;
+
+    var numOfInterations = 0;
+    var iterations = [];
+
+
+  while(numOfInterations < maxIterations) {
+
+    initClustersData(clusters);
+
+    assignDataToClusters(data, clusters, distanceFunction, vectorFunction);
+
+    updateMeans(clusters, vectorFunction);
+
+    var meansDistance = getMeansDistance(clusters, vectorFunction, distanceFunction);
+
+      iterations.push(meansDistance);
+        // console.log(numOfInterations + ': ' + meansDistance );
+        // console.log(clusters);
+        numOfInterations++;
+  }
+  
+  console.log(getMeansDistance(clusters, vectorFunction, distanceFunction));
+
+    return { clusters: clusters, iterations: iterations };
+}
+
+function defaultVectorFunction(vector) {
+  return vector;
+}
+
+function getNumnerOfDimensions(data, vectorFunction) {
+    if (data[0]) {
+        return vectorFunction(data[0]).length;
+    }  
+  return 0;
+}
+
+function getNumberOfClusters(n) {
+  return Math.ceil(Math.sqrt(n/2));
+}
+
+function getMinAndMaxValues(data, numberOfDimensions, vectorFunction) {
+
+  var minMaxValues = initMinAndMaxValues(numberOfDimensions);
+
+  data.forEach(function (vector) {
+
+    for (var i = 0; i < numberOfDimensions; i++) {
+      
+      if (vectorFunction(vector)[i] < minMaxValues.minValue[i]) {
+        minMaxValues.minValue[i] = vectorFunction(vector)[i];
+      }
+
+      if(vectorFunction(vector)[i] > minMaxValues.maxValue[i]) {
+        minMaxValues.maxValue[i] = vectorFunction(vector)[i];
+      }
+    };
+  });
+
+
+  return minMaxValues;
+}
+
+
+function initMinAndMaxValues(numberOfDimensions) {
+
+  var result = { minValue : [], maxValue : [] }
+
+  for (var i = 0; i < numberOfDimensions; i++) {
+    result.minValue.push(9999);
+    result.maxValue.push(-9999);
+  };
+
+  return result;
+}
+
+
+function printMeans(clusters) {
+  var means = '';
+
+  clusters.forEach(function (cluster) {
+    means = means + ' [' + cluster.mean + ']'
+  });
+
+  console.log(means);
+}
+
+function getMeansDistance(clusters, vectorFunction, distanceFunction) {
+
+  var meansDistance = 0;
+
+  clusters.forEach(function (cluster) {
+
+    cluster.data.forEach(function (vector) {
+
+        meansDistance = meansDistance + Math.pow(distanceFunction(cluster.mean, vectorFunction(vector)), 2);
+    });
+  });
+
+
+  return meansDistance;
+}
+
+function updateMeans(clusters, vectorFunction) {
+
+  clusters.forEach(function (cluster) {
+    updateMean(cluster, vectorFunction);
+
+  });
+}
+
+
+function updateMean(cluster, vectorFunction) {
+
+  var newMean = [];
+  // console.log("oldmean: " + cluster.mean)
+  for (var i = 0; i < cluster.mean.length; i++) {
+    newMean.push(getMean(cluster.data, i, vectorFunction));
+  };
+
+
+  cluster.mean = newMean;
+  // console.log("newmean: " + cluster.mean)
+
+}
+
+function getMean(data, index, vectorFunction) {
+  var sum =  0;
+  var total = data.length;
+
+  if(total == 0) return 0;
+  data.forEach(function (vector) {
+
+      sum = sum + vectorFunction(vector)[index];
+  });
+
+
+  return sum / total;
+}
+
+function assignDataToClusters(data, clusters, distanceFunction, vectorFunction) {
+
+
+  data.forEach(function (vector) {
+      var cluster = findClosestCluster(vectorFunction(vector), clusters, distanceFunction);
+
+      if(!cluster.data) cluster.data = [];
+    // console.log(vector)
+    cluster.data.push(vector);
+  });
+  for(var c in clusters){
+    if(clusters[c].data.length == 0){
+      // console.log("NO DATA EVERYONE PANIC")
+      // console.log(data)
+      var datalen = data.length;
+      randex = Math.round(random(0,datalen))
+      // console.log(randex)
+      // console.log(data[randex])
+      clusters[c].data.push(data[randex])
+    }
+  }
+}
+
+
+function findClosestCluster(vector, clusters, distanceFunction) {
+
+  var closest = {};
+  var minDistance = 9999999;
+
+  clusters.forEach(function (cluster) {
+    
+    var distance = distanceFunction(cluster.mean, vector);
+    if (distance < minDistance) {
+      minDistance = distance;
+      closest = cluster;
+    };
+  });
+
+  return closest;
+}
+
+function initClustersData(clusters) {
+  clusters.forEach(function (cluster) {
+    cluster.data = [];
+  });
+}
+
+function createClusters(means) {
+  var clusters = [];
+
+  means.forEach(function (mean) {
+    var cluster = { mean : mean, data : []};
+
+    clusters.push(cluster);
+  });
+
+  return clusters;
+}
+
+function createRandomMeans(numberOfDimensions, numberOfClusters, minMaxValues) {
+  
+  var means = [];
+
+
+  for (var i = 0; i < numberOfClusters; i++) {
+    means.push(createRandomPoint(numberOfDimensions, Math.min(minMaxValues.minValue[0], minMaxValues.minValue[1] ),
+                                                     Math.max(minMaxValues.maxValue[0], minMaxValues.maxValue[1])));
+  };
+
+  return means;
+}
+
+function createRandomPoint(numberOfDimensions, minValue, maxValue) {
+  var point = [];
+  for (var i = 0; i < numberOfDimensions; i++) {
+    point.push(random(minValue, maxValue));
+  };
+  
+  return point;
+}
+
+function random (low, high) {
+
+    return Math.random() * (high - low) + low;
+}
+
+function getDistance(vector1, vector2) {
+  var sum = 0;
+
+  for (var i = 0; i < vector1.length; i++) {
+    sum = sum + Math.pow(vector1[i] - vector2[i],2)
+  };
+
+  return Math.sqrt(sum);
+
+}
 
   function similarCustomersInit() {
     var similarCustomers = gon.similar_customers;
@@ -480,7 +891,6 @@ $(document).ready(function(){
   $("#similarSelector").on("click", function() {
       similarCustomersInit();
   });
-
 
 
 

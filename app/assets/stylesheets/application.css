@@ -362,6 +362,20 @@ svg {
   overflow: auto;
 }
 
+#regionBody {
+  display: none;
+  width: calc(100% - 100px);
+  height: 100%;
+  margin-left: 100px;
+}
+
+#regionList {
+  float: left;
+  width: 20%;
+  height: 100%;
+  overflow: auto;
+}
+
 #hotList::-webkit-scrollbar-track {
    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
     border-radius: 10px;
@@ -380,6 +394,12 @@ svg {
 
 
 #hotMap {
+  float: right;
+  width: 80%;
+  height: 100%;
+}
+
+#regionMap {
   float: right;
   width: 80%;
   height: 100%;
