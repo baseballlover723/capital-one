@@ -191,3 +191,4 @@ class DataController < ApplicationController
     categories[category] += amount
   end
 end
+d
