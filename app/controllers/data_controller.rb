@@ -117,12 +117,14 @@ class DataController < ApplicationController
     end
   end
   def load_close_customers(customer)
-    @customer_similar = {size:4908.9,categories:{Retail:0.818629428181466316282670252,Food:0.162639287824156124590030353,Services:0.018731283994377559127299395}}
+    # @customer_similar = {size:4908.9,categories:{Retail:0.818629428181466316282670252,Food:0.162639287824156124590030353,Services:0.018731283994377559127299395}}
 
     # @similar = [Luke Miller: {"size":"2551.93","categories":{"Food":"0.129164984932972299396927032","Retail":"0.821233341039918806550336412","Services":"0.049601674027108894052736556"}}
     # Nathan Blank: {"size":"5167.34","categories":{"Retail":"0.840836871581897068898117794","Services":"0.095494006587528593047873761","Food":"0.020424435009114941149605019","Hotel":"0.043244686821459396904403426"}}
 
     customer_categories = load_categories customer
+    @customer_categories = customer_categories
+    gon.customer_categories = @customer_categories
 
     others = []
     Customer.all.each do |c|
@@ -164,7 +166,7 @@ class DataController < ApplicationController
       categories[category] = value / total.to_f
     end
     puts categories.to_json
-    {customer: customer, size: total, categories: categories}
+    {size: total, categories: categories, customer: customer}
   end
 
   def add_category(categories, category, amount)
