@@ -55,7 +55,13 @@ $(document).ready(function(){
         .data(partition.nodes)
       .enter().append("path")
         .attr("d", arc)
-        .style("fill", function(d) { return colors[d.name]; })
+        .style("fill", function(d) {
+            if(colors[d.name] != null) {
+                return colors[d.name];
+            } else {
+                return colors[d.parent.name];
+            }
+        })
         .on("click", click)
         .on("mouseover", mouseover)
         .each(stash);
