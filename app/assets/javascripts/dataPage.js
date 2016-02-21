@@ -370,4 +370,133 @@ $(document).ready(function(){
     console.log("populate region table");
   }
 
+
+
+
+
+
+
+
+  function similarCustomersInit() {
+    var similarCustomers = gon.similar_customers;
+    var customerCategories = gon.customer_categories;
+
+    myCategoryValues = {
+      "Food": customerCategories.categories.Food,
+      "Hotel": customerCategories.categories.Hotel,
+      "Retail": customerCategories.categories.Retail,
+      "Services": customerCategories.categories.Services
+    };
+
+    myCustomerValues = {
+      "city": customerCategories.customer.city,
+      "first_name": customerCategories.customer.first_name,
+      "last_name": customerCategories.customer.last_name,
+      "state": customerCategories.customer.state,
+      "street_name": customerCategories.customer.street_name,
+      "zip": customerCategories.customer.zip,
+      "street_number": customerCategories.customer.street_number
+    };
+
+    comparisonListKey = ["Food", "Hotel", "Retail", "Services"];
+
+    peopleLikeMeList = [];
+
+    for(var customerIndex = 0; customerIndex < similarCustomers.length; customerIndex++) {
+      var difArr = [
+        myCategoryValues.Food - (similarCustomers[customerIndex].categories.Food == null ? -10: similarCustomers[customerIndex].categories.Food), 
+        myCategoryValues.Hotel - (similarCustomers[customerIndex].categories.Hotel == null ? -10: similarCustomers[customerIndex].categories.Hotel),
+        myCategoryValues.Retail - (similarCustomers[customerIndex].categories.Retail == null ? -10: similarCustomers[customerIndex].categories.Retail),
+        myCategoryValues.Services - (similarCustomers[customerIndex].categories.Services == null ? -10: similarCustomers[customerIndex].categories.Services)
+      ];
+
+      var i = difArr.indexOf(Math.min.apply(Math, difArr));
+      if(difArr[i] < .15 && difArr[i] > -.15) {
+        peopleLikeMeList.push({
+            "otherPersonsID": similarCustomers[customerIndex].customer.id,
+            "mostSimilarCategory": comparisonListKey[i],
+            "difference": difArr[i],
+            "state": similarCustomers[customerIndex].customer.state,
+            "city": similarCustomers[customerIndex].customer.city,
+            "name": similarCustomers[customerIndex].customer.first_name + " " + similarCustomers[customerIndex].customer.last_name
+          });
+      }
+    }
+
+    var categoriesSimilar = [];
+    for (var i = peopleLikeMeList.length - 1; i >= 0; i--) {
+      if(categoriesSimilar.indexOf(peopleLikeMeList[i].mostSimilarCategory) == -1) {
+          categoriesSimilar.push(peopleLikeMeList[i].mostSimilarCategory);
+      }
+    };
+
+    var tmpMatchs = [];
+
+    $("#myNameArea").append("<h4>" + myCustomerValues.first_name + "</h4>");
+
+    if(categoriesSimilar != [] && categoriesSimilar.length > 1) {
+        var begginningHTMLToAdd = '<div class="row"><div class="small-3 medium-2 grid-content"><select name="" id="categoriesSimilarSelector">';
+        var middleHTMLToAdd = '';
+        for (var i = categoriesSimilar.length - 1; i >= 0; i--) {
+         middleHTMLToAdd += '<option value="' + categoriesSimilar[i] + '">' + categoriesSimilar[i] + '</option>';
+        };
+        $("#inbetweenTextMiddle").append(begginningHTMLToAdd + middleHTMLToAdd + '</select></div></div>');
+    }
+
+    $( "select" ).change(function () {
+    var valu = "";
+      $( "select option:selected" ).each(function() {
+        valu += $( this ).text() + " ";
+      });
+      tmpMatchs = [];
+      for (var i = peopleLikeMeList.length - 1; i >= 0; i--) {
+        //alert(peopleLikeMeList[i].mostSimilarCategory.valueOf() + "----" + valu.valueOf() + "----");
+        if(peopleLikeMeList[i].mostSimilarCategory.valueOf() === valu.valueOf().trim()) {
+          tmpMatchs.push(peopleLikeMeList[i].name);
+        }
+      };
+
+      $("#othersArea").text('');
+
+      if(tmpMatchs.length == 1)
+        $("#inbetweenTextBelow").text("there is " + tmpMatchs.length + " person with similar spending habits as you: ");
+      else if(tmpMatchs.length > 1)
+        $("#inbetweenTextBelow").text("there are " + tmpMatchs.length + " people with similar spending habits as you: ");
+
+
+      for (var i = tmpMatchs.length - 1; i >= 0; i--) {
+        $("#othersArea").append('<h4>' + tmpMatchs[i] + '</h4>');
+      };
+      
+
+
+    }).change();
+
+    //$("#similarBody").append("<h4>" + peopleLikeMeList[0].name + "</h4>");
+
+  }
+
+
+  $("#similarSelector").on("click", function() {
+      similarCustomersInit();
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 });
