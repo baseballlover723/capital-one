@@ -12,15 +12,15 @@ m10 = Merchant.create(id: 6, name: "Home Depot", category: "Retail", street_numb
 
 
 
-c1 = Customer.create(id: 5, first_name: "Luke", last_name: "Miller", street_number: "6969", street_name: "ohio street", city: "Dayton", state: "Ohio", zip: "53244")
-c2 = Customer.create(id: 693, first_name: "Nathan", last_name: "Blank", street_number: "42", street_name: "donkey", city: "Chicago", state: "Illinios", zip: "65843")
-c3 = Customer.create(id: 6092, first_name: "Jeremy", last_name: "Wright", street_number: "52", street_name: "weaboo drive", city: "tokyo", state: "Japan", zip: "N/A")
+c1 = Customer.create(id: 1, first_name: "Luke", last_name: "Miller", street_number: "6969", street_name: "ohio street", city: "Dayton", state: "Ohio", zip: "53244")
+c2 = Customer.create(id: 2, first_name: "Nathan", last_name: "Blank", street_number: "42", street_name: "donkey", city: "Chicago", state: "Illinios", zip: "65843")
+c3 = Customer.create(id: 3, first_name: "Jeremy", last_name: "Wright", street_number: "52", street_name: "weaboo drive", city: "tokyo", state: "Japan", zip: "N/A")
 
 a1 = Account.create(id: 123, account_type: "Credit Card", nickname: "Luke's Credit Card", rewards: 100.08, balance: 1_000_000.00, customer: c1)
 a4 = Account.create(id: 999, account_type: "Savings", nickname: "Luke's Savings", rewards: 0.00, balance: 50.00, customer: c1)
 a3 = Account.create(id: 7, account_type: "Checking", nickname: "Jeremy's checking", rewards: 5.14, balance: 56_357.40, customer: c3)
 
-a2 = Account.create(id: 1111, account_type: "Savings", nickname: "Luke's Savings", rewards: 0.00, balance: 2430.00, customer: c2)
+a2 = Account.create(id: 1111, account_type: "Savings", nickname: "Nathan's Savings", rewards: 0.00, balance: 2430.00, customer: c2)
 
 
 p1 = Purchase.create(id: 1234, purchase_type: "merchant", merchant: m1, account: a3, purchase_date: DateTime.iso8601("2016-02-15"),
@@ -58,46 +58,64 @@ p16 = Purchase.create(id: 756, purchase_type: "merchant", merchant: m2, account:
                      amount: 4.83, status: "completed", "medium": "balance", description: "Purchased coffee")
 
 # Amazon
-p8 = Purchase.create(id: 558, purchase_type: "merchant", merchant: m6, account: a2, purchase_date: DateTime.iso8601("2015-04-30"),
-                     amount: 56.56, status: "completed", "medium": "balance", description: "Bought groceries")
-p9 = Purchase.create(id: 559, purchase_type: "merchant", merchant: m6, account: a2, purchase_date: DateTime.iso8601("2015-05-11"),
-                     amount: 126.73, status: "completed", "medium": "balance", description: "Nathan stayed at a hotel for the night")
-p10 = Purchase.create(id: 655, purchase_type: "merchant", merchant: m6, account: a2, purchase_date: DateTime.iso8601("2015-06-15"),
-                     amount: 12.21, status: "completed", "medium": "balance", description: "Bought burritos")
-p11 = Purchase.create(id: 656, purchase_type: "merchant", merchant: m6, account: a2, purchase_date: DateTime.iso8601("2015-07-24"),
-                     amount: 19.83, status: "completed", "medium": "balance", description: "Purchased coffee")
-p12 = Purchase.create(id: 657, purchase_type: "merchant", merchant: m6, account: a2, purchase_date: DateTime.iso8601("2015-08-02"),
-                     amount: 17.91, status: "completed", "medium": "balance", description: "Purchased a Big Mac")
-p13 = Purchase.create(id: 658, purchase_type: "merchant", merchant: m6, account: a2, purchase_date: DateTime.iso8601("2015-09-29"),
-                     amount: 86.56, status: "completed", "medium": "balance", description: "Bought groceries")
-p14 = Purchase.create(id: 659, purchase_type: "merchant", merchant: m6, account: a2, purchase_date: DateTime.iso8601("2015-10-11"),
-                     amount: 96.73, status: "completed", "medium": "balance", description: "Nathan stayed at a hotel for the night")
-p15 = Purchase.create(id: 755, purchase_type: "merchant", merchant: m6, account: a2, purchase_date: DateTime.iso8601("2015-11-15"),
-                     amount: 8.71, status: "completed", "medium": "balance", description: "Bought burritos")
-p16 = Purchase.create(id: 756, purchase_type: "merchant", merchant: m6, account: a2, purchase_date: DateTime.iso8601("2015-12-24"),
-                     amount: 4.83, status: "completed", "medium": "balance", description: "Purchased coffee")
+p17 = Purchase.create(id: 17, purchase_type: "merchant", merchant: m6, account: a1, purchase_date: DateTime.iso8601("2015-04-30"),
+                     amount: 1722.3898937001727, status: "completed", "medium": "balance", description: "AMAZON DRONE DELIVERY")
+p18 = Purchase.create(id: 18, purchase_type: "merchant", merchant: m6, account: a2, purchase_date: DateTime.iso8601("2015-05-11"),
+                     amount: 1595.6185574805083, status: "completed", "medium": "balance", description: "AMAZON DRONE DELIVERY")
+p19 = Purchase.create(id: 19, purchase_type: "merchant", merchant: m6, account: a3, purchase_date: DateTime.iso8601("2015-06-15"),
+                     amount: 318.7563936215583, status: "completed", "medium": "balance", description: "AMAZON DRONE DELIVERY")
+p20 = Purchase.create(id: 20, purchase_type: "merchant", merchant: m6, account: a1, purchase_date: DateTime.iso8601("2015-07-24"),
+                     amount: 107.98137016179999, status: "completed", "medium": "balance", description: "AMAZON DRONE DELIVERY")
+p21 = Purchase.create(id: 21, purchase_type: "merchant", merchant: m6, account: a2, purchase_date: DateTime.iso8601("2015-08-02"),
+                     amount: 1256.756388863517, status: "completed", "medium": "balance", description: "AMAZON DRONE DELIVERY")
+p22 = Purchase.create(id: 22, purchase_type: "merchant", merchant: m6, account: a3, purchase_date: DateTime.iso8601("2015-09-29"),
+                     amount: 1944.3640847407657, status: "completed", "medium": "balance", description: "AMAZON DRONE DELIVERY")
+p23 = Purchase.create(id: 23, purchase_type: "merchant", merchant: m6, account: a1, purchase_date: DateTime.iso8601("2015-10-11"),
+                     amount: 146.54056236396062, status: "completed", "medium": "balance", description: "AMAZON DRONE DELIVERY")
+p24 = Purchase.create(id: 24, purchase_type: "merchant", merchant: m6, account: a2, purchase_date: DateTime.iso8601("2015-11-15"),
+                     amount: 997.5769136550015, status: "completed", "medium": "balance", description: "AMAZON DRONE DELIVERY")
+p25 = Purchase.create(id: 25, purchase_type: "merchant", merchant: m6, account: a3, purchase_date: DateTime.iso8601("2015-12-24"),
+                     amount: 1731.0317430666548, status: "completed", "medium": "balance", description: "AMAZON DRONE DELIVERY")
 
 #
-p8 = Purchase.create(id: 558, purchase_type: "merchant", merchant: m6, account: a2, purchase_date: DateTime.iso8601("2015-04-30"),
-                    amount: 56.56, status: "completed", "medium": "balance", description: "Bought groceries")
-p9 = Purchase.create(id: 559, purchase_type: "merchant", merchant: m6, account: a2, purchase_date: DateTime.iso8601("2015-05-11"),
-                    amount: 126.73, status: "completed", "medium": "balance", description: "Nathan stayed at a hotel for the night")
-p10 = Purchase.create(id: 655, purchase_type: "merchant", merchant: m6, account: a2, purchase_date: DateTime.iso8601("2015-06-15"),
-                    amount: 12.21, status: "completed", "medium": "balance", description: "Bought burritos")
-p11 = Purchase.create(id: 656, purchase_type: "merchant", merchant: m6, account: a2, purchase_date: DateTime.iso8601("2015-07-24"),
-                    amount: 19.83, status: "completed", "medium": "balance", description: "Purchased coffee")
-p12 = Purchase.create(id: 657, purchase_type: "merchant", merchant: m6, account: a2, purchase_date: DateTime.iso8601("2015-08-02"),
-                    amount: 17.91, status: "completed", "medium": "balance", description: "Purchased a Big Mac")
-p13 = Purchase.create(id: 658, purchase_type: "merchant", merchant: m6, account: a2, purchase_date: DateTime.iso8601("2015-09-29"),
-                    amount: 86.56, status: "completed", "medium": "balance", description: "Bought groceries")
-p14 = Purchase.create(id: 659, purchase_type: "merchant", merchant: m6, account: a2, purchase_date: DateTime.iso8601("2015-10-11"),
-                    amount: 96.73, status: "completed", "medium": "balance", description: "Nathan stayed at a hotel for the night")
-p15 = Purchase.create(id: 755, purchase_type: "merchant", merchant: m6, account: a2, purchase_date: DateTime.iso8601("2015-11-15"),
-                    amount: 8.71, status: "completed", "medium": "balance", description: "Bought burritos")
-p16 = Purchase.create(id: 756, purchase_type: "merchant", merchant: m6, account: a2, purchase_date: DateTime.iso8601("2015-12-24"),
-                    amount: 4.83, status: "completed", "medium": "balance", description: "Purchased coffee")
+p26= Purchase.create(id: 26, purchase_type: "merchant", merchant: m7, account: a3, purchase_date: DateTime.iso8601("2015-04-30"),
+                    amount: 139.45862718832709, status: "completed", "medium": "balance", description: "Bought groceries")
+p27= Purchase.create(id: 27, purchase_type: "merchant", merchant: m7, account: a3, purchase_date: DateTime.iso8601("2015-05-11"),
+                    amount: 56.04739586876561, status: "completed", "medium": "balance", description: "Bought more groceries")
+p28 = Purchase.create(id: 28, purchase_type: "merchant", merchant: m7, account: a3, purchase_date: DateTime.iso8601("2015-06-15"),
+                    amount: 8.561755557831741, status: "completed", "medium": "balance", description: "Bought even more groceries")
+p29 = Purchase.create(id: 29, purchase_type: "merchant", merchant: m8, account: a1, purchase_date: DateTime.iso8601("2015-07-24"),
+                    amount: 122.88888363107802, status: "completed", "medium": "balance", description: "Haircut at Supercuts")
+p30 = Purchase.create(id: 30, purchase_type: "merchant", merchant: m8, account: a2, purchase_date: DateTime.iso8601("2015-08-02"),
+                    amount: 81.40879509033687, status: "completed", "medium": "balance", description: "Haircut at Supercuts")
+p31 = Purchase.create(id: 31, purchase_type: "merchant", merchant: m8, account: a3, purchase_date: DateTime.iso8601("2015-09-29"),
+                    amount: 71.17280751479944, status: "completed", "medium": "balance", description: "Haircut at Supercuts")
+p32 = Purchase.create(id: 32, purchase_type: "merchant", merchant: m8, account: a1, purchase_date: DateTime.iso8601("2015-10-11"),
+                    amount: 3.6935679530844867, status: "completed", "medium": "balance", description: "Haircut at Supercuts")
+p33 = Purchase.create(id: 33, purchase_type: "merchant", merchant: m8, account: a2, purchase_date: DateTime.iso8601("2015-11-15"),
+                    amount: 140.6104359993869, status: "completed", "medium": "balance", description: "Haircut at Supercuts")
+p34 = Purchase.create(id: 34, purchase_type: "merchant", merchant: m8, account: a3, purchase_date: DateTime.iso8601("2015-12-24"),
+                    amount: 20.780176698810095, status: "completed", "medium": "balance", description: "Haircut at Supercuts")
 
 
+p35 = Purchase.create(id: 35, purchase_type: "merchant", merchant: m9, account: a1, purchase_date: DateTime.iso8601("2015-04-30"),
+                    amount: 118.81730742826653, status: "completed", "medium": "balance", description: "Saw Deadpool")
+p36 = Purchase.create(id: 36, purchase_type: "merchant", merchant: m9, account: a2, purchase_date: DateTime.iso8601("2015-05-11"),
+                    amount: 164.95174303584733, status: "completed", "medium": "balance", description: "Saw Deadpool")
+p37 = Purchase.create(id: 37, purchase_type: "merchant", merchant: m10, account: a2, purchase_date: DateTime.iso8601("2015-06-15"),
+                    amount: 6.423931527357407, status: "completed", "medium": "balance", description: "Bought burritos")
+p38 = Purchase.create(id: 38, purchase_type: "merchant", merchant: m10, account: a2, purchase_date: DateTime.iso8601("2015-07-24"),
+                    amount: 46.04258385472373, status: "completed", "medium": "balance", description: "Purchased coffee")
+p39 = Purchase.create(id: 39, purchase_type: "merchant", merchant: m10, account: a2, purchase_date: DateTime.iso8601("2015-08-02"),
+                    amount: 101.82834318747737, status: "completed", "medium": "balance", description: "Purchased a Big Mac")
+p40 = Purchase.create(id: 40, purchase_type: "merchant", merchant: m10, account: a2, purchase_date: DateTime.iso8601("2015-09-29"),
+                    amount: 32.57336801522046, status: "completed", "medium": "balance", description: "Bought groceries")
+p41 = Purchase.create(id: 41, purchase_type: "merchant", merchant: m8, account: a2, purchase_date: DateTime.iso8601("2015-10-11"),
+                    amount: 91.10409186772495, status: "completed", "medium": "balance", description: "More haircuts")
+p42 = Purchase.create(id: 42, purchase_type: "merchant", merchant: m8, account: a2, purchase_date: DateTime.iso8601("2015-11-15"),
+                    amount: 180.32897877982893, status: "completed", "medium": "balance", description: "More haircuts")
+p43 = Purchase.create(id: 43, purchase_type: "merchant", merchant: m9, account: a3, purchase_date: DateTime.iso8601("2015-12-24"),
+                    amount: 24.417213233791244, status: "completed", "medium": "balance", description: "Saw Deadpool")
 
 
 
