@@ -116,26 +116,35 @@ class DataController < ApplicationController
       f.write(object.to_json)
     end
   end
-
   def load_close_customers(customer)
+    @customer_similar = {size:4908.9,categories:{Retail:0.818629428181466316282670252,Food:0.162639287824156124590030353,Services:0.018731283994377559127299395}}
+
+    # @similar = [Luke Miller: {"size":"2551.93","categories":{"Food":"0.129164984932972299396927032","Retail":"0.821233341039918806550336412","Services":"0.049601674027108894052736556"}}
+    # Nathan Blank: {"size":"5167.34","categories":{"Retail":"0.840836871581897068898117794","Services":"0.095494006587528593047873761","Food":"0.020424435009114941149605019","Hotel":"0.043244686821459396904403426"}}
+
     customer_categories = load_categories customer
 
-    others = {}
+    others = []
     Customer.all.each do |c|
       unless c == customer
-        others[c] = load_categories c
+        others << load_categories(c)
       end
     end
     puts customer_categories.to_json
     puts "others"
-    others.each do |key, value|
-      puts "#{key.first_name} #{key.last_name}: #{value.to_json}"
+    # others.each do |key, value|
+    #   puts "#{key.first_name} #{key.last_name}: #{value.to_json}"
+    # end
+    others.each do |value|
+      puts value.as_json
     end
+    # puts others.as_json
     is_similar customer_categories, others, 10
   end
 
   def is_similar(customer_categories, others, threshhold)
     # customer
+    @similar_customers = others
   end
 
   def load_categories(customer)
@@ -154,7 +163,7 @@ class DataController < ApplicationController
       categories[category] = value / total.to_f
     end
     puts categories.to_json
-    {size: total, categories: categories}
+    {customer: customer, size: total, categories: categories}
   end
 
   def add_category(categories, category, amount)
