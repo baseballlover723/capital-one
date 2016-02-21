@@ -145,6 +145,7 @@ class DataController < ApplicationController
   def is_similar(customer_categories, others, threshhold)
     # customer
     @similar_customers = others
+    gon.similar_customers = @similar_customers
   end
 
   def load_categories(customer)
