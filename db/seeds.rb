@@ -15,7 +15,7 @@ a3 = Account.create(id: 7, account_type: "Checking", nickname: "Jeremy's checkin
 a2 = Account.create(id: 1111, account_type: "Savings", nickname: "Luke's Savings", rewards: 0.00, balance: 2430.00, customer: c2)
 
 
-p1 = Purchase.create(id: 1234, purchase_type: "merchant", merchant: m1, account: a3, purchase_date: DateTime.iso8601("2016-02-15"),
+p1 = Purchase.create(id: 1234, purchase_type: "merchant", merchant: m1, account: a3, purchase_date: DateTime.iso8601("2015-02-15"),
                      amount: 524.31, status: "pending", "medium": "balance", description: "Jeremey bought some expensive clothes stuff from Andrew")
 p2 = Purchase.create(id: 4231, purchase_type: "merchant", merchant: m2, account: a3, purchase_date: DateTime.iso8601("2015-12-15"),
                      amount: 700_000.00, status: "pending", "medium": "balance", description: "Jeremey bought a league team from Philip")
@@ -49,14 +49,14 @@ p15 = Purchase.create(id: 755, purchase_type: "merchant", merchant: m1, account:
 p16 = Purchase.create(id: 756, purchase_type: "merchant", merchant: m2, account: a2, purchase_date: DateTime.iso8601("2015-12-24"),
                      amount: 4.83, status: "completed", "medium": "balance", description: "Purchased coffee")
 
-b1 = Bill.create(id: 15, status: "completed", payee: "Jeremy", nickname: "weaboo tax", creation_date: DateTime.iso8601("1995-07-17"),
-                 payment_date: DateTime.iso8601("1995-07-27"), recurring_date: 485, upcoming_payment_date: DateTime.iso8601("2016-02-22"),
+b1 = Bill.create(id: 15, status: "completed", payee: "Jeremy", nickname: "weaboo tax", creation_date: DateTime.iso8601("2015-07-17"),
+                 payment_date: DateTime.iso8601("1995-07-27"), recurring_date: 485, upcoming_payment_date: DateTime.iso8601("2015-02-22"),
                  payment_amount: 58_603.32, account: a3)
 b2 = Bill.create(id: 944, status: "completed", payee: "Luke", nickname: "Luke's unfair government tax", creation_date: DateTime.iso8601("20150525"),
-                 payment_date: DateTime.iso8601("2016-01-01"), recurring_date: 15, upcoming_payment_date: DateTime.iso8601("20160217"),
+                 payment_date: DateTime.iso8601("2016-01-01"), recurring_date: 15, upcoming_payment_date: DateTime.iso8601("20150217"),
                  payment_amount: 4_458_754.99, account: a2)
-b3 = Bill.create(id: 921, status: "completed", payee: "Luke", nickname: "Luke's netflix and chill bill", creation_date: DateTime.iso8601("20131019"),
-                 payment_date: DateTime.iso8601("2016-03-19"), recurring_date: 12, upcoming_payment_date: DateTime.iso8601("20160319"),
+b3 = Bill.create(id: 921, status: "completed", payee: "Luke", nickname: "Luke's netflix and chill bill", creation_date: DateTime.iso8601("20151019"),
+                 payment_date: DateTime.iso8601("2016-03-19"), recurring_date: 12, upcoming_payment_date: DateTime.iso8601("20150319"),
                  payment_amount: 69.99, account: a1)
 
 b4 = Bill.create(id: 2, status: "completed", payee: "Comcast", nickname: "Nathan didn't pay the government", creation_date: DateTime.iso8601("2015-05-25"),
@@ -67,11 +67,11 @@ b5 = Bill.create(id: 3, status: "completed", payee: "Trunk Club", nickname: "Nat
                  payment_amount: 69.99, account: a2)
 
 
-d1 = Deposit.create(id: 512, deposit_type: "deposit", transaction_date: DateTime.iso8601("2016-02-20"), status: "completed",
+d1 = Deposit.create(id: 512, deposit_type: "deposit", transaction_date: DateTime.iso8601("2015-02-20"), status: "completed",
                     medium: "balance", amount: 84.66, description: "Micky d's paycheck", account: a3)
-d2 = Deposit.create(id: 24, deposit_type: "deposit", transaction_date: DateTime.iso8601("2016-01-12"), status: "completed",
+d2 = Deposit.create(id: 24, deposit_type: "deposit", transaction_date: DateTime.iso8601("2015-01-12"), status: "completed",
                     medium: "balance", amount: 500_084.66, description: "Mom died and get me her millions", account: a1)
-d3 = Deposit.create(id: 1543, deposit_type: "deposit", transaction_date: DateTime.iso8601("2016-02-25"), status: "completed",
+d3 = Deposit.create(id: 1543, deposit_type: "deposit", transaction_date: DateTime.iso8601("2015-02-25"), status: "completed",
                     medium: "balance", amount: 10.00, description: "found a ten on the ground", account: a1)
 
 d4 = Deposit.create(id: 545, deposit_type: "deposit", transaction_date: DateTime.iso8601("2015-09-20"), status: "completed",
