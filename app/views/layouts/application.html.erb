@@ -24,9 +24,9 @@
   </div>
   <div class="top-bar-right">
     <ul class="dropdown menu" data-dropdown-menu>
-      <li>
+      <li id="greeting">
         <% if params[:id] %>
-            <span id="greeting">Hi <%= Customer.find(params[:id]).first_name %>!</span>
+            <span>Hi <%= Customer.find(params[:id]).first_name %>!</span>
         <% end %>
       </li>
       <li>

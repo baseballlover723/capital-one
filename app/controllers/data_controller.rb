@@ -3,7 +3,7 @@ class DataController < ApplicationController
     @id = params[:id]
     @customer = Customer.find(@id)
     @accounts = @customer.accounts
-
+    gon.user = @customer
     @bills = Bill.where account: @accounts
     @deposits = Deposit.where account: @accounts
     @purchases = Purchase.where account: @accounts

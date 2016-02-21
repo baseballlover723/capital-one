@@ -39,7 +39,7 @@ $(document).ready(function(){
     document.getElementById("hotBody").style.display = "none";
     document.getElementById("regionBody").style.display = "none";
     document.getElementById("similarBody").style.display = "block";
-    // regionCalculator();
+    showSimilar();
   });
 
   function initializeGraphs(){
@@ -368,11 +368,8 @@ $(document).ready(function(){
   }
 
 
-
-
   function generateRegionMap() {
-    // console.log("populate region table");
-    // Run K-Means to generate clusters from # of cities, then get each's average 
+    // Run K-Means to generate clusters from # of cities, then get each's average
     // cost of a transaction to estimate most/least expensive
     var merchantIdToName = {};
     var merchantsCounts = {};
@@ -396,7 +393,7 @@ $(document).ready(function(){
     var clusters = getClusters(regionData, clusterOptions);
 
     console.log(clusters);
-    
+
 
     for(var c in clusters){
       clusters[c]["avgCost"] = 0;
@@ -502,18 +499,6 @@ $(document).ready(function(){
   }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 /* K Means Implementation by dimas at
  * https://github.com/shudima/dimas-kmeans
  */
@@ -527,10 +512,10 @@ function getClusters(data, options) {
 
   if (!options || !options.distanceFunction) { distanceFunction = getDistance; }
   else { distanceFunction = options.distanceFunction; }
-  
+
   if (!options || !options.vectorFunction) { vectorFunction = defaultVectorFunction; }
     else { vectorFunction = options.vectorFunction; }
-    
+
     if (!options || !options.maxIterations) { maxIterations = 1000; }
     else { maxIterations = options.maxIterations; }
 
@@ -545,7 +530,7 @@ function getClusters(data, options) {
 
 
 function getClustersWithParams(data, numberOfDimensions ,numberOfClusters, distanceFunction, vectorFunction, minMaxValues, maxIterations) {
-  
+
   var means = createRandomMeans(numberOfDimensions, numberOfClusters, minMaxValues);
 
   var clusters = createClusters(means);
@@ -571,8 +556,6 @@ function getClustersWithParams(data, numberOfDimensions ,numberOfClusters, dista
         // console.log(clusters);
         numOfInterations++;
   }
-  
-  console.log(getMeansDistance(clusters, vectorFunction, distanceFunction));
 
     return { clusters: clusters, iterations: iterations };
 }
@@ -584,7 +567,7 @@ function defaultVectorFunction(vector) {
 function getNumnerOfDimensions(data, vectorFunction) {
     if (data[0]) {
         return vectorFunction(data[0]).length;
-    }  
+    }
   return 0;
 }
 
@@ -599,7 +582,7 @@ function getMinAndMaxValues(data, numberOfDimensions, vectorFunction) {
   data.forEach(function (vector) {
 
     for (var i = 0; i < numberOfDimensions; i++) {
-      
+
       if (vectorFunction(vector)[i] < minMaxValues.minValue[i]) {
         minMaxValues.minValue[i] = vectorFunction(vector)[i];
       }
@@ -635,7 +618,7 @@ function printMeans(clusters) {
     means = means + ' [' + cluster.mean + ']'
   });
 
-  console.log(means);
+  // console.log(means);
 }
 
 function getMeansDistance(clusters, vectorFunction, distanceFunction) {
@@ -721,7 +704,7 @@ function findClosestCluster(vector, clusters, distanceFunction) {
   var minDistance = 9999999;
 
   clusters.forEach(function (cluster) {
-    
+
     var distance = distanceFunction(cluster.mean, vector);
     if (distance < minDistance) {
       minDistance = distance;
@@ -751,7 +734,7 @@ function createClusters(means) {
 }
 
 function createRandomMeans(numberOfDimensions, numberOfClusters, minMaxValues) {
-  
+
   var means = [];
 
 
@@ -768,7 +751,7 @@ function createRandomPoint(numberOfDimensions, minValue, maxValue) {
   for (var i = 0; i < numberOfDimensions; i++) {
     point.push(random(minValue, maxValue));
   };
-  
+
   return point;
 }
 
@@ -815,7 +798,7 @@ function getDistance(vector1, vector2) {
 
     for(var customerIndex = 0; customerIndex < similarCustomers.length; customerIndex++) {
       var difArr = [
-        myCategoryValues.Food - (similarCustomers[customerIndex].categories.Food == null ? -10: similarCustomers[customerIndex].categories.Food), 
+        myCategoryValues.Food - (similarCustomers[customerIndex].categories.Food == null ? -10: similarCustomers[customerIndex].categories.Food),
         myCategoryValues.Hotel - (similarCustomers[customerIndex].categories.Hotel == null ? -10: similarCustomers[customerIndex].categories.Hotel),
         myCategoryValues.Retail - (similarCustomers[customerIndex].categories.Retail == null ? -10: similarCustomers[customerIndex].categories.Retail),
         myCategoryValues.Services - (similarCustomers[customerIndex].categories.Services == null ? -10: similarCustomers[customerIndex].categories.Services)
@@ -878,35 +861,120 @@ function getDistance(vector1, vector2) {
       for (var i = tmpMatchs.length - 1; i >= 0; i--) {
         $("#othersArea").append('<h4>' + tmpMatchs[i] + '</h4>');
       };
-      
+
 
 
     }).change();
 
-    //$("#similarBody").append("<h4>" + peopleLikeMeList[0].name + "</h4>");
 
   }
 
 
-  $("#similarSelector").on("click", function() {
-      similarCustomersInit();
-  });
+  function showSimilar(){
+    showSimilarLeft();
+    showSimilarRight();
+  }
+
+  function showSimilarLeft(){
+    if(document.getElementById("similarLeft")){
+      var wrapper = document.getElementById('similarLeft');
+      var tbl = document.createElement('table');
+      tbl.style.width = '100%';
+      tbl.setAttribute('border', '1');
+      var tbdy = document.createElement('tbody');
+      // Titles
+      var tr = document.createElement('tr');
+
+      var td = document.createElement('td');
+      td.appendChild(document.createTextNode('Similar Customers'))
+      td.setAttribute('rowSpan', '1');
+      tr.appendChild(td);
+
+      var td = document.createElement('td');
+      td.appendChild(document.createTextNode('Similarity'))
+      td.setAttribute('rowSpan', '1');
+      tr.appendChild(td);
 
 
+      tbdy.appendChild(tr);
 
+      var count = 0;
+      for(var i =0; i< gon.similarCustomers.length; i++){
+        // Create Table Row
+          var tr = document.createElement('tr');
 
+          var td = document.createElement('td');
+          td.appendChild(document.createTextNode(gon.similarCustomers[i].customer.first_name + " " + gon.similarCustomers[i].customer.last_name));
 
+          td.setAttribute('rowSpan', '1');
+          tr.appendChild(td)
 
+          var td = document.createElement('td');
+          td.appendChild(document.createTextNode((gon.similarCustomers[i].similarity * 100).toFixed(2) + "%"));
+          td.setAttribute('rowSpan', '1');
+          tr.appendChild(td)
 
+          tbdy.appendChild(tr);
+      }
+      tbl.appendChild(tbdy);
+      wrapper.appendChild(tbl)
+    }
+  }
 
+  function showSimilarRight(){
+    var custToMerch = {};
+    for(var i=0; i<5; i++){
+      for(var purchase in gon.purchases) {
+        if(custToMerch[gon.similarCustomers[i].customer.id] == null) {
+          custToMerch[gon.similarCustomers[i].customer.id] = [];
+        }
+        if(gon.purchases[purchase].account_id == gon.similarCustomers[i].customer.id){
+          var temp = custToMerch[gon.similarCustomers[i].customer.id];
+          var arr = (temp instanceof Array) ? temp : [ temp ];
+          arr.push(gon.purchases[purchase].merchant_id);
+          custToMerch[gon.similarCustomers[i].customer.id] = arr;
+        }
+      }
+    }
+    console.log("customtoMerch");
+    console.log(custToMerch);
+    makeSimilarRightTable(custToMerch);
+  }
 
+  function makeSimilarRightTable(custToMerch){
+    var merchantIdToName = {};
 
+    for(var i =0; i< gon.merchants.length; i++){
+      merchantIdToName[gon.merchants[i].id] = gon.merchants[i].name;
+    }
 
+    var wrapper = document.getElementById('similarRight');
+    var tbl = document.createElement('table');
+    tbl.style.width = '100%';
+    tbl.setAttribute('border', '1');
+    var tbdy = document.createElement('tbody');
+    // Titles
+    var tr = document.createElement('tr');
 
+    var td = document.createElement('td');
+    td.appendChild(document.createTextNode('Recommended Merchants'))
+    td.setAttribute('rowSpan', '1');
+    tr.appendChild(td);
 
+    tbdy.appendChild(tr);
+    var count = 0;
+    for(var custTm in custToMerch){
+      // Create Table Row
+        var tr = document.createElement('tr');
 
+        var td = document.createElement('td');
+        td.appendChild(document.createTextNode(merchantIdToName[custToMerch[custTm][0]]));
+        td.setAttribute('rowSpan', '1');
+        tr.appendChild(td);
 
-
-
-
+        tbdy.appendChild(tr);
+    }
+    tbl.appendChild(tbdy);
+    wrapper.appendChild(tbl)
+  }
 });
