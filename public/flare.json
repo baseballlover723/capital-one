@@ -1,66 +1,104 @@
 {
-  "name": "Monitary Transactions",
-    "children": [
+   "name":"Monitary Transactions",
+   "children":[
       {
-       "name": "Money In",
-       "children": [
-          {
-           "name": "Deposit",
-           "children": [
-                {"name": "CommunityStructure", "size": 3812},
-                {"name": "HierarchicalCluster", "size": 6714}
-           ]
-          },
-          {
-           "name": "Transfer In",
-           "children": [
-              {"name": "BetweennessCentrality", "size": 3534},
-              {"name": "LinkDistance", "size": 5731},
-              {"name": "MaxFlowMinCut", "size": 7840},
-              {"name": "ShortestPaths", "size": 5914},
-              {"name": "SpanningTree", "size": 3416}
-           ]
-          }
-       ]
+         "name":"Money In",
+         "children":[
+            {
+               "name":"Deposit",
+               "children":[
+                  {
+                     "name":"Paycheck",
+                     "size":0
+                  }
+               ]
+            },
+            {
+               "name":"Transfer In",
+               "children":[
+                   {
+                     "name":"Mafia",
+                     "size":2433.31
+                  }
+               ]
+            }
+         ]
       },
       {
-       "name": "Money Out",
-       "children": [
-          {
-           "name": "Withdrawl",
-           "children": [
-              {"name": "ArrayInterpolator", "size": 1983},
-              {"name": "ColorInterpolator", "size": 2047},
-              {"name": "DateInterpolator", "size": 1375},
-              {"name": "Interpolator", "size": 8746},
-              {"name": "MatrixInterpolator", "size": 2202},
-              {"name": "NumberInterpolator", "size": 1382}
-           ]
-          },
-          {
-           "name": "Transfer Out",
-           "children": [
-               {"name": "Scheduler", "size": 5593},
-                {"name": "Sequence", "size": 5534},
-                {"name": "Transition", "size": 9201},
-                {"name": "Transitioner", "size": 19975}
-           ]
-          },
-          {
-           "name": "Purchase",
-           "children": [
-              {"name": "DragForce", "size": 1082},
-              {"name": "GravityForce", "size": 1336},
-              {"name": "IForce", "size": 319},
-              {"name": "NBodyForce", "size": 10498},
-              {"name": "Particle", "size": 2822},
-              {"name": "Simulation", "size": 9983},
-              {"name": "Spring", "size": 2213},
-              {"name": "SpringForce", "size": 1681}
-            ]
-          }
-       ]
+         "name":"Money Out",
+         "children":[
+            {
+               "name":"Withdrawl",
+               "children":[
+                   {
+                     "name":"Repay Loan",
+                     "size":133.31
+                  }
+               ]
+            },
+            {
+               "name":"Transfer Out",
+               "children":[
+                   {
+                     "name":"Paying off the Gov",
+                     "size":23.31
+                  }
+               ]
+            },
+            {
+               "name":"Purchase",
+               "children":[
+                  {
+                     "name":"Bought burritos",
+                     "size":24.31
+                  },
+                  {
+                     "name":"Purchased coffee",
+                     "size":9.83
+                  },
+                  {
+                     "name":"Purchased a Happy Meal",
+                     "size":7.91
+                  },
+                  {
+                     "name":"Bought groceries",
+                     "size":56.56
+                  },
+                  {
+                     "name":"Nathan stayed at a hotel for the night",
+                     "size":126.73
+                  },
+                  {
+                     "name":"Bought burritos",
+                     "size":12.21
+                  },
+                  {
+                     "name":"Purchased coffee",
+                     "size":19.83
+                  },
+                  {
+                     "name":"Purchased a Big Mac",
+                     "size":17.91
+                  },
+                  {
+                     "name":"Bought groceries",
+                     "size":86.56
+                  },
+                  {
+                     "name":"Nathan stayed at a hotel for the night",
+                     "size":96.73
+                  },
+                  {
+                     "name":"Bought burritos",
+                     "size":8.71
+                  },
+                  {
+                     "name":"Purchased coffee",
+                     "size":4.83
+                  }
+               ]
+            }
+         ]
       }
-  ]
+   ]
 }
-
