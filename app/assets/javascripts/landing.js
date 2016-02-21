@@ -4,7 +4,7 @@ $(document).ready(function(){
       if (!e) e = window.event;
       var keyCode = e.keyCode || e.which;
       if (keyCode == '13'){ //enter key
-        console.log("enter");
+        window.location.href ='/' + $("#query").val();
       }
     }
   }
