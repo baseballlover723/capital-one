@@ -36,7 +36,8 @@ def load
   # 50.times do
   #   generate_random_merchant
   # end
-  25.times do
+  25.times do |numb|
+    puts "generating ##{numb} of 25"
     customer = generate_random_customer
     account = generate_random_account customer
     10.times do
@@ -51,7 +52,8 @@ def load
 
   end
 
-  250.times do
+  250.times do |numb|
+    puts "generating ##{numb} of 250"
     generate_random_transfer
   end
 
