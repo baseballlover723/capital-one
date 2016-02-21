@@ -116,6 +116,7 @@ class DataController < ApplicationController
       f.write(object.to_json)
     end
   end
+
   def load_close_customers(customer)
     # @customer_similar = {size:4908.9,categories:{Retail:0.818629428181466316282670252,Food:0.162639287824156124590030353,Services:0.018731283994377559127299395}}
 
@@ -138,7 +139,7 @@ class DataController < ApplicationController
     #   puts "#{key.first_name} #{key.last_name}: #{value.to_json}"
     # end
     # puts others.as_json
-    is_similar customer_categories, others, 0.1
+    is_similar customer_categories, others, 1.1
   end
 
   def is_similar(customer_categories, others, threshhold)
@@ -163,10 +164,12 @@ class DataController < ApplicationController
       dif2 = ((other[:categories][c2[:category]] || 0) - c2[:value]).abs
       # puts "original value: #{c1[:value].round(4)}, other_value: #{(other[:categories][c1[:category]] || 0).round(4)}, dif: #{dif1.round(4)}, #{c1[:category]}"
       # puts "original value: #{c2[:value].round(4)}, other_value: #{(other[:categories][c2[:category]] || 0).round(4)}, dif: #{dif2.round(4)}, #{c2[:category]}"
-      dif = (1- c1[:value]) * dif1  + (1-c2[:value]) * dif2 # the magic formula for similarity
+      dif = (1- c1[:value]) * dif1 + (1-c2[:value]) * dif2 # the magic formula for similarity
       # puts "dif: #{dif.round(4)}"
-      @similar_customers << other and puts "added" if dif < threshhold
+      similar = {customer: other[:customer], accounts: other[:customer].accounts, similarity: 1 - dif, percent1: (other[:categories][c1[:category]] || 0), percent2: (other[:categories][c2[:category]] || 0)}
+      @similar_customers << similar if dif < threshhold
     end
+    @similar_customers.sort! {|x, y| y[:similarity] <=> x[:similarity]}
     gon.similar_customers = @similar_customers
   end
 
