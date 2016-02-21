@@ -1,42 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-    <title><%= content_for?(:title) ? yield(:title) : "Capital One" %></title>
-    <%= favicon_link_tag 'favicon.ico' %>
-    <%= stylesheet_link_tag    "application" %>
-    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
-    <%= csrf_meta_tags %>
+  <title><%= content_for?(:title) ? yield(:title) : "Capital One" %></title>
+  <%= favicon_link_tag 'favicon.ico' %>
+  <%= stylesheet_link_tag "application" %>
+  <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
 
-    <link href='https://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
-    <%= Gon::Base.render_data %>
-  </head>
-    <div class="top-bar">
-      <div class="top-bar-left">
-          <ul class="dropdown menu" data-dropdown-menu>
-            <li class="menu-text"><div data-no-turbolink><%= link_to "Capital One HackIllinois 2016", landing_path %></div></li>
-            <li><%= link_to "Break this server", break_path %></li>
-          </ul>
-        </div>
-      <div class="top-bar-right">
-        <ul class="dropdown menu" data-dropdown-menu>
-          <li>
-            <a href="#">Authors</a>
-            <ul class="menu vertical right">
-              <li><a  class="linkedin" href="https://www.linkedin.com/in/softwarelover">Andrew Ma</a></li>
-              <li><a class="linkedin" href="#">Philip Ross</a></li>
-              <li><a class="linkedin" href="https://www.linkedin.com/in/nathan-blank-51000792">Nathan Blank</a></li>
-              <li><a class="linkedin" href="#">Luke Miller</a></li>
-            </ul>
-          </li>
+  <link href='https://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
+  <%= Gon::Base.render_data %>
+</head>
+<div class="top-bar">
+  <div class="top-bar-left">
+    <ul class="dropdown menu" data-dropdown-menu>
+      <li class="menu-text">
+        <div data-no-turbolink><%= link_to "Capital One HackIllinois 2016", landing_path %></div>
+      </li>
+      <li><%= link_to "Break this server", break_path %></li>
+    </ul>
+  </div>
+  <div class="top-bar-right">
+    <ul class="dropdown menu" data-dropdown-menu>
+      <li>
+        <% if params[:id] %>
+            <span id="greeting">Hi <%= Customer.find(params[:id]).first_name %>!</span>
+        <% end %>
+      </li>
+      <li>
+        <a href="#">Authors</a>
+        <ul class="menu vertical right">
+          <li><a class="linkedin" href="https://www.linkedin.com/in/softwarelover">Andrew Ma</a></li>
+          <li><a class="linkedin" href="#">Philip Ross</a></li>
+          <li><a class="linkedin" href="https://www.linkedin.com/in/nathan-blank-51000792">Nathan Blank</a></li>
+          <li><a class="linkedin" href="#">Luke Miller</a></li>
         </ul>
-      </div>
-    </div>
-  <body>
+      </li>
+    </ul>
+  </div>
+</div>
+<body>
 
-  <%= yield %>
+<%= yield %>
 
-  </body>
+</body>
 </html>
