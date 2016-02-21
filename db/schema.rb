@@ -26,13 +26,15 @@ ActiveRecord::Schema.define(version: 20160220182022) do
   add_index "accounts", ["customer_id"], name: "index_accounts_on_customer_id", using: :btree
 
   create_table "atms", force: :cascade do |t|
-    t.string   "u_id",       limit: 255
     t.string   "name",       limit: 255
     t.string   "lat",        limit: 255
     t.string   "lng",        limit: 255
+    t.integer  "account_id", limit: 4
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
+
+  add_index "atms", ["account_id"], name: "index_atms_on_account_id", using: :btree
 
   create_table "bills", force: :cascade do |t|
     t.string   "status",                limit: 255
