@@ -320,13 +320,13 @@ svg {
 #righty {
   width: 20%;
   text-align: center;
-  z-index: -1;
+  z-index: 5;
   margin-top: -2.5%;
   float: right;
   margin-right: 15%;
-    overflow: none;
-    text-overflow: ellipsis;
-    height:100px;
+  overflow: none;
+  text-overflow: ellipsis;
+  height:100px;
 
 }
 
@@ -339,12 +339,13 @@ svg {
 }
 
 #explanation {
-  z-index: -1;
+  z-index: 5;
   width: 100%;
   position: relative;
   top: 50%;
   /*margin-top: 20%;*/
-  font-size: 1.3em
+  font-size: 1.3em;
+
 }
 
 #hotBody {

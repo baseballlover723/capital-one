@@ -66,22 +66,37 @@ $(document).ready(function(){
 
        d3.select("#container").on("mouseleave", mouseleave);
 
+    depositTotal = 0;
+    withdrawlTotal = 0;
+    transferInTotal = 0;
+    transferOutTotal = 0;
+    purchaseTotal = 0;
+
     for(var childIndex = 0; childIndex < path.node().__data__.children[0].children[0].value; childIndex++) {
       totalSize += path.node().__data__.children[0].children[0].children[childIndex].size;
+      depositTotal += path.node().__data__.children[0].children[0].children[childIndex].size;
     }
     for(var childIndex = 0; childIndex < path.node().__data__.children[0].children[1].value; childIndex++) {
       totalSize += path.node().__data__.children[0].children[1].children[childIndex].size;
+      transferInTotal += path.node().__data__.children[0].children[1].children[childIndex].size;
     }
     for(var childIndex = 0; childIndex < path.node().__data__.children[1].children[0].value; childIndex++) {
       totalSize += path.node().__data__.children[1].children[0].children[childIndex].size;
+      withdrawlTotal += path.node().__data__.children[1].children[0].children[childIndex].size;
     }
     for(var childIndex = 0; childIndex < path.node().__data__.children[1].children[1].value; childIndex++) {
       totalSize += path.node().__data__.children[1].children[1].children[childIndex].size;
+      transferOutTotal += path.node().__data__.children[1].children[1].children[childIndex].size;
     }
     for(var childIndex = 0; childIndex < path.node().__data__.children[1].children[2].value; childIndex++) {
       totalSize += path.node().__data__.children[1].children[2].children[childIndex].size;
+      purchaseTotal += path.node().__data__.children[1].children[2].children[childIndex].size;
       //findColors(path.node().__data__.children[1].children[2].children[childIndex].name);
     }
+
+    totals = {"Withdrawl": withdrawlTotal, "Deposit": depositTotal, "Purchase": purchaseTotal,
+              "Transfer In": transferInTotal, "Transfer Out": transferOutTotal, "Money In": depositTotal + transferInTotal,
+              "Money Out": withdrawlTotal + transferOutTotal + purchaseTotal};
 
     // setTimeout(function(){
     //   path.style("fill", function(d) { 
@@ -116,11 +131,14 @@ $(document).ready(function(){
     if (percentage < 0.1) {
       percentageString = "< 0.1%";
     }
-    d3.select("#percentage")
-        .text(percentageString);
+    if(d.size != null)
+      d3.select("#percentage").text("$" + d.size + " as " + percentageString);
+    else if (totals[d.name] != null)
+      d3.select("#percentage").text("$" + totals[d.name] + " as " + percentageString);
+    else 
+      d3.select("#percentage").text("$" + totalSize + " as " + percentageString);
 
-    d3.select("#explanation")
-        .style("visibility", "");
+    d3.select("#explanation").style("visibility", "");
     d3.select("#nameofthing").text(d.name);
 
     var sequenceArray = getAncestors(d);
