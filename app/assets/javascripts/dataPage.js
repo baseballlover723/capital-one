@@ -2,10 +2,10 @@ $(document).ready(function(){
   initializeGraphs();
   $("#graphSelector").click(function(){
     document.getElementById("mapBody").style.display = "none";
-    document.getElementById("chartBody").style.display = "block";
+    document.getElementById("rightDisplay").style.display = "block";
   });
   $("#mapSelector").click(function(){
-    document.getElementById("chartBody").style.display = "none";
+    document.getElementById("rightDisplay").style.display = "none";
     document.getElementById("mapBody").style.display = "block";
     initializeMap();
   });
@@ -34,7 +34,8 @@ $(document).ready(function(){
   var bucketsOld = [0,0,0,0,0,0,0,0,0,0,0,0];
   preparePurchaseGraph(bucketsCurrent, bucketsOld);
 
-  console.log(bucketsCurrent)
+  console.log("null here " + bucketsCurrent)
+
 
       var data = {
     labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
@@ -173,15 +174,15 @@ $(document).ready(function(){
 
   function preparePurchaseGraph(bucketsCurrent, bucketsOld){
     labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-    
+
 
     for(var i =0; i< gon.graphPurchases.length; i++){
-      var datebucket = parseInt(gon.graphPurchases[i].purchase_date.split("-")[1] );
-      var year = parseInt(gon.graphPurchases[i].purchase_date.split("-")[0] );
-      if(year < 2015 ){
-        bucketsOld[datebucket] += parseInt(gon.graphPurchases[i].amount);
-      } else{ 
-        bucketsCurrent[datebucket] += parseInt(gon.graphPurchases[i].amount);
+      var datebucket = parseFloat(gon.graphPurchases[i].purchase_date.split("-")[1] ) -1;
+      var year = parseFloat(gon.graphPurchases[i].purchase_date.split("-")[0] );
+      if(year > 2015 ){
+        bucketsOld[datebucket] += parseFloat(gon.graphPurchases[i].amount);
+      } else{
+        bucketsCurrent[datebucket] += parseFloat(gon.graphPurchases[i].amount);
       }
 
     }
@@ -189,6 +190,8 @@ $(document).ready(function(){
 
   function initializeMap(){
     if(document.getElementById("map")){
+
+      console.log("map");
       var myLatLng = {lat: gon.merchants[0].lat, lng: gon.merchants[0].lng};
 
       var map = new google.maps.Map(document.getElementById('map'), {
@@ -229,7 +232,5 @@ $(document).ready(function(){
       }
     }
   }
-console.log(gon.transfers)
 
 });
-

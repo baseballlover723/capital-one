@@ -9,13 +9,16 @@ c2 = Customer.create(id: 693, first_name: "Nathan", last_name: "Blank", street_n
 c3 = Customer.create(id: 6092, first_name: "Jeremy", last_name: "Wright", street_number: "52", street_name: "weaboo drive", city: "tokyo", state: "Japan", zip: "N/A")
 
 a1 = Account.create(id: 123, account_type: "Credit Card", nickname: "Luke's Credit Card", rewards: 100.08, balance: 1_000_000.00, customer: c1)
-a2 = Account.create(id: 999, account_type: "Savings", nickname: "Luke's Savings", rewards: 0.00, balance: 50.00, customer: c1)
+a4 = Account.create(id: 999, account_type: "Savings", nickname: "Luke's Savings", rewards: 0.00, balance: 50.00, customer: c1)
 a3 = Account.create(id: 7, account_type: "Checking", nickname: "Jeremy's checking", rewards: 5.14, balance: 56_357.40, customer: c3)
+
+a2 = Account.create(id: 1111, account_type: "Savings", nickname: "Luke's Savings", rewards: 0.00, balance: 2430.00, customer: c2)
+
 
 p1 = Purchase.create(id: 1234, purchase_type: "merchant", merchant: m1, account: a3, purchase_date: DateTime.iso8601("2016-02-15"),
                      amount: 524.31, status: "pending", "medium": "balance", description: "Jeremey bought some expensive clothes stuff from Andrew")
 p2 = Purchase.create(id: 4231, purchase_type: "merchant", merchant: m2, account: a3, purchase_date: DateTime.iso8601("2015-12-15"),
-                     amount: 700_000.00, status: "pending", "medium": "balance", description: "Jeremey bought a league team from Philip")
+                     amount: 700000.00, status: "pending", "medium": "balance", description: "Jeremey bought a league team from Philip")
 p3 = Purchase.create(id: 332, purchase_type: "merchant", merchant: m3, account: a1, purchase_date: DateTime.iso8601("2015-07-12"),
                      amount: 76.31, status: "pending", "medium": "balance", description: "Luke bought some reeds from zanes music shop")
 p4 = Purchase.create(id: 14, purchase_type: "merchant", merchant: m1, account: a1, purchase_date: DateTime.iso8601("2016-01-15"),
@@ -48,10 +51,10 @@ p16 = Purchase.create(id: 756, purchase_type: "merchant", merchant: m2, account:
 
 b1 = Bill.create(id: 15, status: "completed", payee: "Jeremy", nickname: "weaboo tax", creation_date: DateTime.iso8601("1995-07-17"),
                  payment_date: DateTime.iso8601("1995-07-27"), recurring_date: 485, upcoming_payment_date: DateTime.iso8601("2016-02-22"),
-                 payment_amount: 58_603.32, account: a3)
+                 payment_amount: 58603.32, account: a3)
 b2 = Bill.create(id: 944, status: "completed", payee: "Luke", nickname: "Luke's unfair government tax", creation_date: DateTime.iso8601("20150525"),
                  payment_date: DateTime.iso8601("2016-01-01"), recurring_date: 15, upcoming_payment_date: DateTime.iso8601("20160217"),
-                 payment_amount: 4_458_754.99, account: a2)
+                 payment_amount: 4458754.99, account: a2)
 b3 = Bill.create(id: 921, status: "completed", payee: "Luke", nickname: "Luke's netflix and chill bill", creation_date: DateTime.iso8601("20131019"),
                  payment_date: DateTime.iso8601("2016-03-19"), recurring_date: 12, upcoming_payment_date: DateTime.iso8601("20160319"),
                  payment_amount: 69.99, account: a1)
@@ -67,7 +70,7 @@ b5 = Bill.create(id: 3, status: "completed", payee: "Trunk Club", nickname: "Nat
 d1 = Deposit.create(id: 512, deposit_type: "deposit", transaction_date: DateTime.iso8601("2016-02-20"), status: "completed",
                     medium: "balance", amount: 84.66, description: "Micky d's paycheck", account: a3)
 d2 = Deposit.create(id: 24, deposit_type: "deposit", transaction_date: DateTime.iso8601("2016-01-12"), status: "completed",
-                    medium: "balance", amount: 500_084.66, description: "Mom died and get me her millions", account: a1)
+                    medium: "balance", amount: 500084.66, description: "Mom died and get me her millions", account: a1)
 d3 = Deposit.create(id: 1543, deposit_type: "deposit", transaction_date: DateTime.iso8601("2016-02-25"), status: "completed",
                     medium: "balance", amount: 10.00, description: "found a ten on the ground", account: a1)
 
@@ -78,19 +81,17 @@ d5 = Deposit.create(id: 546, deposit_type: "deposit", transaction_date: DateTime
 d6 = Deposit.create(id: 547, deposit_type: "deposit", transaction_date: DateTime.iso8601("2015-06-25"), status: "completed",
                     medium: "balance", amount: 10.00, description: "Tax Refund", account: a2)
 
-w1 = Withdraw.create(id: 1, withdraw_type: "withdraw", transaction_date: DateTime.iso8601("2016-01-01"), status: "completed",
+w1 = Withdraw.create(id: 11111, withdraw_type: "withdraw", transaction_date: DateTime.iso8601("2015-01-01"), status: "completed",
                      medium: "balance", amount: 120.00, description: "Mystery Gifting all of my friends", account: a3)
 w2 = Withdraw.create(id: 87, withdraw_type: "withdraw", transaction_date: DateTime.iso8601("2015-12-25"), status: "completed",
-                     medium: "balance", amount: 58_777_888.66, description: "I bought Sealand", account: a1)
+                     medium: "balance", amount: 58777888.66, description: "I bought Sealand", account: a1)
 w3 = Withdraw.create(id: 4523, withdraw_type: "withdraw", transaction_date: DateTime.iso8601("2016-02-19"), status: "pending",
                      medium: "balance", amount: 2130.69, description: "Needed money to go buy some rare pepes and dank memes", account: a3)
 
-w4 = Withdraw.create(id: 1, withdraw_type: "withdraw", transaction_date: DateTime.iso8601("2015-08-01"), status: "completed",
+w4 = Withdraw.create(id: 11313, withdraw_type: "withdraw", transaction_date: DateTime.iso8601("2015-08-01"), status: "completed",
                      medium: "balance", amount: 120.00, description: "Mystery Gifting all of my friends", account: a2)
-w5 = Withdraw.create(id: 87, withdraw_type: "withdraw", transaction_date: DateTime.iso8601("2015-5-25"), status: "completed",
-                     medium: "balance", amount: 58_777_888.66, description: "I bought a boat", account: a2)
-w6 = Withdraw.create(id: 4523, withdraw_type: "withdraw", transaction_date: DateTime.iso8601("2015-03-19"), status: "completed",
-                     medium: "balance", amount: 230.69, description: "Needed money to go buy some rare pepes and dank memes", account: a2)
+w5 = Withdraw.create(id: 8437, withdraw_type: "withdraw", transaction_date: DateTime.iso8601("2015-05-25"), status: "completed",
+                     medium: "balance", amount: 58777888.66, description: "I bought a boat", account: a2)
 
 
 t1 = Transfer.create(id: 311, transfer_type: "p2p", transaction_date: DateTime.iso8601("2015-11-19"), status: "completed",
@@ -100,6 +101,10 @@ t2 = Transfer.create(id: 312, transfer_type: "p2p", transaction_date: DateTime.i
 t3 = Transfer.create(id: 313, transfer_type: "p2p", transaction_date: DateTime.iso8601("2015-04-19"), status: "completed", medium: "balance",
                      amount: 15.00, description: "Drug deal",
                      payer: a2, payee: a3)
+
+t3 = Transfer.create(id: 3143, transfer_type: "p2p", transaction_date: DateTime.iso8601("2015-09-19"), status: "completed", medium: "balance",
+                     amount: 15.00, description: "Drug deal",
+                     payer: a3, payee: a2)
 
 
 atm1 = Atm.create(u_id: 5, name: "ATM", lat: "39.48", lng: "-87.32")
