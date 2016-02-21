@@ -108,7 +108,7 @@ class DataController < ApplicationController
     gon.transfers = @transfers
     gon.withdraws = @withdraws
 
-    load_close @customer
+    load_close_customers @customer
   end
 
   def writeJsonFile(object)
@@ -117,19 +117,44 @@ class DataController < ApplicationController
     end
   end
 
-  def load_close(customer)
+  def load_close_customers(customer)
+    customer_categories = load_categories customer
+
+    others = {}
+    Customer.all.each do |c|
+      unless c == customer
+        others[c] = load_categories c
+      end
+    end
+    puts customer_categories.to_json
+    puts "others"
+    others.each do |key, value|
+      puts "#{key.first_name} #{key.last_name}: #{value.to_json}"
+    end
+    is_similar customer_categories, others, 10
+  end
+
+  def is_similar(customer_categories, others, threshhold)
+    # customer
+  end
+
+  def load_categories(customer)
     categories = {}
     puts customer
+    total = 0
     customer.accounts.each do |account|
       account.purchases.each do |purchase|
         category = purchase.merchant.category
         add_category categories, category, purchase.amount
+        total += purchase.amount
         puts purchase.to_json
       end
-
     end
-
+    categories.each do |category, value|
+      categories[category] = value / total.to_f
+    end
     puts categories.to_json
+    {size: total, categories: categories}
   end
 
   def add_category(categories, category, amount)
