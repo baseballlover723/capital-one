@@ -876,8 +876,6 @@ function getDistance(vector1, vector2) {
   }
 
   function showSimilarLeft(){
-    console.log("similarLeft");
-    console.log(gon.similar_customers);
     if(document.getElementById("similarLeft")){
       var wrapper = document.getElementById('similarLeft');
       var tbl = document.createElement('table');
@@ -901,25 +899,20 @@ function getDistance(vector1, vector2) {
       tbdy.appendChild(tr);
 
       var count = 0;
-      for(var i =0; i< gon.similar_customers.length; i++){
+      for(var i =0; i< gon.similarCustomers.length; i++){
         // Create Table Row
           var tr = document.createElement('tr');
 
           var td = document.createElement('td');
-          td.appendChild(document.createTextNode("1"));
+          td.appendChild(document.createTextNode(gon.similarCustomers[i].customer.first_name + " " + gon.similarCustomers[i].customer.last_name));
 
           td.setAttribute('rowSpan', '1');
           tr.appendChild(td)
 
           var td = document.createElement('td');
-          td.appendChild(document.createTextNode("1"));
+          td.appendChild(document.createTextNode((gon.similarCustomers[i].similarity * 100).toFixed(2) + "%"));
           td.setAttribute('rowSpan', '1');
           tr.appendChild(td)
-          if(count < 5){
-            if(count % 2 == 0) tr.className = "hotMerchantEven";
-            else tr.className = "hotMerchantOdd";
-          }
-          count++;
 
           tbdy.appendChild(tr);
       }
@@ -929,8 +922,59 @@ function getDistance(vector1, vector2) {
   }
 
   function showSimilarRight(){
-
+    var custToMerch = {};
+    for(var i=0; i<5; i++){
+      for(var purchase in gon.purchases) {
+        if(custToMerch[gon.similarCustomers[i].customer.id] == null) {
+          custToMerch[gon.similarCustomers[i].customer.id] = [];
+        }
+        if(gon.purchases[purchase].account_id == gon.similarCustomers[i].customer.id){
+          var temp = custToMerch[gon.similarCustomers[i].customer.id];
+          var arr = (temp instanceof Array) ? temp : [ temp ];
+          arr.push(gon.purchases[purchase].merchant_id);
+          custToMerch[gon.similarCustomers[i].customer.id] = arr;
+        }
+      }
+    }
+    console.log("customtoMerch");
+    console.log(custToMerch);
+    makeSimilarRightTable(custToMerch);
   }
 
+  function makeSimilarRightTable(custToMerch){
+    var merchantIdToName = {};
 
+    for(var i =0; i< gon.merchants.length; i++){
+      merchantIdToName[gon.merchants[i].id] = gon.merchants[i].name;
+    }
+
+    var wrapper = document.getElementById('similarRight');
+    var tbl = document.createElement('table');
+    tbl.style.width = '100%';
+    tbl.setAttribute('border', '1');
+    var tbdy = document.createElement('tbody');
+    // Titles
+    var tr = document.createElement('tr');
+
+    var td = document.createElement('td');
+    td.appendChild(document.createTextNode('Recommended Merchants'))
+    td.setAttribute('rowSpan', '1');
+    tr.appendChild(td);
+
+    tbdy.appendChild(tr);
+    var count = 0;
+    for(var custTm in custToMerch){
+      // Create Table Row
+        var tr = document.createElement('tr');
+
+        var td = document.createElement('td');
+        td.appendChild(document.createTextNode(merchantIdToName[custToMerch[custTm][0]]));
+        td.setAttribute('rowSpan', '1');
+        tr.appendChild(td);
+
+        tbdy.appendChild(tr);
+    }
+    tbl.appendChild(tbdy);
+    wrapper.appendChild(tbl)
+  }
 });

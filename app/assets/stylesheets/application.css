@@ -43,6 +43,10 @@
   width: 40px;
 }
 
+#greeting {
+  width: 100px;
+}
+
 .linkedin {
   text-align: left;
 }
@@ -423,6 +427,35 @@ svg {
   display: none;
   height: 100%;
   width: calc(100% - 100px);
+  margin-left: 100px;
+}
+
+#similarLeft {
+  width: 50%;
+  height: 100%;
+  float: left;
+  overflow: auto;
+}
+
+#similarLeft::-webkit-scrollbar-track {
+   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+  	background-color: transparent;
+}
+
+#similarLeft::-webkit-scrollbar {
+	width: 6px;
+	background-color: transparent;
+}
+
+#similarLeft::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+	background-color: transparent;
+}
+
+#similarRight {
+  width: 50%;
+  float: right;
 }
 
 @media screen and (min-width: 1360px) {

@@ -170,7 +170,7 @@ class DataController < ApplicationController
       @similar_customers << similar if dif < threshhold
     end
     @similar_customers.sort! {|x, y| y[:similarity] <=> x[:similarity]}
-    gon.similar_customers = @similar_customers
+    gon.similarCustomers = @similar_customers
   end
 
   def load_categories(customer)
