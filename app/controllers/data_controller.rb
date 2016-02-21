@@ -59,28 +59,33 @@ class DataController < ApplicationController
 
     children_array = @json[:children][0][:children][0][:children]
     @deposits.each do |deposite|
-      children_array << {name: deposite.description, size: deposite.amount}
+      children_array << {name: deposite.description, size: deposite.amount.to_i}
     end
+    children_array << {name: "No Deposits", size: 0} if @deposits.empty?
 
     children_array = @json[:children][0][:children][1][:children]
     @payee_transfers.each do |transfer|
-      children_array << {name: transfer.description, size: transfer.amount}
+      children_array << {name: transfer.description, size: transfer.amount.to_i}
     end
+    children_array << {name: "No Incoming Transfers", size: 0} if @payee_transfers.empty?
 
     children_array = @json[:children][1][:children][0][:children]
     @withdraws.each do |withdraw|
-      children_array << {name: withdraw.description, size: withdraw.amount}
+      children_array << {name: withdraw.description, size: withdraw.amount.to_i}
     end
+    children_array << {name: "No Withdraws", size: 0} if @withdraws.empty?
 
     children_array = @json[:children][1][:children][1][:children]
     @payer_transfers.each do |transfer|
-      children_array << {name: transfer.description, size: transfer.amount}
+      children_array << {name: transfer.description, size: transfer.amount.to_i}
     end
+    children_array << {name: "No Outgoing Transfers", size: 0} if @payer_transfers.empty?
 
     children_array = @json[:children][1][:children][2][:children]
     @purchases.each do |purchase|
-      children_array << {name: purchase.description, size: purchase.amount}
+      children_array << {name: purchase.description, size: purchase.amount.to_i}
     end
+    children_array << {name: "No Purchases", size: 0} if @purchases.empty?
 
     writeJsonFile @json
 
