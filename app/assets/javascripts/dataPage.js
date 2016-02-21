@@ -1,21 +1,44 @@
 $(document).ready(function(){
+  var createdHotList = false;
   initializeGraphs();
   $("#graphSelector").click(function(){
     document.getElementById("mapBody").style.display = "none";
     document.getElementById("hotBody").style.display = "none  ";
+    document.getElementById("regionBody").style.display = "none";
+    document.getElementById("similarBody").style.display = "none";
     document.getElementById("rightDisplay").style.display = "block";
   });
   $("#mapSelector").click(function(){
     document.getElementById("rightDisplay").style.display = "none";
     document.getElementById("hotBody").style.display = "none";
+    document.getElementById("regionBody").style.display = "none";
+    document.getElementById("similarBody").style.display = "none";
     document.getElementById("mapBody").style.display = "block";
     initializeMap();
   });
   $("#hotSelector").click(function(){
     document.getElementById("rightDisplay").style.display = "none";
     document.getElementById("mapBody").style.display = "none";
+    document.getElementById("regionBody").style.display = "none";
+    document.getElementById("similarBody").style.display = "none";
     document.getElementById("hotBody").style.display = "block";
     populateHotBuckets();
+  });
+  $("#regionSelector").click(function(){
+    document.getElementById("rightDisplay").style.display = "none";
+    document.getElementById("mapBody").style.display = "none";
+    document.getElementById("hotBody").style.display = "none";
+    document.getElementById("similarBody").style.display = "none";
+    document.getElementById("regionBody").style.display = "block";
+    regionCalculator();
+  });
+  $("#similarSelector").click(function(){
+    document.getElementById("rightDisplay").style.display = "none";
+    document.getElementById("mapBody").style.display = "none";
+    document.getElementById("hotBody").style.display = "none";
+    document.getElementById("regionBody").style.display = "none";
+    document.getElementById("similarBody").style.display = "block";
+    // regionCalculator();
   });
 
   function initializeGraphs(){
@@ -253,7 +276,10 @@ $(document).ready(function(){
 
   function initializeHotMap(merchantCounts){
     if(document.getElementById("hotMap")){
-      createHotList(merchantCounts);
+      if(!createdHotList){
+        createHotList(merchantCounts);
+        createdHotList = true;
+      }
       var myLatLng = {lat: gon.merchants[merchantCounts[0][2]].lat, lng:  gon.merchants[merchantCounts[0][2]].lng};
 
       var map = new google.maps.Map(document.getElementById('hotMap'), {
@@ -332,6 +358,16 @@ $(document).ready(function(){
       tbl.appendChild(tbdy);
       wrapper.appendChild(tbl)
     }
+  }
+
+  function regionCalculator() {
+    if(document.getElementById("regionBody")){
+      populateRegionTable();
+    }
+  }
+
+  function populateRegionTable() {
+    console.log("populate region table");
   }
 
 });
