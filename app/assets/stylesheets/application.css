@@ -139,7 +139,7 @@ input{
 
  .dataBody {
    display :block;
-   height: 100%;
+   height: calc(100% - 54px);
    width: 100%;
    clear: both;
  }
@@ -226,6 +226,7 @@ i {
 }
 
  .rightright {
+   background-color: #efefef;
    width: 100%;
    height: 100%;
    overflow: auto;
@@ -295,7 +296,7 @@ i {
 
 #mapWrapper {
   width: 100%;
-  height: calc(100% - 60px);
+  height: 100%;
 }
 
 #map {
