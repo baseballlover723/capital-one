@@ -20,7 +20,7 @@ a3 = Account.create(id: 3, account_type: "Checking", nickname: "Jeremy's checkin
 a2 = Account.create(id: 4, account_type: "Savings", nickname: "Nathan's Savings", rewards: 0.00, balance: 2430.00, customer: c2) 
 
 p1 = Purchase.create(id: 1234, purchase_type: "merchant", merchant: m1, account: a3, purchase_date: DateTime.iso8601("2016-02-15"), amount: 524.31, status: "pending", "medium": "balance", description: "Jeremey bought some expensive clothes stuff from Andrew")
-p2 = Purchase.create(id: 4231, purchase_type: "merchant", merchant: m2, account: a3, purchase_date: DateTime.iso8601("2015-12-15"), amount: 700000.00, status: "pending", "medium": "balance", description: "Jeremey bought a league team from Philip")
+p2 = Purchase.create(id: 4231, purchase_type: "merchant", merchant: m2, account: a3, purchase_date: DateTime.iso8601("2015-12-15"), amount: 192.00, status: "pending", "medium": "balance", description: "Jeremey bought a league team from Philip")
 p3 = Purchase.create(id: 332, purchase_type: "merchant", merchant: m3, account: a1, purchase_date: DateTime.iso8601("2015-07-12"), amount: 76.31, status: "pending", "medium": "balance", description: "Luke bought some reeds from zanes music shop")
 p4 = Purchase.create(id: 8797689, purchase_type: "merchant", merchant: m1, account: a1, purchase_date: DateTime.iso8601("2016-01-15"), amount: 2530.31, status: "declinded", "medium": "balance", description: "Luke got black out drunk and spent all of his retierment fund on expensive clothes from Andrew silk shop")
 p5 = Purchase.create(id: 555, purchase_type: "merchant", merchant: m1, account: a2, purchase_date: DateTime.iso8601("2015-01-15"), amount: 24.31, status: "completed", "medium": "balance", description: "Bought burritos")
