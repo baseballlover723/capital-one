@@ -195,23 +195,17 @@ $(document).ready(function(){
         merchantsCounts[gon.merchants[i].id] = 0;
       }
 
-      console.log(" gon purchases: ")
-      console.log(gon.purchases);
       for(var i =0; i< gon.purchases.length; i++){
-        console.log(gon.purchases[i]["merchant_id"]);
         merchantsCounts[gon.purchases[i]["merchant_id"]]++;
       }
 
-      console.log("merchant counts stuff ");
-      console.log(merchantsCounts);
-      console.log(merchantIdToName);
-
-      initializeHotMap();
+      initializeHotMap(merchantsCounts.sort(function(a, b) {return a[1] < b[1] ? 1 : a[1] > b[1] ? -1 : 0}));
     }
   }
 
-  function initializeMap(){
+  function initializeMap(merchantCounts){
     if(document.getElementById("map")){
+      console.log("adf " + merchantCounts);
       var myLatLng = {lat: gon.merchants[0].lat, lng: gon.merchants[0].lng};
 
       var map = new google.maps.Map(document.getElementById('map'), {
