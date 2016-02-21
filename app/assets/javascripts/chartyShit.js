@@ -47,7 +47,9 @@ $(document).ready(function(){
   // Keep track of the node that is currently being displayed as the root.
   var node;
 
-  d3.json("flare.json", function(error, root) {
+    console.log(gon.jsonFile);
+
+  d3.json(gon.jsonFile, function(error, root) {
     node = root;
     var path = svg.datum(root).selectAll("path")
         .data(partition.nodes)

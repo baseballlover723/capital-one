@@ -102,5 +102,21 @@ class DataController < ApplicationController
     gon.transfers = @transfers
     gon.withdraws = @withdraws
 
+    load_close
+  end
+
+  def load_close
+    categories = {}
+    @purchases.each do |purchase|
+      category = purchase.merchant.category
+      add_category categories, category, purchase.amount
+      puts purchase.to_json
+    end
+    puts categories.to_json
+  end
+
+  def add_category(categories, category, amount)
+    categories[category] = 0 unless categories[category]
+    categories[category] += amount
   end
 end
