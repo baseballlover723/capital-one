@@ -47,9 +47,9 @@ $(document).ready(function(){
   // Keep track of the node that is currently being displayed as the root.
   var node;
 
-    console.log(gon.jsonFile);
+    //console.log(gon.jsonFile);
 
-  d3.json(gon.jsonFile, function(error, root) {
+  d3.json("myJsonFile.json", function(error, root) {
     node = root;
     var path = svg.datum(root).selectAll("path")
         .data(partition.nodes)
@@ -61,6 +61,7 @@ $(document).ready(function(){
         .each(stash);
 
        d3.select("#container").on("mouseleave", mouseleave);
+      console.log(path.node().__data__.children[0]);
 
     for(var childIndex = 0; childIndex < path.node().__data__.children[0].children[0].value; childIndex++) {
       totalSize += path.node().__data__.children[0].children[0].children[childIndex].size;

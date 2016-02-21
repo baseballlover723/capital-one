@@ -82,6 +82,8 @@ class DataController < ApplicationController
       children_array << {name: purchase.description, size: purchase.amount}
     end
 
+    writeJsonFile @json
+
     gon.graphBills = @bills
     gon.graphDeposit = @deposits
     gon.graphPurchases = @purchases
@@ -89,29 +91,39 @@ class DataController < ApplicationController
     gon.graphPayeeTransfers = @payee_transfers
     gon.graphWithdraws = @withdraws
     gon.atms = @atms
-    gon.jsonFile = @json
 
 # do we need below?
     gon.id = @id;
     gon.accounts = @accounts
     gon.bills = @bills
-    # gon.customers = @customers
+# gon.customers = @customers
     gon.deposits = @deposits
     gon.merchants = @merchants
     gon.purchases = @purchases
     gon.transfers = @transfers
     gon.withdraws = @withdraws
 
-    load_close
+    load_close @customer
   end
 
-  def load_close
-    categories = {}
-    @purchases.each do |purchase|
-      category = purchase.merchant.category
-      add_category categories, category, purchase.amount
-      puts purchase.to_json
+  def writeJsonFile(object)
+    File.open("public/myJsonFile.json", "w") do |f|
+      f.write(object.to_json)
     end
+  end
+
+  def load_close(customer)
+    categories = {}
+    puts customer
+    customer.accounts.each do |account|
+      account.purchases.each do |purchase|
+        category = purchase.merchant.category
+        add_category categories, category, purchase.amount
+        puts purchase.to_json
+      end
+
+    end
+
     puts categories.to_json
   end
 
@@ -119,4 +131,5 @@ class DataController < ApplicationController
     categories[category] = 0 unless categories[category]
     categories[category] += amount
   end
+
 end
