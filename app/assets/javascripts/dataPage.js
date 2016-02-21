@@ -121,7 +121,7 @@ $(document).ready(function(){
   }
 
   function generatePurchaseTable(){
-    var body = document.getElementsByTagName('body')[0];
+    var wrapper = document.getElementById('tableWrapper');
     var tbl = document.createElement('table');
     tbl.style.width = '100%';
     tbl.setAttribute('border', '1');
@@ -165,11 +165,11 @@ $(document).ready(function(){
         td.appendChild(document.createTextNode(gon.graphPurchases[i].purchase_date.split("T")[0]))
         td.setAttribute('rowSpan', '1');
         tr.appendChild(td)
-       
+
         tbdy.appendChild(tr);
     }
     tbl.appendChild(tbdy);
-    body.appendChild(tbl)
+    wrapper.appendChild(tbl)
   }
 
   function preparePurchaseGraph(bucketsCurrent, bucketsOld){
