@@ -6,6 +6,7 @@
     <ul id="sourceSelectorWrapper">
       <li class="sourceList"><button id="graphSelector" class="sourceSelector"><span data-tooltip aria-haspopup="true" class="has-tip" data-disable-hover='false' tabindex=1 title="Transaction Graphics"><i class="fa fa-line-chart"></i></span></button></li>
       <li class="sourceList"><button id="mapSelector" class="sourceSelector"><span data-tooltip aria-haspopup="true" class="has-tip" data-disable-hover='false' tabindex=1 title="Transaction Locations"><i class="fa fa-map"></i></span></button></li>
+      <li class="sourceList"><button id="hotSelector" class="sourceSelector"><span data-tooltip aria-haspopup="true" class="has-tip" data-disable-hover='false' tabindex=1 title="Hot Transactions"><i class="fa fa-fire"></i></span></button></li>
     </ul>
   </div>
   <div id="rightDisplay">
@@ -39,10 +40,19 @@
     </div>
   </div>
   </div>
+
   <div id="mapBody">
-    <div id="mapTitle">Financial Map for Andrew Ma</div>
     <div id="mapWrapper">
       <div id="map"></div>
+    </div>
+  </div>
+
+  <div id="hotBody">
+
+    <div id="mapWrapper">
+      <div id="hotList">
+      </div>
+      <div id="hotMap"></div>
     </div>
   </div>
 </div>

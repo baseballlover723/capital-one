@@ -136,6 +136,7 @@ input{
  .dataBody {
    display :block;
    height: 100%;
+   width: 100%;
    clear: both;
  }
 
@@ -288,14 +289,15 @@ i {
  }
 
 #mapWrapper {
+  margin-left: 100px;
   width: 100%;
   height: calc(100% - 60px);
 }
 
 #map {
   position: relative;
-  width: 90%;
-  height: 90%;
+  width: 100%;
+  height: 100%;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -334,6 +336,41 @@ svg {
   top: 50%;
   margin-top: 20%;
   font-size: 1.3em
+}
+
+#hotBody {
+  width: calc(100% - 100px);
+  height: 100%;
+}
+
+#hotList {
+  float: left;
+  width: 20%;
+  height: 100%%;
+  overflow: auto;
+}
+
+#hotList::-webkit-scrollbar-track {
+   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+  	background-color: transparent;
+}
+
+#hotList::-webkit-scrollbar {
+	width: 6px;
+	background-color: transparent;
+}
+
+#hotList::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+	background-color: transparent;
+}
+
+
+#hotMap {
+  float: right;
+  width: 80%;
+  height: 100%;
 }
 
 @media screen and (min-width: 1360px) {

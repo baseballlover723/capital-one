@@ -2,27 +2,22 @@ $(document).ready(function(){
   initializeGraphs();
   $("#graphSelector").click(function(){
     document.getElementById("mapBody").style.display = "none";
+    document.getElementById("hotBody").style.display = "none  ";
     document.getElementById("rightDisplay").style.display = "block";
   });
   $("#mapSelector").click(function(){
     document.getElementById("rightDisplay").style.display = "none";
+    document.getElementById("hotBody").style.display = "none";
     document.getElementById("mapBody").style.display = "block";
     initializeMap();
   });
-  console.log("This user's accounts:")
-  console.log(gon.accounts)
-  console.log("gon.graphBills");
-  console.log(gon.graphBills);
-    console.log("gon.graphDeposit");
-  console.log(gon.graphDeposit);
-    console.log("gon.graphPurchases");
-  console.log(gon.graphPurchases);
+  $("#hotSelector").click(function(){
+    document.getElementById("rightDisplay").style.display = "none";
+    document.getElementById("mapBody").style.display = "none";
+    document.getElementById("hotBody").style.display = "block";
+    populateHotBuckets();
+  });
 
-  console.log("payer/payee transfers");
-  console.log(gon.graphPayerTransfers);
-  console.log(gon.graphPayeeTransfers);
-
-  console.log(gon.graphWithdraws);
   function initializeGraphs(){
     if(document.getElementById("chartBody")){
       var canv = document.getElementById("lineGraph");
@@ -34,7 +29,7 @@ $(document).ready(function(){
   var bucketsOld = [0,0,0,0,0,0,0,0,0,0,0,0];
   preparePurchaseGraph(bucketsCurrent, bucketsOld);
 
-  console.log("null here " + bucketsCurrent)
+
 
 
       var data = {
@@ -188,10 +183,35 @@ $(document).ready(function(){
     }
   }
 
+  function populateHotBuckets(){
+    if(document.getElementById("hotMap")){
+      //populate buckets
+      var merchantIdToName = {};
+      var merchantsCounts = {};
+
+
+      for(var i =0; i< gon.merchants.length; i++){
+        merchantIdToName[gon.merchants[i].id] = gon.merchants[i].name;
+        merchantsCounts[gon.merchants[i].id] = 0;
+      }
+
+      console.log(" gon purchases: ")
+      console.log(gon.purchases);
+      for(var i =0; i< gon.purchases.length; i++){
+        console.log(gon.purchases[i]["merchant_id"]);
+        merchantsCounts[gon.purchases[i]["merchant_id"]]++;
+      }
+
+      console.log("merchant counts stuff ");
+      console.log(merchantsCounts);
+      console.log(merchantIdToName);
+
+      initializeHotMap();
+    }
+  }
+
   function initializeMap(){
     if(document.getElementById("map")){
-
-      console.log("map");
       var myLatLng = {lat: gon.merchants[0].lat, lng: gon.merchants[0].lng};
 
       var map = new google.maps.Map(document.getElementById('map'), {
@@ -230,6 +250,107 @@ $(document).ready(function(){
                         });
                     })(marker, merchant);
       }
+    }
+  }
+
+  function initializeHotMap(){
+    if(document.getElementById("hotMap")){
+      createHotList();
+      console.log("hotMap");
+      // var myLatLng = {lat: gon.merchants[0].lat, lng: gon.merchants[0].lng};
+      var myLatLng = {lat: 85, lng: 23};
+
+      var map = new google.maps.Map(document.getElementById('hotMap'), {
+        center: myLatLng,
+        scrollwheel: true,
+        zoom: 5
+      });
+      // var infowindow = new google.maps.InfoWindow();
+      // var marker;
+
+      // for(var merchant in gon.merchants){
+      //   var merch = gon.merchants[merchant];
+      //   myLatLng = {lat: parseFloat(merch.lat), lng: parseFloat(merch.lng)};
+      //   marker = new google.maps.Marker({position: myLatLng,map: map,title: merch.category});
+      //   (function(marker, i) {
+      //                   // add click event
+      //                   google.maps.event.addListener(marker, 'click', function() {
+      //                       infowindow = new google.maps.InfoWindow({
+      //                           content: 'Hello, World!!'
+      //                       });
+      //                       infowindow.open(map, marker);
+      //                   });
+      //               })(marker, merchant);
+      // }
+      //
+      // for(var merchant in gon.atms){
+      //   var atm = gon.atms[merchant];
+      //   myLatLng = {lat: parseFloat(atm.lat), lng: parseFloat(atm.lng)};
+      //   marker = new google.maps.Marker({position: myLatLng,map: map,title: "ATM"});
+      //   (function(marker, i) {
+      //                   // add click event
+      //                   google.maps.event.addListener(marker, 'click', function() {
+      //                       infowindow = new google.maps.InfoWindow({
+      //                           content: 'Hello, World!!'
+      //                       });
+      //                       infowindow.open(map, marker);
+      //                   });
+      //               })(marker, merchant);
+      // }
+    }
+  }
+
+  function createHotList(){
+    if(document.getElementById("hotList")){
+      var wrapper = document.getElementById('hotList');
+      var tbl = document.createElement('table');
+      tbl.style.width = '100%';
+      tbl.setAttribute('border', '1');
+      var tbdy = document.createElement('tbody');
+      // Titles
+      var tr = document.createElement('tr');
+
+      var td = document.createElement('td');
+      td.appendChild(document.createTextNode('Purchase Description'))
+      td.setAttribute('rowSpan', '1');
+      tr.appendChild(td);
+
+      var td = document.createElement('td');
+      td.appendChild(document.createTextNode('Amount'))
+      td.setAttribute('rowSpan', '1');
+      tr.appendChild(td);
+
+      var td = document.createElement('td');
+      td.appendChild(document.createTextNode('Date Purchased'))
+      td.setAttribute('rowSpan', '1');
+      tr.appendChild(td);
+
+      tbdy.appendChild(tr);
+
+
+      for(var i =0; i< gon.graphPurchases.length; i++){
+        // Create Table Row
+          var tr = document.createElement('tr');
+
+          var td = document.createElement('td');
+          td.appendChild(document.createTextNode(gon.graphPurchases[i].description))
+          td.setAttribute('rowSpan', '1');
+          tr.appendChild(td)
+
+          var td = document.createElement('td');
+          td.appendChild(document.createTextNode(gon.graphPurchases[i].amount))
+          td.setAttribute('rowSpan', '1');
+          tr.appendChild(td)
+
+          var td = document.createElement('td');
+          td.appendChild(document.createTextNode(gon.graphPurchases[i].purchase_date.split("T")[0]))
+          td.setAttribute('rowSpan', '1');
+          tr.appendChild(td)
+
+          tbdy.appendChild(tr);
+      }
+      tbl.appendChild(tbdy);
+      wrapper.appendChild(tbl)
     }
   }
 
