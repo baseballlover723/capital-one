@@ -65,7 +65,6 @@ $(document).ready(function(){
             }});
 
        d3.select("#container").on("mouseleave", mouseleave);
-      console.log(path.node().__data__.children[0]);
 
     for(var childIndex = 0; childIndex < path.node().__data__.children[0].children[0].value; childIndex++) {
       totalSize += path.node().__data__.children[0].children[0].children[childIndex].size;
