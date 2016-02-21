@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+def load
 m1 = Merchant.create(id: 1, name: "Chipotle", category: "Food", street_number: "528", street_name: "East Green Street", city: "Champaign", zip: "61820", lat: "40.11", lng: "-88.30")
 m2 = Merchant.create(id: 2, name: "Starbucks", category: "Food", street_number: "503", street_name: "East Green Street", city: "Champaign", zip: "61820", lat: "40.10", lng: "-88.30")
 m3 = Merchant.create(id: 3, name: "McDonalds", category: "Food", street_number: "616", street_name: "East Green Street", city: "Champaign", zip: "61820", lat: "40.11", lng: "-88.29")
@@ -36,46 +36,6 @@ p13 = Purchase.create(id: 658, purchase_type: "merchant", merchant: m4, account:
 p14 = Purchase.create(id: 659, purchase_type: "merchant", merchant: m5, account: a2, purchase_date: DateTime.iso8601("2015-10-11"), amount: 96.73, status: "completed", "medium": "balance", description: "Nathan stayed at a hotel for the night")
 p15 = Purchase.create(id: 755, purchase_type: "merchant", merchant: m1, account: a2, purchase_date: DateTime.iso8601("2015-11-15"), amount: 8.71, status: "completed", "medium": "balance", description: "Bought burritos")
 p16 = Purchase.create(id: 756, purchase_type: "merchant", merchant: m2, account: a2, purchase_date: DateTime.iso8601("2015-12-24"), amount: 4.83, status: "completed", "medium": "balance", description: "Purchased coffee")
-=======
-def load
-  m1 = Merchant.create(id: 1, name: "Chipotle", category: "Food", street_number: "528", street_name: "East Green Street", city: "Champaign", zip: "61820", lat: "40.11", lng: "-88.30")
-  m2 = Merchant.create(id: 2, name: "Starbucks", category: "Food", street_number: "503", street_name: "East Green Street", city: "Champaign", zip: "61820", lat: "40.10", lng: "-88.30")
-  m3 = Merchant.create(id: 3, name: "McDonalds", category: "Food", street_number: "616", street_name: "East Green Street", city: "Champaign", zip: "61820", lat: "40.11", lng: "-88.29")
-  m4 = Merchant.create(id: 4, name: "Walmart", category: "Retail", street_number: "2610", street_name: "North Prospect Avenue", city: "Champaign", zip: "61822", lat: "40.14", lng: "-88.32")
-  m5 = Merchant.create(id: 5, name: "Holiday Inn", category: "Hotel", street_number: "1003", street_name: "West Killarney Street", city: "Urbana", zip: "61801", lat: "40.13", lng: "-88.29")
-  m6 = Merchant.create(id: 6, name: "Amazon", category: "Retail", street_number: "528", street_name: "East Green Street", city: "Champaign", zip: "61820", lat: "39.946", lng: "-86.734")
-  m7 = Merchant.create(id: 7, name: "Kroger", category: "Food", street_number: "503", street_name: "East Green Street", city: "Champaign", zip: "61820", lat: "40.1126", lng: "-88.218")
-  m8 = Merchant.create(id: 8, name: "Supercuts", category: "Services", street_number: "616", street_name: "East Green Street", city: "Champaign", zip: "61820", lat: "40.0753", lng: "-88.322")
-  m9 = Merchant.create(id: 9, name: "AMC Movie Theater", category: "Retail", street_number: "2610", street_name: "North Prospect Avenue", city: "Champaign", zip: "61822", lat: "40.075", lng: "-88.254")
-  m10 = Merchant.create(id: 10, name: "Home Depot", category: "Retail", street_number: "820 ", street_name: "Bloomington ", city: "Urbana", zip: "61801", lat: "40.133", lng: "-88.256")
-
-  c1 = Customer.create(id: 1, first_name: "Luke", last_name: "Miller", street_number: "6969", street_name: "ohio street", city: "Dayton", state: "Ohio", zip: "53244")
-  c2 = Customer.create(id: 2, first_name: "Nathan", last_name: "Blank", street_number: "42", street_name: "donkey", city: "Chicago", state: "Illinios", zip: "65843")
-  c3 = Customer.create(id: 3, first_name: "Jeremy", last_name: "Wright", street_number: "52", street_name: "weaboo drive", city: "tokyo", state: "Japan", zip: "N/A")
-
-
-  a1 = Account.create(id: 1, account_type: "Credit Card", nickname: "Luke's Credit Card", rewards: 100.08, balance: 1_000_000.00, customer: c1)
-  a4 = Account.create(id: 2, account_type: "Savings", nickname: "Luke's Savings", rewards: 0.00, balance: 50.00, customer: c1)
-  a3 = Account.create(id: 3, account_type: "Checking", nickname: "Jeremy's checking", rewards: 5.14, balance: 56_357.40, customer: c3)
-  a2 = Account.create(id: 4, account_type: "Savings", nickname: "Nathan's Savings", rewards: 0.00, balance: 2430.00, customer: c2)
-
-  p1 = Purchase.create(id: 1234, purchase_type: "merchant", merchant: m1, account: a3, purchase_date: DateTime.iso8601("2016-02-15"), amount: 524.31, status: "pending", "medium": "balance", description: "Jeremey bought some expensive clothes stuff from Andrew")
-  p2 = Purchase.create(id: 4231, purchase_type: "merchant", merchant: m2, account: a3, purchase_date: DateTime.iso8601("2015-12-15"), amount: 700000.00, status: "pending", "medium": "balance", description: "Jeremey bought a league team from Philip")
-  p3 = Purchase.create(id: 332, purchase_type: "merchant", merchant: m3, account: a1, purchase_date: DateTime.iso8601("2015-07-12"), amount: 76.31, status: "pending", "medium": "balance", description: "Luke bought some reeds from zanes music shop")
-  p4 = Purchase.create(id: 8797689, purchase_type: "merchant", merchant: m1, account: a1, purchase_date: DateTime.iso8601("2016-01-15"), amount: 2530.31, status: "declinded", "medium": "balance", description: "Luke got black out drunk and spent all of his retierment fund on expensive clothes from Andrew silk shop")
-  p5 = Purchase.create(id: 555, purchase_type: "merchant", merchant: m1, account: a2, purchase_date: DateTime.iso8601("2015-01-15"), amount: 24.31, status: "completed", "medium": "balance", description: "Bought burritos")
-  p6 = Purchase.create(id: 556, purchase_type: "merchant", merchant: m2, account: a2, purchase_date: DateTime.iso8601("2015-02-24"), amount: 9.83, status: "completed", "medium": "balance", description: "Purchased coffee")
-  p7 = Purchase.create(id: 557, purchase_type: "merchant", merchant: m3, account: a2, purchase_date: DateTime.iso8601("2015-03-02"), amount: 7.91, status: "completed", "medium": "balance", description: "Purchased a Happy Meal")
-  p8 = Purchase.create(id: 558, purchase_type: "merchant", merchant: m4, account: a2, purchase_date: DateTime.iso8601("2015-04-30"), amount: 56.56, status: "completed", "medium": "balance", description: "Bought groceries")
-  p9 = Purchase.create(id: 559, purchase_type: "merchant", merchant: m5, account: a2, purchase_date: DateTime.iso8601("2015-05-11"), amount: 126.73, status: "completed", "medium": "balance", description: "Nathan stayed at a hotel for the night")
-  p10 = Purchase.create(id: 655, purchase_type: "merchant", merchant: m1, account: a2, purchase_date: DateTime.iso8601("2015-06-15"), amount: 12.21, status: "completed", "medium": "balance", description: "Bought burritos")
-  p11 = Purchase.create(id: 656, purchase_type: "merchant", merchant: m2, account: a2, purchase_date: DateTime.iso8601("2015-07-24"), amount: 19.83, status: "completed", "medium": "balance", description: "Purchased coffee")
-  p12 = Purchase.create(id: 657, purchase_type: "merchant", merchant: m3, account: a2, purchase_date: DateTime.iso8601("2015-08-02"), amount: 17.91, status: "completed", "medium": "balance", description: "Purchased a Big Mac")
-  p13 = Purchase.create(id: 658, purchase_type: "merchant", merchant: m4, account: a2, purchase_date: DateTime.iso8601("2015-09-29"), amount: 86.56, status: "completed", "medium": "balance", description: "Bought groceries")
-  p14 = Purchase.create(id: 659, purchase_type: "merchant", merchant: m5, account: a2, purchase_date: DateTime.iso8601("2015-10-11"), amount: 96.73, status: "completed", "medium": "balance", description: "Nathan stayed at a hotel for the night")
-  p15 = Purchase.create(id: 755, purchase_type: "merchant", merchant: m1, account: a2, purchase_date: DateTime.iso8601("2015-11-15"), amount: 8.71, status: "completed", "medium": "balance", description: "Bought burritos")
-  p16 = Purchase.create(id: 756, purchase_type: "merchant", merchant: m2, account: a2, purchase_date: DateTime.iso8601("2015-12-24"), amount: 4.83, status: "completed", "medium": "balance", description: "Purchased coffee")
->>>>>>> da405de579cbf17617816ff942f280d5682fe530
 
 # Amazon
   p17 = Purchase.create(id: 17, purchase_type: "merchant", merchant: m6, account: a1, purchase_date: DateTime.iso8601("2015-04-30"), amount: 1722.3898937001727, status: "completed", "medium": "balance", description: "AMAZON DRONE DELIVERY")
@@ -336,10 +296,13 @@ def load
   atm2 = Atm.create(name: "ATM", lat: "39.10", lng: "-84.51", account: a1)
   atm3 = Atm.create(name: "ATM", lat: "41.89", lng: "-87.64", account: a1)
 
-  10.times do
-    generate_random_purchase a1
-    generate_random_purchase a2
-    generate_random_purchase a3
+  30.times do
+    # generate_random_purchase a1
+    # generate_random_purchase a2
+    # generate_random_purchase a3
+    generate_random_deposit
+    generate_random_transfer
+    generate_random_bill
   end
 
   puts "completed seeding"
@@ -357,10 +320,155 @@ def last_name
   Faker::Name.last_name
 end
 
-def generate_random_purchase(account)
+def generate_random_customer
+  Customer.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, street_number: Faker::Address.street_address.split(" ")[0],
+                  street_name: Faker::Address.street_name, city: Faker::Address.city, state: Faker::Address.state, zip: Faker::Address.zip)
+end
+
+def generate_random_merchant
+  Merchant.create(name: Faker::Company.name, category: Faker::Commerce.department(1, true), street_number: Faker::Address.street_address.split(" ")[0],
+                  street_name: Faker::Address.street_name, city: Faker::Address.city, state: Faker::Address.state, zip: Faker::Address.zip,
+                  lat: Faker::Address.latitude, lng: Faker::Address.longitude)
+end
+
+def generate_random_purchase(account = Account.all.sample, merchant = Merchant.all.sample)
   date = Faker::Time.backward(14)
-  Purchase.create(purchase_type: "merchant", merchant: Merchant.all.sample, account: account, purchase_date: date,
+  Purchase.create(purchase_type: "merchant", merchant: merchant, account: account, purchase_date: date,
                   amount: Faker::Commerce.price(200), status: "completed", "medium": "balance", description: "Bought a #{Faker::Commerce.product_name}")
 end
 
+def generate_random_account(customer = Customer.all.sample)
+  card_type = Faker::Business.credit_card_type
+  Account.create(account_type: card_type, nickname: "#{customer.first_name} #{customer.last_name}'s #{card_type}",
+                 rewards: Faker::Number.decimal(3, 2), balance: Faker::Number.decimal(6, 2), customer: customer)
+end
+
+def generate_random_atm(account = Account.all.sample)
+  Atm.create(name: "ATM", lat: Faker::Address.latitude, lng: Faker::Address.longitude, account: account)
+end
+
+def generate_random_bill(account = Account.all.sample)
+  Bill.create(status: "completed", payee: "#{account.customer.first_name} #{account.customer.last_name}", nickname: Faker::Company.catch_phrase, creation_date: Faker::Time.backward(365),
+              payment_date: Faker::Time.forward(30), recurring_date: 0, upcoming_payment_date: Faker::Time.forward(30),
+              payment_amount: Faker::Commerce.price(400), account: account)
+end
+
+def generate_random_deposit(account = Account.all.sample)
+  Deposit.create(deposit_type: "deposit", transaction_date: Faker::Time.backward(30), status: "completed",
+                 medium: "balance", amount: Faker::Commerce.price(500), description: Faker::Company.catch_phrase, account: account)
+end
+
+def generate_random_withdraw(account = Account.all.sample)
+  Withdraw.create(withdraw_type: "withdraw", transaction_date: Faker::Time.backward(30), status: "completed",
+                  medium: "balance", amount: Faker::Commerce.price(200), description: Faker::Company.catch_phrase, account: account)
+end
+
+def generate_random_transfer(payer = Account.all.sample, payee = Account.all.sample)
+  Transfer.create(transfer_type: "p2p", transaction_date: Faker::Time.backward(30), status: "completed",
+                  medium: "balanece", amount: Faker::Commerce.price(200), description: Faker::Company.catch_phrase, payer: payer, payee: payee)
+end
+
 load
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# def load
+  
+#   50.times do
+#     generate_random_merchant
+#   end
+#   25.times do
+#     customer = generate_random_customer
+#     account = generate_random_account customer
+#     10.times do
+#       generate_random_purchase account
+#       generate_random_deposit account
+#       generate_random_withdraw account
+#     end
+#     5.times do
+#       generate_random_atm account
+#       generate_random_bill account
+#     end
+
+#   end
+
+#   250.times do
+#     generate_random_transfer
+#   end
+
+
+#   puts "completed seeding"
+# end
+
+# def generate_random_customer
+#   Customer.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, street_number: Faker::Address.street_address.split(" ")[0],
+#                   street_name: Faker::Address.street_name, city: Faker::Address.city, state: Faker::Address.state, zip: Faker::Address.zip)
+# end
+
+# def generate_random_merchant
+#   Merchant.create(name: Faker::Company.name, category: Faker::Commerce.department(1, true), street_number: Faker::Address.street_address.split(" ")[0],
+#                   street_name: Faker::Address.street_name, city: Faker::Address.city, state: Faker::Address.state, zip: Faker::Address.zip,
+#                   lat: Faker::Address.latitude, lng: Faker::Address.longitude)
+# end
+
+# def generate_random_purchase(account = Account.all.sample, merchant = Merchant.all.sample)
+#   date = Faker::Time.backward(14)
+#   Purchase.create(purchase_type: "merchant", merchant: merchant, account: account, purchase_date: date,
+#                   amount: Faker::Commerce.price(200), status: "completed", "medium": "balance", description: "Bought a #{Faker::Commerce.product_name}")
+# end
+
+# def generate_random_account(customer = Customer.all.sample)
+#   card_type = Faker::Business.credit_card_type
+#   Account.create(account_type: card_type, nickname: "#{customer.first_name} #{customer.last_name}'s #{card_type}",
+#                  rewards: Faker::Number.decimal(3, 2), balance: Faker::Number.decimal(6, 2), customer: customer)
+# end
+
+# def generate_random_atm(account = Account.all.sample)
+#   Atm.create(name: "ATM", lat: Faker::Address.latitude, lng: Faker::Address.longitude, account: account)
+# end
+
+# def generate_random_bill(account = Account.all.sample)
+#   Bill.create(status: "completed", payee: "#{account.customer.first_name} #{account.customer.last_name}", nickname: Faker::Company.catch_phrase, creation_date: Faker::Time.backward(365),
+#               payment_date: Faker::Time.forward(30), recurring_date: 0, upcoming_payment_date: Faker::Time.forward(30),
+#               payment_amount: Faker::Commerce.price(400), account: account)
+# end
+
+# def generate_random_deposit(account = Account.sample)
+#   Deposit.create(deposit_type: "deposit", transaction_date: Faker::Time.backward(30), status: "completed",
+#                  medium: "balance", amount: Faker::Commerce.price(500), description: Faker::Company.catch_phrase, account: account)
+# end
+
+# def generate_random_withdraw(account = Account.sample)
+#   Withdraw.create(withdraw_type: "withdraw", transaction_date: Faker::Time.backward(30), status: "completed",
+#                   medium: "balance", amount: Faker::Commerce.price(200), description: Faker::Company.catch_phrase, account: account)
+# end
+
+# def generate_random_transfer(payer = Account.all.sample, payee = Account.all.sample)
+#   Transfer.create(transfer_type: "p2p", transaction_date: Faker::Time.backward(30), status: "completed",
+#                   medium: "balanece", amount: Faker::Commerce.price(200), description: Faker::Company.catch_phrase, payer: payer, payee: payee)
+# end
+
+# load
