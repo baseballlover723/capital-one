@@ -107,9 +107,9 @@ t3 = Transfer.create(id: 3143, transfer_type: "p2p", transaction_date: DateTime.
                      payer: a3, payee: a2)
 
 
-atm1 = Atm.create(u_id: 5, name: "ATM", lat: "39.48", lng: "-87.32")
-atm2 = Atm.create(u_id: 5, name: "ATM", lat: "39.10", lng: "-84.51")
-atm3 = Atm.create(u_id: 5, name: "ATM", lat: "41.89", lng: "-87.64")
+atm1 = Atm.create(name: "ATM", lat: "39.48", lng: "-87.32", account: a1)
+atm2 = Atm.create(name: "ATM", lat: "39.10", lng: "-84.51", account: a1)
+atm3 = Atm.create(name: "ATM", lat: "41.89", lng: "-87.64", account: a1)
 puts "completed seeding"
 
 def name
