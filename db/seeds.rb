@@ -36,7 +36,6 @@ def load
   p14 = Purchase.create(id: 659, purchase_type: "merchant", merchant: m5, account: a2, purchase_date: DateTime.iso8601("2015-10-11"), amount: 96.73, status: "completed", "medium": "balance", description: "Nathan stayed at a hotel for the night")
   p15 = Purchase.create(id: 755, purchase_type: "merchant", merchant: m1, account: a2, purchase_date: DateTime.iso8601("2015-11-15"), amount: 8.71, status: "completed", "medium": "balance", description: "Bought burritos")
   p16 = Purchase.create(id: 756, purchase_type: "merchant", merchant: m2, account: a2, purchase_date: DateTime.iso8601("2015-12-24"), amount: 4.83, status: "completed", "medium": "balance", description: "Purchased coffee")
-  >>>>>>> da405de579cbf17617816ff942f280d5682fe530
 
 # Amazon
   p17 = Purchase.create(id: 17, purchase_type: "merchant", merchant: m6, account: a1, purchase_date: DateTime.iso8601("2015-04-30"), amount: 1722.3898937001727, status: "completed", "medium": "balance", description: "AMAZON DRONE DELIVERY")
