@@ -39,8 +39,12 @@
   padding: 0;
 }
 
+.linkedin {
+  text-align: left;
+}
+
 .mainBody{
-  background-image: url("/city.png");
+  background-image: url("/city.jpg");
   display: block;
   background-repeat: no-repeat;
   width: 100%;
@@ -48,7 +52,7 @@
 }
 
  #queryWrapper {
-   margin-left: 37%;
+   margin-left: 43%;
    top: 15%;
    position: relative;
 }
@@ -59,7 +63,7 @@ input{
 }
 
  #query {
-   font-size: 18px;
+   font-size: 36px;
    padding:10px 10px 10px 5px;
    display: block;
    width: 300px;
@@ -79,12 +83,12 @@ input{
 
  #searchLabel {
    color: white;
-   font-size:18px;
+   font-size:24px;
    font-weight:normal;
    position:absolute;
    pointer-events:none;
    left:5px;
-   top:10px;
+   top:30px;
    transition:0.2s ease all;
    font-family: 'PT Sans', sans-serif;
  }
@@ -132,6 +136,7 @@ input{
  .dataBody {
    display :block;
    height: 100%;
+   width: 100%;
    clear: both;
  }
 
@@ -156,15 +161,19 @@ input{
    width: 100%;
    border: transparent;
    background: transparent;
+   color: white;
 }
 
-#mapSelector {
+#mapSelector, #graphSelector{
+  color: white;
   background-color: transparent;
+  cursor: pointer;
 }
 
 i {
   border: transparent;
   background: transparent;
+  color: white;
 }
 
  .sourceSelector {
@@ -173,32 +182,76 @@ i {
    width: 100%;
    font-size: 70px;
    margin-top: 50px;
+   color: white;
    transition: 0.5s ease;
  }
 
  .sourceSelector:hover {
-   cursor:pointer;
    font-size: 90px;
    transition: 0.3s ease;
+   cursor: pointer;
  }
 
- .rightDisplay {
+ #rightDisplay {
    width: calc(100% - 100px);
    height: 100%;
    display: block;
    float: right;
  }
 
+.rightleft {
+  display: none;
+}
+
+.rightleft::-webkit-scrollbar-track{
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+   border-radius: 10px;
+ 	background-color: transparent;
+  overflow: auto;
+}
+
+.rightleft::-webkit-scrollbar {
+  width: 6px;
+  background-color: transparent;
+}
+
+.rightleft::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: transparent;
+}
+
+ .rightright {
+   width: 100%;
+   height: 100%;
+   overflow: auto;
+ }
+
+.rightright::-webkit-scrollbar-track {
+   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+  	background-color: transparent;
+}
+
+.rightright::-webkit-scrollbar {
+	width: 6px;
+	background-color: transparent;
+}
+
+.rightright::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+	background-color: transparent;
+}
+
  #chartBody {
    width: 100%;
    height: 100%;
  }
 
- #chartTitle, #mapTitle {
+ .chartTitle, #mapTitle {
    text-align: center;
    font-size: 2.5em;
    font-weight: bold;
-   width: 80%;
+   width: 100%;
    margin-right: auto;
    margin-left: auto;
  }
@@ -207,11 +260,17 @@ i {
    width: 100%;
  }
 
+ #lineGraphWrapper {
+   height: 250px;
+ }
+
 .chartTitle {
   text-align: center;
   font-size: 1.5em;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: -6%;
+  margin-top: 5%;
   top: 5%;
 }
 
@@ -219,27 +278,113 @@ i {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 70% !important;
-  height: auto !important;
   text-align: center;
 }
 
  #mapBody {
    display: none;
    height: 100%;
-   width: 100%;
+   width: calc(100% - 100px);
+   float: right;
  }
 
 #mapWrapper {
+  margin-left: 100px;
   width: 100%;
   height: calc(100% - 60px);
 }
 
 #map {
   position: relative;
-  width: 90%;
-  height: 90%;
+  width: 100%;
+  height: 100%;
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+
+path {
+  stroke: #fff;
+  fill-rule: evenodd;
+}
+
+svg {
+  display: inline-block;
+}
+
+#righty {
+  width: 20%;
+  text-align: center;
+  z-index: -1;
+  margin-top: -2.5%;
+  float: right;
+  margin-right: 15%;
+}
+
+#lefty {
+  width: 100%;
+  float: left;
+  text-align: center;
+  position: relative;
+
+}
+
+#explanation {
+  z-index: -1;
+  width: 100%;
+  position: relative;
+  top: 50%;
+  margin-top: 20%;
+  font-size: 1.3em
+}
+
+#hotBody {
+  width: calc(100% - 100px);
+  height: 100%;
+}
+
+#hotList {
+  float: left;
+  width: 20%;
+  height: 100%%;
+  overflow: auto;
+}
+
+#hotList::-webkit-scrollbar-track {
+   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+  	background-color: transparent;
+}
+
+#hotList::-webkit-scrollbar {
+	width: 6px;
+	background-color: transparent;
+}
+
+#hotList::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+	background-color: transparent;
+}
+
+
+#hotMap {
+  float: right;
+  width: 80%;
+  height: 100%;
+}
+
+@media screen and (min-width: 1360px) {
+  .rightleft {
+    display: block;
+    width: 50%;
+    height: 100%;
+    float: left;
+  }
+
+  .rightright {
+    width: 50%;
+    height: 100%;
+    float: right;
+    overflow: auto;
+  }
 }

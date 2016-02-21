@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-  var totalSize = 0; 
+  var totalSize = 0;
 
   var colors = {
     "Money In": "#2ECC71",
@@ -13,8 +13,8 @@ $(document).ready(function(){
     "Monitary Transactions": "#FFFFFF"
   };
 
-  var width = 480 * 1.5,
-      height =  350 * 1.5,
+  var width = 480 * 1.3,
+      height =  350 * 1.3,
       radius = Math.min(width, height) / 2;
 
   var x = d3.scale.linear()
@@ -299,7 +299,7 @@ $(document).ready(function(){
     }
     return path;
   };
-    
+
   });
 
   d3.select(self.frameElement).style("height", height + "px");

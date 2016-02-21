@@ -2,36 +2,35 @@ $(document).ready(function(){
   initializeGraphs();
   $("#graphSelector").click(function(){
     document.getElementById("mapBody").style.display = "none";
-    document.getElementById("chartBody").style.display = "block";
+    document.getElementById("hotBody").style.display = "none  ";
+    document.getElementById("rightDisplay").style.display = "block";
   });
   $("#mapSelector").click(function(){
-    document.getElementById("chartBody").style.display = "none";
+    document.getElementById("rightDisplay").style.display = "none";
+    document.getElementById("hotBody").style.display = "none";
     document.getElementById("mapBody").style.display = "block";
     initializeMap();
   });
-  console.log("This user's accounts:")
-  console.log(gon.accounts)
-  console.log("gon.graphBills");
-  console.log(gon.graphBills);
-    console.log("gon.graphDeposit");
-  console.log(gon.graphDeposit);
-    console.log("gon.graphPurchases");
-  console.log(gon.graphPurchases);
+  $("#hotSelector").click(function(){
+    document.getElementById("rightDisplay").style.display = "none";
+    document.getElementById("mapBody").style.display = "none";
+    document.getElementById("hotBody").style.display = "block";
+    populateHotBuckets();
+  });
 
-  console.log("payer/payee transfers");
-  console.log(gon.graphPayerTransfers);
-  console.log(gon.graphPayeeTransfers);
-
-  console.log(gon.graphWithdraws);
   function initializeGraphs(){
     if(document.getElementById("chartBody")){
       var canv = document.getElementById("lineGraph");
       canv.className = "graphs";
       var ctx1 = canv.getContext("2d");
+
+
   var bucketsCurrent = [0,0,0,0,0,0,0,0,0,0,0,0];
   var bucketsOld = [0,0,0,0,0,0,0,0,0,0,0,0];
   preparePurchaseGraph(bucketsCurrent, bucketsOld);
-  console.log(bucketsCurrent)
+
+
+
 
       var data = {
     labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
@@ -110,27 +109,103 @@ $(document).ready(function(){
       };
       var lineChart1 = new Chart(ctx1).Line(data, options);
       canv.className = "graphs";
+
+      generatePurchaseTable();
+
     }
+  }
+
+  function generatePurchaseTable(){
+    var wrapper = document.getElementById('tableWrapper');
+    var tbl = document.createElement('table');
+    tbl.style.width = '100%';
+    tbl.setAttribute('border', '1');
+    var tbdy = document.createElement('tbody');
+    // Titles
+    var tr = document.createElement('tr');
+
+    var td = document.createElement('td');
+    td.appendChild(document.createTextNode('Purchase Description'))
+    td.setAttribute('rowSpan', '1');
+    tr.appendChild(td);
+
+    var td = document.createElement('td');
+    td.appendChild(document.createTextNode('Amount'))
+    td.setAttribute('rowSpan', '1');
+    tr.appendChild(td);
+
+    var td = document.createElement('td');
+    td.appendChild(document.createTextNode('Date Purchased'))
+    td.setAttribute('rowSpan', '1');
+    tr.appendChild(td);
+
+    tbdy.appendChild(tr);
+
+
+    for(var i =0; i< gon.graphPurchases.length; i++){
+      // Create Table Row
+        var tr = document.createElement('tr');
+
+        var td = document.createElement('td');
+        td.appendChild(document.createTextNode(gon.graphPurchases[i].description))
+        td.setAttribute('rowSpan', '1');
+        tr.appendChild(td)
+
+        var td = document.createElement('td');
+        td.appendChild(document.createTextNode(gon.graphPurchases[i].amount))
+        td.setAttribute('rowSpan', '1');
+        tr.appendChild(td)
+
+        var td = document.createElement('td');
+        td.appendChild(document.createTextNode(gon.graphPurchases[i].purchase_date.split("T")[0]))
+        td.setAttribute('rowSpan', '1');
+        tr.appendChild(td)
+
+        tbdy.appendChild(tr);
+    }
+    tbl.appendChild(tbdy);
+    wrapper.appendChild(tbl)
   }
 
   function preparePurchaseGraph(bucketsCurrent, bucketsOld){
     labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-    
+
 
     for(var i =0; i< gon.graphPurchases.length; i++){
-      var datebucket = parseInt(gon.graphPurchases[i].purchase_date.split("-")[1] );
-      var year = parseInt(gon.graphPurchases[i].purchase_date.split("-")[0] );
-      if(year < 2015 ){
-        bucketsOld[datebucket] += parseInt(gon.graphPurchases[i].amount);
-      } else{ 
-        bucketsCurrent[datebucket] += parseInt(gon.graphPurchases[i].amount);
+      var datebucket = parseFloat(gon.graphPurchases[i].purchase_date.split("-")[1] ) -1;
+      var year = parseFloat(gon.graphPurchases[i].purchase_date.split("-")[0] );
+      if(year > 2015 ){
+        bucketsOld[datebucket] += parseFloat(gon.graphPurchases[i].amount);
+      } else{
+        bucketsCurrent[datebucket] += parseFloat(gon.graphPurchases[i].amount);
       }
 
     }
   }
 
-  function initializeMap(){
+  function populateHotBuckets(){
+    if(document.getElementById("hotMap")){
+      //populate buckets
+      var merchantIdToName = {};
+      var merchantsCounts = {};
+
+
+      for(var i =0; i< gon.merchants.length; i++){
+        merchantIdToName[gon.merchants[i].id] = gon.merchants[i].name;
+        merchantsCounts[gon.merchants[i].id] = 0;
+      }
+
+      for(var i =0; i< gon.purchases.length; i++){
+        merchantsCounts[gon.purchases[i]["merchant_id"]]++;
+      }
+
+      initializeHotMap(merchantsCounts.sort(function(a, b) {return a[1] < b[1] ? 1 : a[1] > b[1] ? -1 : 0}));
+    }
+  }
+
+  function initializeMap(merchantCounts){
     if(document.getElementById("map")){
+      console.log("adf " + merchantCounts);
       var myLatLng = {lat: gon.merchants[0].lat, lng: gon.merchants[0].lng};
 
       var map = new google.maps.Map(document.getElementById('map'), {
@@ -171,7 +246,106 @@ $(document).ready(function(){
       }
     }
   }
-console.log(gon.transfers)
+
+  function initializeHotMap(){
+    if(document.getElementById("hotMap")){
+      createHotList();
+      console.log("hotMap");
+      // var myLatLng = {lat: gon.merchants[0].lat, lng: gon.merchants[0].lng};
+      var myLatLng = {lat: 85, lng: 23};
+
+      var map = new google.maps.Map(document.getElementById('hotMap'), {
+        center: myLatLng,
+        scrollwheel: true,
+        zoom: 5
+      });
+      // var infowindow = new google.maps.InfoWindow();
+      // var marker;
+
+      // for(var merchant in gon.merchants){
+      //   var merch = gon.merchants[merchant];
+      //   myLatLng = {lat: parseFloat(merch.lat), lng: parseFloat(merch.lng)};
+      //   marker = new google.maps.Marker({position: myLatLng,map: map,title: merch.category});
+      //   (function(marker, i) {
+      //                   // add click event
+      //                   google.maps.event.addListener(marker, 'click', function() {
+      //                       infowindow = new google.maps.InfoWindow({
+      //                           content: 'Hello, World!!'
+      //                       });
+      //                       infowindow.open(map, marker);
+      //                   });
+      //               })(marker, merchant);
+      // }
+      //
+      // for(var merchant in gon.atms){
+      //   var atm = gon.atms[merchant];
+      //   myLatLng = {lat: parseFloat(atm.lat), lng: parseFloat(atm.lng)};
+      //   marker = new google.maps.Marker({position: myLatLng,map: map,title: "ATM"});
+      //   (function(marker, i) {
+      //                   // add click event
+      //                   google.maps.event.addListener(marker, 'click', function() {
+      //                       infowindow = new google.maps.InfoWindow({
+      //                           content: 'Hello, World!!'
+      //                       });
+      //                       infowindow.open(map, marker);
+      //                   });
+      //               })(marker, merchant);
+      // }
+    }
+  }
+
+  function createHotList(){
+    if(document.getElementById("hotList")){
+      var wrapper = document.getElementById('hotList');
+      var tbl = document.createElement('table');
+      tbl.style.width = '100%';
+      tbl.setAttribute('border', '1');
+      var tbdy = document.createElement('tbody');
+      // Titles
+      var tr = document.createElement('tr');
+
+      var td = document.createElement('td');
+      td.appendChild(document.createTextNode('Purchase Description'))
+      td.setAttribute('rowSpan', '1');
+      tr.appendChild(td);
+
+      var td = document.createElement('td');
+      td.appendChild(document.createTextNode('Amount'))
+      td.setAttribute('rowSpan', '1');
+      tr.appendChild(td);
+
+      var td = document.createElement('td');
+      td.appendChild(document.createTextNode('Date Purchased'))
+      td.setAttribute('rowSpan', '1');
+      tr.appendChild(td);
+
+      tbdy.appendChild(tr);
+
+
+      for(var i =0; i< gon.graphPurchases.length; i++){
+        // Create Table Row
+          var tr = document.createElement('tr');
+
+          var td = document.createElement('td');
+          td.appendChild(document.createTextNode(gon.graphPurchases[i].description))
+          td.setAttribute('rowSpan', '1');
+          tr.appendChild(td)
+
+          var td = document.createElement('td');
+          td.appendChild(document.createTextNode(gon.graphPurchases[i].amount))
+          td.setAttribute('rowSpan', '1');
+          tr.appendChild(td)
+
+          var td = document.createElement('td');
+          td.appendChild(document.createTextNode(gon.graphPurchases[i].purchase_date.split("T")[0]))
+          td.setAttribute('rowSpan', '1');
+          tr.appendChild(td)
+
+          tbdy.appendChild(tr);
+      }
+      tbl.appendChild(tbdy);
+      wrapper.appendChild(tbl)
+    }
+  }
 
 });
-

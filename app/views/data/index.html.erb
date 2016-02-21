@@ -1,76 +1,58 @@
 
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=visualization"></script>
-<style type="text/css">
-
-  path {
-    stroke: #fff;
-    fill-rule: evenodd;
-  }
-
-  svg {
-    display: inline-block;
-  }
-
-  #righty {
-    width: 50%;
-    float: right;
-    text-align: left;
-  }
-
-  #lefty {
-    width: 50%;
-    float: left;
-    text-align: center;
-    position: relative;
-
-  }
- 
-  #explanation {
-    height: 100%;
-    position: relative;
-    top: 50%;
-    margin-top: 20%;
-    font-size: 5em
-  }
-
-</style>
-
 
 <div class="dataBody">
   <div class="leftMenu">
     <ul id="sourceSelectorWrapper">
-      <li class="sourceList"><button id="graphSelector" class="sourceSelector"><abbr title="Transaction Locations"><i class="fa fa-line-chart"></i></abbr></button></li>
-      <li class="sourceList"><button id="mapSelector" class="sourceSelector"><abbr title="Transaction Locations"><i class="fa fa-map"></i></abbr></button></li>
+      <li class="sourceList"><button id="graphSelector" class="sourceSelector"><span data-tooltip aria-haspopup="true" class="has-tip" data-disable-hover='false' tabindex=1 title="Transaction Graphics"><i class="fa fa-line-chart"></i></span></button></li>
+      <li class="sourceList"><button id="mapSelector" class="sourceSelector"><span data-tooltip aria-haspopup="true" class="has-tip" data-disable-hover='false' tabindex=1 title="Transaction Locations"><i class="fa fa-map"></i></span></button></li>
+      <li class="sourceList"><button id="hotSelector" class="sourceSelector"><span data-tooltip aria-haspopup="true" class="has-tip" data-disable-hover='false' tabindex=1 title="Hot Transactions"><i class="fa fa-fire"></i></span></button></li>
     </ul>
   </div>
-  <div class="rightDisplay">
+  <div id="rightDisplay">
     <div id="chartBody">
-      <div id="chartTitle">Financial Data for Andrew Ma</div>
-      <div id="lineGraphWrapper">
-        <div class="chartTitle">here</div>
-        <canvas id="lineGraph" height="500%" width="1500%"><canvas>
-      </div>
 
-      <div id="solarChartWrapper">
-        <div class="chartTitle">Creative Title</div>
-        <div id="lefty">
-          <div id="solarGraph" class="graphs"></div>
-        </div>
-        <div id="righty">
-          <div id="explanation" style="visibility: hidden;">
-            <span id="nameofthing"></span><br/>
-            <span id="percentage"></span> of total flow 
-          </div>
-        </div>
-      </div>  
-
+    <div class="rightleft">
+      <div id="tableWrapper"></div>
     </div>
-    <div id="mapBody">
-      <div id="mapTitle">Financial Map for Andrew Ma</div>
-      <div id="mapWrapper">
-        <div id="map"></div>
-      </div>
 
+    <div class="rightright">
+      <div id="chartBody">
+        <div id="lineGraphWrapper">
+          <div class="chartTitle">Balance Over Time</div>
+          <canvas id="lineGraph" width="500px" height="250px" class="graphs"><canvas>
+        </div>
+
+        <div id="solarChartWrapper">
+          <div class="chartTitle">Total Money Flow</div>
+          <div id="righty">
+            <div id="explanation" style="visibility: hidden;">
+              <span id="nameofthing"></span><br/>
+              <span id="percentage"></span> of total flow
+            </div>
+          </div>
+          <div id="lefty">
+            <div id="solarGraph"></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div id="mapBody">
+    <div id="mapWrapper">
+      <div id="map"></div>
+    </div>
+  </div>
+
+  <div id="hotBody">
+
+    <div id="mapWrapper">
+      <div id="hotList">
+      </div>
+      <div id="hotMap"></div>
     </div>
   </div>
 </div>
