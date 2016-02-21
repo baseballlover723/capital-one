@@ -1,7 +1,41 @@
 def load
-  50.times do
-    generate_random_merchant
-  end
+  m1 = Merchant.create(id: 1, name: "Chipotle", category: "Food", street_number: "528", street_name: "East Green Street", city: "Champaign", zip: "61820", lat: "40.11", lng: "-88.30")
+  m2 = Merchant.create(id: 2, name: "Starbucks", category: "Food", street_number: "503", street_name: "East Green Street", city: "Champaign", zip: "61820", lat: "40.10", lng: "-88.30")
+  m3 = Merchant.create(id: 3, name: "McDonalds", category: "Food", street_number: "616", street_name: "East Green Street", city: "Champaign", zip: "61820", lat: "40.11", lng: "-88.29")
+  m4 = Merchant.create(id: 4, name: "Walmart", category: "Retail", street_number: "2610", street_name: "North Prospect Avenue", city: "Champaign", zip: "61822", lat: "40.14", lng: "-88.32")
+  m5 = Merchant.create(id: 5, name: "Holiday Inn", category: "Hotel", street_number: "1003", street_name: "West Killarney Street", city: "Urbana", zip: "61801", lat: "40.13", lng: "-88.29")
+  m6 = Merchant.create(id: 6, name: "Amazon", category: "Retail", street_number: "528", street_name: "East Green Street", city: "Champaign", zip: "61820", lat: "39.946", lng: "-86.734")
+  m7 = Merchant.create(id: 7, name: "Kroger", category: "Food", street_number: "503", street_name: "East Green Street", city: "Champaign", zip: "61820", lat: "40.1126", lng: "-88.218")
+  m8 = Merchant.create(id: 8, name: "Supercuts", category: "Services", street_number: "616", street_name: "East Green Street", city: "Champaign", zip: "61820", lat: "40.0753", lng: "-88.322")
+  m9 = Merchant.create(id: 9, name: "AMC Movie Theater", category: "Retail", street_number: "2610", street_name: "North Prospect Avenue", city: "Champaign", zip: "61822", lat: "40.075", lng: "-88.254")
+  m10 = Merchant.create(id: 10, name: "Home Depot", category: "Retail", street_number: "820 ", street_name: "Bloomington ", city: "Urbana", zip: "61801", lat: "40.133", lng: "-88.256")
+
+  m12 = Merchant.create(id: 12, name: "Starbucks", category: "Food", street_number: "000", street_name: "Doesn't Even Matter Street", city: "Terre Haute", zip: "61801", lat: "39.5107939272", lng: "-87.4024553678")
+  m13 = Merchant.create(id: 13, name: "Home Depot", category: "Retail", street_number: "000", street_name: "Doesn't Even Matter Street", city: "Terre Haute", zip: "61801", lat: "39.5318883867", lng: "-87.4421859863")
+  m14 = Merchant.create(id: 14, name: "Amazon", category: "Retail", street_number: "000", street_name: "Doesn't Even Matter Street", city: "Terre Haute", zip: "61801", lat: "39.5157500833", lng: "-87.4685364938")
+  m15 = Merchant.create(id: 15, name: "Walmart", category: "Retail", street_number: "000", street_name: "Doesn't Even Matter Street", city: "Terre Haute", zip: "61801", lat: "39.5116076655", lng: "-87.4213754504")
+  m16 = Merchant.create(id: 16, name: "Chipotle", category: "Food", street_number: "000", street_name: "Doesn't Even Matter Street", city: "Terre Haute", zip: "61801", lat: "39.4552020995", lng: "-87.4097545229")
+  m17 = Merchant.create(id: 17, name: "Amazon", category: "Retail", street_number: "000", street_name: "Doesn't Even Matter Street", city: "Terre Haute", zip: "61801", lat: "39.4606930119", lng: "-87.4116807815")
+
+
+  m20 = Merchant.create(id: 20, name: "Supercuts", category: "Services", street_number: "000", street_name: "Doesn't Even Matter Street", city: "Seattle", zip: "61801", lat: "47.6286494695", lng: "-122.540462803")
+  m21 = Merchant.create(id: 21, name: "McDonalds", category: "Food", street_number: "000", street_name: "Doesn't Even Matter Street", city: "Seattle", zip: "61801", lat: "47.6003709605", lng: "-122.434010589")
+  m22 = Merchant.create(id: 22, name: "Capital One", category: "Bank", street_number: "000", street_name: "Doesn't Even Matter Street", city: "Seattle", zip: "61801", lat: "47.5633769323", lng: "-122.462557874")
+  m23 = Merchant.create(id: 23, name: "Capital One", category: "Bank", street_number: "000", street_name: "Doesn't Even Matter Street", city: "Seattle", zip: "61801", lat: "47.6167315238", lng: "-122.410783568")
+  m24 = Merchant.create(id: 24, name: "AMC Movie Theater", category: "Retail", street_number: "000", street_name: "Doesn't Even Matter Street", city: "Seattle", zip: "61801", lat: "47.5863690422", lng: "-122.527225799")
+  m25 = Merchant.create(id: 25, name: "Kroger", category: "Food", street_number: "000", street_name: "Doesn't Even Matter Street", city: "Seattle", zip: "61801", lat: "47.6579932708", lng: "-122.440059029")
+
+  m30 = Merchant.create(id: 30, name: "Starbucks", category: "Food", street_number: "000", street_name: "Doesn't Even Matter Street", city: "Las Vegas", zip: "61801", lat: "36.1413960461", lng: "-115.324812931")
+  m31 = Merchant.create(id: 31, name: "Amazon", category: "Retail", street_number: "000", street_name: "Doesn't Even Matter Street", city: "Las Vegas", zip: "61801", lat: "36.1006576921", lng: "-115.30518889")
+  m32 = Merchant.create(id: 32, name: "Holiday Inn", category: "Hotel", street_number: "000", street_name: "Doesn't Even Matter Street", city: "Las Vegas", zip: "61801", lat: "36.1240596568", lng: "-115.333319704")
+  m33 = Merchant.create(id: 33, name: "McDonalds", category: "Food", street_number: "000", street_name: "Doesn't Even Matter Street", city: "Las Vegas", zip: "61801", lat: "36.1018046237", lng: "-115.340079479")
+  m34 = Merchant.create(id: 34, name: "Home Depot", category: "Retail", street_number: "000", street_name: "Doesn't Even Matter Street", city: "Las Vegas", zip: "61801", lat: "36.1170355156", lng: "-115.350784265")
+  m35 = Merchant.create(id: 35, name: "Chipotle", category: "Food", street_number: "000", street_name: "Doesn't Even Matter Street", city: "Las Vegas", zip: "61801", lat: "36.1552938659", lng: "-115.366826026")
+
+
+  # 50.times do
+  #   generate_random_merchant
+  # end
   25.times do
     customer = generate_random_customer
     account = generate_random_account customer
