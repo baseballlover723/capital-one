@@ -39,6 +39,10 @@
   padding: 0;
 }
 
+.top-bar-right ul li {
+  width: 40px;
+}
+
 .linkedin {
   text-align: left;
 }
@@ -135,7 +139,7 @@ input{
 
  .dataBody {
    display :block;
-   height: 100%;
+   height: calc(100% - 54px);
    width: 100%;
    clear: both;
  }
@@ -201,6 +205,7 @@ i {
 
 .rightleft {
   display: none;
+  overflow: auto;
 }
 
 .rightleft::-webkit-scrollbar-track{
@@ -221,6 +226,7 @@ i {
 }
 
  .rightright {
+   background-color: #efefef;
    width: 100%;
    height: 100%;
    overflow: auto;
@@ -281,7 +287,7 @@ i {
   text-align: center;
 }
 
- #mapBody {
+ #mapBody, #hotbody{
    display: none;
    height: 100%;
    width: calc(100% - 100px);
@@ -289,9 +295,8 @@ i {
  }
 
 #mapWrapper {
-  margin-left: 100px;
   width: 100%;
-  height: calc(100% - 60px);
+  height: 100%;
 }
 
 #map {
@@ -319,6 +324,10 @@ svg {
   margin-top: -2.5%;
   float: right;
   margin-right: 15%;
+    overflow: none;
+    text-overflow: ellipsis;
+    height:100px;
+
 }
 
 #lefty {
@@ -334,19 +343,21 @@ svg {
   width: 100%;
   position: relative;
   top: 50%;
-  margin-top: 20%;
+  /*margin-top: 20%;*/
   font-size: 1.3em
 }
 
 #hotBody {
+  display: none;
   width: calc(100% - 100px);
   height: 100%;
+  margin-left: 100px;
 }
 
 #hotList {
   float: left;
   width: 20%;
-  height: 100%%;
+  height: 100%;
   overflow: auto;
 }
 
@@ -371,6 +382,26 @@ svg {
   float: right;
   width: 80%;
   height: 100%;
+}
+
+.hotMerchantOdd {
+  background-color: #2980b9;
+}
+
+.hotMerchantEven {
+  background-color: #2e8ece !important;
+}
+
+#regionBody {
+  display: none;
+  height: 100%;
+  width: calc(100% - 100px);
+}
+
+#similarBody {
+  display: none;
+  height: 100%;
+  width: calc(100% - 100px);
 }
 
 @media screen and (min-width: 1360px) {

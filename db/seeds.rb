@@ -9,8 +9,6 @@ m8 = Merchant.create(id: 8, name: "Supercuts", category: "Services", street_numb
 m9 = Merchant.create(id: 9, name: "AMC Movie Theater", category: "Retail", street_number: "2610", street_name: "North Prospect Avenue", city: "Champaign", zip: "61822", lat: "40.075", lng: "-88.254")
 m10 = Merchant.create(id: 10, name: "Home Depot", category: "Retail", street_number: "820 ", street_name: "Bloomington ", city: "Urbana", zip: "61801", lat: "40.133", lng: "-88.256")
 
-
-
 c1 = Customer.create(id: 1, first_name: "Luke", last_name: "Miller", street_number: "6969", street_name: "ohio street", city: "Dayton", state: "Ohio", zip: "53244")
 c2 = Customer.create(id: 2, first_name: "Nathan", last_name: "Blank", street_number: "42", street_name: "donkey", city: "Chicago", state: "Illinios", zip: "65843")
 c3 = Customer.create(id: 3, first_name: "Jeremy", last_name: "Wright", street_number: "52", street_name: "weaboo drive", city: "tokyo", state: "Japan", zip: "N/A")
@@ -50,6 +48,7 @@ p24 = Purchase.create(id: 24, purchase_type: "merchant", merchant: m6, account: 
 p25 = Purchase.create(id: 25, purchase_type: "merchant", merchant: m6, account: a3, purchase_date: DateTime.iso8601("2015-12-24"), amount: 1731.0317430666548, status: "completed", "medium": "balance", description: "AMAZON DRONE DELIVERY")
 
 #
+
 p26= Purchase.create(id: 26, purchase_type: "merchant", merchant: m7, account: a3, purchase_date: DateTime.iso8601("2015-04-30"), amount: 139.45862718832709, status: "completed", "medium": "balance", description: "Bought groceries")
 p27= Purchase.create(id: 27, purchase_type: "merchant", merchant: m7, account: a3, purchase_date: DateTime.iso8601("2015-05-11"), amount: 56.04739586876561, status: "completed", "medium": "balance", description: "Bought more groceries")
 p28 = Purchase.create(id: 28, purchase_type: "merchant", merchant: m7, account: a3, purchase_date: DateTime.iso8601("2015-06-15"), amount: 8.561755557831741, status: "completed", "medium": "balance", description: "Bought even more groceries")
@@ -247,12 +246,13 @@ p189 = Purchase.create(id: 189, purchase_type: "merchant", merchant: m31, accoun
 
 
 
+
 b1 = Bill.create(id: 15, status: "completed", payee: "Jeremy", nickname: "weaboo tax", creation_date: DateTime.iso8601("1995-07-17"),
                  payment_date: DateTime.iso8601("1995-07-27"), recurring_date: 485, upcoming_payment_date: DateTime.iso8601("2016-02-22"),
-                 payment_amount: 58603.32, account: a3)
+                 payment_amount: 53.32, account: a3)
 b2 = Bill.create(id: 944, status: "completed", payee: "Luke", nickname: "Luke's unfair government tax", creation_date: DateTime.iso8601("20150525"),
                  payment_date: DateTime.iso8601("2016-01-01"), recurring_date: 15, upcoming_payment_date: DateTime.iso8601("20160217"),
-                 payment_amount: 4458754.99, account: a2)
+                 payment_amount: 44.99, account: a2)
 b3 = Bill.create(id: 921, status: "completed", payee: "Luke", nickname: "Luke's netflix and chill bill", creation_date: DateTime.iso8601("20131019"),
                  payment_date: DateTime.iso8601("2016-03-19"), recurring_date: 12, upcoming_payment_date: DateTime.iso8601("20160319"),
                  payment_amount: 69.99, account: a1)
@@ -265,10 +265,11 @@ b5 = Bill.create(id: 3, status: "completed", payee: "Trunk Club", nickname: "Nat
                  payment_amount: 69.99, account: a2)
 
 
-d1 = Deposit.create(id: 512, deposit_type: "deposit", transaction_date: DateTime.iso8601("2016-02-20"), status: "completed",
+d1 = Deposit.create(id: 512, deposit_type: "deposit", transaction_date: DateTime.iso8601("2015-02-20"), status: "completed",
                     medium: "balance", amount: 84.66, description: "Micky d's paycheck", account: a3)
+
 d2 = Deposit.create(id: 24, deposit_type: "deposit", transaction_date: DateTime.iso8601("2016-01-12"), status: "completed",
-                    medium: "balance", amount: 500084.66, description: "Mom died and get me her millions", account: a1)
+                    medium: "balance", amount: 54.66, description: "Mom died and get me her millions", account: a1)
 d3 = Deposit.create(id: 1543, deposit_type: "deposit", transaction_date: DateTime.iso8601("2016-02-25"), status: "completed",
                     medium: "balance", amount: 10.00, description: "found a ten on the ground", account: a1)
 
@@ -282,14 +283,14 @@ d6 = Deposit.create(id: 547, deposit_type: "deposit", transaction_date: DateTime
 w1 = Withdraw.create(id: 11111, withdraw_type: "withdraw", transaction_date: DateTime.iso8601("2015-01-01"), status: "completed",
                      medium: "balance", amount: 120.00, description: "Mystery Gifting all of my friends", account: a3)
 w2 = Withdraw.create(id: 87, withdraw_type: "withdraw", transaction_date: DateTime.iso8601("2015-12-25"), status: "completed",
-                     medium: "balance", amount: 58777888.66, description: "I bought Sealand", account: a1)
+                     medium: "balance", amount: 598.66, description: "I bought Sealand", account: a1)
 w3 = Withdraw.create(id: 4523, withdraw_type: "withdraw", transaction_date: DateTime.iso8601("2016-02-19"), status: "pending",
-                     medium: "balance", amount: 2130.69, description: "Needed money to go buy some rare pepes and dank memes", account: a3)
+                     medium: "balance", amount: 210.69, description: "Needed money to go buy some rare pepes and dank memes", account: a3)
 
 w4 = Withdraw.create(id: 11313, withdraw_type: "withdraw", transaction_date: DateTime.iso8601("2015-08-01"), status: "completed",
                      medium: "balance", amount: 120.00, description: "Mystery Gifting all of my friends", account: a2)
 w5 = Withdraw.create(id: 8437, withdraw_type: "withdraw", transaction_date: DateTime.iso8601("2015-05-25"), status: "completed",
-                     medium: "balance", amount: 58777888.66, description: "I bought a boat", account: a2)
+                     medium: "balance", amount: 588.66, description: "I bought a boat", account: a2)
 
 
 t1 = Transfer.create(id: 311, transfer_type: "p2p", transaction_date: DateTime.iso8601("2015-11-19"), status: "completed",

@@ -1,21 +1,44 @@
 $(document).ready(function(){
+  var createdHotList = false;
   initializeGraphs();
   $("#graphSelector").click(function(){
     document.getElementById("mapBody").style.display = "none";
     document.getElementById("hotBody").style.display = "none  ";
+    document.getElementById("regionBody").style.display = "none";
+    document.getElementById("similarBody").style.display = "none";
     document.getElementById("rightDisplay").style.display = "block";
   });
   $("#mapSelector").click(function(){
     document.getElementById("rightDisplay").style.display = "none";
     document.getElementById("hotBody").style.display = "none";
+    document.getElementById("regionBody").style.display = "none";
+    document.getElementById("similarBody").style.display = "none";
     document.getElementById("mapBody").style.display = "block";
     initializeMap();
   });
   $("#hotSelector").click(function(){
     document.getElementById("rightDisplay").style.display = "none";
     document.getElementById("mapBody").style.display = "none";
+    document.getElementById("regionBody").style.display = "none";
+    document.getElementById("similarBody").style.display = "none";
     document.getElementById("hotBody").style.display = "block";
     populateHotBuckets();
+  });
+  $("#regionSelector").click(function(){
+    document.getElementById("rightDisplay").style.display = "none";
+    document.getElementById("mapBody").style.display = "none";
+    document.getElementById("hotBody").style.display = "none";
+    document.getElementById("similarBody").style.display = "none";
+    document.getElementById("regionBody").style.display = "block";
+    regionCalculator();
+  });
+  $("#similarSelector").click(function(){
+    document.getElementById("rightDisplay").style.display = "none";
+    document.getElementById("mapBody").style.display = "none";
+    document.getElementById("hotBody").style.display = "none";
+    document.getElementById("regionBody").style.display = "none";
+    document.getElementById("similarBody").style.display = "block";
+    // regionCalculator();
   });
 
   function initializeGraphs(){
@@ -188,25 +211,23 @@ $(document).ready(function(){
       //populate buckets
       var merchantIdToName = {};
       var merchantsCounts = {};
-
+      var merchantIdToIndex = {};
 
       for(var i =0; i< gon.merchants.length; i++){
         merchantIdToName[gon.merchants[i].id] = gon.merchants[i].name;
+        merchantIdToIndex[gon.merchants[i].id] = i;
         merchantsCounts[gon.merchants[i].id] = 0;
+
       }
 
-      console.log(" gon purchases: ")
-      console.log(gon.purchases);
       for(var i =0; i< gon.purchases.length; i++){
-        console.log(gon.purchases[i]["merchant_id"]);
         merchantsCounts[gon.purchases[i]["merchant_id"]]++;
       }
+      var sortable = [];
+      for (var i in merchantsCounts)
+            sortable.push([merchantIdToName[i], merchantsCounts[i], merchantIdToIndex[i]])
 
-      console.log("merchant counts stuff ");
-      console.log(merchantsCounts);
-      console.log(merchantIdToName);
-
-      initializeHotMap();
+      initializeHotMap(sortable.sort(function(a, b) {return b[1] - a[1]}));
     }
   }
 
@@ -253,54 +274,42 @@ $(document).ready(function(){
     }
   }
 
-  function initializeHotMap(){
+  function initializeHotMap(merchantCounts){
     if(document.getElementById("hotMap")){
-      createHotList();
-      console.log("hotMap");
-      // var myLatLng = {lat: gon.merchants[0].lat, lng: gon.merchants[0].lng};
-      var myLatLng = {lat: 85, lng: 23};
+      if(!createdHotList){
+        createHotList(merchantCounts);
+        createdHotList = true;
+      }
+      var myLatLng = {lat: gon.merchants[merchantCounts[0][2]].lat, lng:  gon.merchants[merchantCounts[0][2]].lng};
 
       var map = new google.maps.Map(document.getElementById('hotMap'), {
         center: myLatLng,
         scrollwheel: true,
-        zoom: 5
+        zoom: 10
       });
-      // var infowindow = new google.maps.InfoWindow();
-      // var marker;
+      var infowindow = new google.maps.InfoWindow();
+      var marker;
 
-      // for(var merchant in gon.merchants){
-      //   var merch = gon.merchants[merchant];
-      //   myLatLng = {lat: parseFloat(merch.lat), lng: parseFloat(merch.lng)};
-      //   marker = new google.maps.Marker({position: myLatLng,map: map,title: merch.category});
-      //   (function(marker, i) {
-      //                   // add click event
-      //                   google.maps.event.addListener(marker, 'click', function() {
-      //                       infowindow = new google.maps.InfoWindow({
-      //                           content: 'Hello, World!!'
-      //                       });
-      //                       infowindow.open(map, marker);
-      //                   });
-      //               })(marker, merchant);
-      // }
-      //
-      // for(var merchant in gon.atms){
-      //   var atm = gon.atms[merchant];
-      //   myLatLng = {lat: parseFloat(atm.lat), lng: parseFloat(atm.lng)};
-      //   marker = new google.maps.Marker({position: myLatLng,map: map,title: "ATM"});
-      //   (function(marker, i) {
-      //                   // add click event
-      //                   google.maps.event.addListener(marker, 'click', function() {
-      //                       infowindow = new google.maps.InfoWindow({
-      //                           content: 'Hello, World!!'
-      //                       });
-      //                       infowindow.open(map, marker);
-      //                   });
-      //               })(marker, merchant);
-      // }
+      for(var merchant=0; merchant<5; merchant++){
+
+        var merch = gon.merchants[merchantCounts[merchant][2]];
+
+        myLatLng = {lat: parseFloat(merch.lat), lng: parseFloat(merch.lng)};
+        marker = new google.maps.Marker({position: myLatLng,map: map,title: merch.name});
+        (function(marker, merchant) {
+                        // add click event
+                        google.maps.event.addListener(marker, 'click', function() {
+                            infowindow = new google.maps.InfoWindow({
+                                content: gon.merchants[merchantCounts[merchant][2]].name
+                            });
+                            infowindow.open(map, marker);
+                        });
+                    })(marker, merchant);
+      }
     }
   }
 
-  function createHotList(){
+  function createHotList(merchantCounts){
     if(document.getElementById("hotList")){
       var wrapper = document.getElementById('hotList');
       var tbl = document.createElement('table');
@@ -311,47 +320,54 @@ $(document).ready(function(){
       var tr = document.createElement('tr');
 
       var td = document.createElement('td');
-      td.appendChild(document.createTextNode('Purchase Description'))
+      td.appendChild(document.createTextNode('Hot Merchants'))
       td.setAttribute('rowSpan', '1');
       tr.appendChild(td);
 
       var td = document.createElement('td');
-      td.appendChild(document.createTextNode('Amount'))
+      td.appendChild(document.createTextNode('Number of Transactions'))
       td.setAttribute('rowSpan', '1');
       tr.appendChild(td);
 
-      var td = document.createElement('td');
-      td.appendChild(document.createTextNode('Date Purchased'))
-      td.setAttribute('rowSpan', '1');
-      tr.appendChild(td);
 
       tbdy.appendChild(tr);
 
-
-      for(var i =0; i< gon.graphPurchases.length; i++){
+      var count = 0;
+      for(var i =0; i< merchantCounts.length; i++){
         // Create Table Row
           var tr = document.createElement('tr');
 
           var td = document.createElement('td');
-          td.appendChild(document.createTextNode(gon.graphPurchases[i].description))
+          td.appendChild(document.createTextNode(merchantCounts[i][0]));
+
           td.setAttribute('rowSpan', '1');
           tr.appendChild(td)
 
           var td = document.createElement('td');
-          td.appendChild(document.createTextNode(gon.graphPurchases[i].amount))
+          td.appendChild(document.createTextNode(merchantCounts[i][1]))
           td.setAttribute('rowSpan', '1');
           tr.appendChild(td)
-
-          var td = document.createElement('td');
-          td.appendChild(document.createTextNode(gon.graphPurchases[i].purchase_date.split("T")[0]))
-          td.setAttribute('rowSpan', '1');
-          tr.appendChild(td)
+          if(count < 5){
+            if(count % 2 == 0) tr.className = "hotMerchantEven";
+            else tr.className = "hotMerchantOdd";
+          }
+          count++;
 
           tbdy.appendChild(tr);
       }
       tbl.appendChild(tbdy);
       wrapper.appendChild(tbl)
     }
+  }
+
+  function regionCalculator() {
+    if(document.getElementById("regionBody")){
+      populateRegionTable();
+    }
+  }
+
+  function populateRegionTable() {
+    console.log("populate region table");
   }
 
 });
