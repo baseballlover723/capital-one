@@ -103,8 +103,8 @@ class DataController < ApplicationController
     gon.bills = @bills
 # gon.customers = @customers
     gon.deposits = @deposits
-    gon.merchants = @merchants
-    gon.purchases = @purchases
+    gon.merchants = Merchant.all
+    gon.purchases = Purchase.all
     gon.transfers = @transfers
     gon.withdraws = @withdraws
 

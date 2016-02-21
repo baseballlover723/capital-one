@@ -55,16 +55,14 @@ $(document).ready(function(){
         .data(partition.nodes)
       .enter().append("path")
         .attr("d", arc)
-        .style("fill", function(d) {
-            if(colors[d.name] != null) {
-                return colors[d.name];
-            } else {
-                return colors[d.parent.name];
-            }
-        })
         .on("click", click)
         .on("mouseover", mouseover)
-        .each(stash);
+        .each(stash).style("fill", function(d) { 
+            if(colors[d.name] != null) {
+              return colors[d.name];
+            } else{
+              return colors[d.parent.name];
+            }});
 
        d3.select("#container").on("mouseleave", mouseleave);
       console.log(path.node().__data__.children[0]);
@@ -83,10 +81,22 @@ $(document).ready(function(){
     }
     for(var childIndex = 0; childIndex < path.node().__data__.children[1].children[2].value; childIndex++) {
       totalSize += path.node().__data__.children[1].children[2].children[childIndex].size;
+      //findColors(path.node().__data__.children[1].children[2].children[childIndex].name);
     }
 
-
-
+    // setTimeout(function(){
+    //   path.style("fill", function(d) { 
+    //         if(colors[d.name] != null) {
+    //           return colors[d.name];
+    //         } else{
+    //           if(d.parent.name == "Purchase") {
+    //             return colors[d.parent.name];
+    //           } else {
+    //             return colors[d.parent.name];
+    //           }
+    //         }})
+    // }, 3000);
+    
 
     var value = this.value === "count"
           ? function() { return 1; }
@@ -155,6 +165,72 @@ $(document).ready(function(){
     //     .style("visibility", "hidden");
   }
 
+
+ // function findColors(itemName) {
+ //        var req = new XMLHttpRequest();
+ //        req.onload = function() {
+ //          // console.log(this.response);
+ //          // console.log(this.response.items[0].link);
+ //          // var colorThief = new ColorThief();
+ //          // console.log(colorThief.getColor(this.response.items[0].image.thumbnailLink));
+
+ //            // var req = new XMLHttpRequest();
+ //            // req.onload = function() {
+ //            // //   console.log(this.response.body);
+ //            //     var colorThief = new ColorThief();
+ //            //     console.log(colorThief.getColor(this.response.getElementsByTagName("img")[0]));
+ //            // // };
+ //            // req.open("GET", this.response.items[0].link);
+ //            // req.responseType = "jsonp";
+ //            // req.setRequestHeader('X-Custom-Header', 'value');
+ //            // req.send(); 
+
+
+
+ //            // convertDataURLToImageData(
+ //            //     this.response.items[0].link,
+ //            //     function(imageData){
+ //            //          // Do something with imageData
+ //            //         var colorThief = new ColorThief();
+ //            //         console.log(colorThief.getColor(this.response.items[0].image.thumbnailLink));
+ //            //     }
+ //            // )
+
+ //          var formData = new FormData();
+ //          formData.append("image_url", "http://labs.tineye.com/color/f4f3c89b2decf4a13036f139462a1659a04e66e6?ignore_background=True&width=250&color_format=hex&ignore_interior_background=True&height=250");
+ //          formData.append("submitted", 1)
+ //          var request = new XMLHttpRequest();
+ //          request.onload = function() {
+ //            console.log(this.response);
+ //          }
+ //          request.open("POST", "http://www.cssdrive.com/imagepalette/index.php");
+ //          request.send(formData);
+
+ //        };
+ //        req.open("GET", 'https://www.googleapis.com/customsearch/v1?key=AIzaSyAoab-xN6AT4B_3sjWYVoU9T1MBbZu782M&cx=011526180547357920005:hrzlsj6oggw&q=' + 'chipotle' + '&searchType=image&fileType=jpg&imgSize=small&alt=json');
+ //        req.responseType = "json";
+ //        req.send();        
+ //    }
+
+ //  function convertDataURLToImageData(dataURL, callback) {
+ //    if (dataURL !== undefined && dataURL !== null) {
+ //        var canvas, context, image;
+ //        canvas = document.createElement('canvas');
+ //        canvas.width = 470;
+ //        canvas.height = 470;
+ //        context = canvas.getContext('2d');
+ //        image = new Image();
+ //        image.src = dataURL + '?' + new Date().getTime();
+ //        image.crossOrigin = 'anonymous';
+ //        image.addEventListener('load', function(){
+ //            context.drawImage(image, 0, 0, canvas.width, canvas.height);
+ //            callback(context.getImageData(0, 0, canvas.width, canvas.height));
+ //        }, false);
+ //      }
+ //  }
+
+
+
   function breadcrumbPoints(d, i) {
     var points = [];
     points.push("0,0");
@@ -180,7 +256,12 @@ $(document).ready(function(){
 
     entering.append("svg:polygon")
         .attr("points", breadcrumbPoints)
-        .style("fill", function(d) { return colors[d.name]; });
+        .style("fill", function(d) { 
+             if(colors[d.name] != null) {
+              return colors[d.name];
+            } else{
+              return colors[d.parent.name];
+            }});
 
     entering.append("svg:text")
         .attr("x", (b.w + b.t) / 2)
